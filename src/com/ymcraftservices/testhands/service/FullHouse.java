@@ -17,26 +17,33 @@ public class FullHouse extends Hand {
 
     @Override
     public Boolean verify() {
-        if(!isAValidHand()) return false;
+        if (!isAValidHand()) return false;
         Map<NumberCard, Long> numberCardAndItsOccurence = this.cards
                 .stream()
                 .collect(Collectors.groupingBy(card -> card.getNumberCard(), Collectors.counting()));
+        // retrieve the two potential two of a kind and three of kind
         List<Map.Entry<NumberCard, Long>> entries = numberCardAndItsOccurence.entrySet()
                 .stream()
                 .filter(numberCardLongEntry -> numberCardLongEntry.getValue() == 3 || numberCardLongEntry.getValue() == 2)
                 .collect(Collectors.toList());
-        Optional<Map.Entry<NumberCard, Long>> maybeThreeOfaKind = entries.stream()
+        // a full house if necessarly a three of kind and (three or two of a kind) , this is what we are asserting here
+        return maybeThreeOfAKind(entries)
+                .map(numberCardLongEntry -> maybeThreeOrTwoOfAKind(entries, numberCardLongEntry))
+                .orElseGet(() -> false);
+
+    }
+
+    private Boolean maybeThreeOrTwoOfAKind(List<Map.Entry<NumberCard, Long>> entries, Map.Entry<NumberCard, Long> numberCardLongEntry) {
+        return entries.stream()
+                .filter(numberCarLodngEntry1 -> !numberCarLodngEntry1.equals(numberCardLongEntry))
+                .findFirst()
+                .map(numberCardLongEntry1 -> numberCardLongEntry1.getValue() == 2 || numberCardLongEntry1.getValue() == 3)
+                .orElseGet(() -> false);
+    }
+
+    private Optional<Map.Entry<NumberCard, Long>> maybeThreeOfAKind(List<Map.Entry<NumberCard, Long>> entries) {
+        return entries.stream()
                 .filter(numberCardLongEntry -> numberCardLongEntry.getValue() == 3)
                 .findFirst();
-        if(maybeThreeOfaKind.isPresent()) {
-            Optional<Map.Entry<NumberCard, Long>> maybeThreeOrTwoOfAkind = entries.stream()
-                    .filter(numberCardLongEntry -> !numberCardLongEntry.equals(maybeThreeOfaKind.get()))
-                    .findFirst();
-            if(maybeThreeOrTwoOfAkind.isPresent()) {
-                return maybeThreeOrTwoOfAkind.get().getValue() == 2 || maybeThreeOrTwoOfAkind.get().getValue() == 3;
-            }
-            return false;
-        }
-        return false;
     }
 }
