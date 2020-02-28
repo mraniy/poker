@@ -15,6 +15,11 @@ public abstract class Hand {
 
     protected List<Card> cards;
 
+    protected Optional<Hand> next;
+
+
+
+
     protected LabelCard retrieveLabelCardOfFlush() {
         Map<LabelCard, Long> numberOfOccurencesLabel = cards.stream()
                 .collect(Collectors.groupingBy(h -> h.getLabelCard(),
@@ -26,23 +31,25 @@ public abstract class Hand {
     }
 
     protected boolean isFromTenToAs(Card card) {
-        return Arrays.asList(NumberCard.AS , NumberCard.KING , NumberCard.DAME , NumberCard.VALLEE , NumberCard.DIX)
+        return Arrays.asList(NumberCard.AS, NumberCard.KING, NumberCard.DAME, NumberCard.VALLEE, NumberCard.DIX)
                 .contains(card.getNumberCard());
 
     }
 
 
-
-
     protected boolean areCardsStraightNotToAs(List<Card> cardsWithTheSameLabelOccuringMoreThanFiveTimes) {
         int count = 0;
-        for(int i = 0 ; i< cardsWithTheSameLabelOccuringMoreThanFiveTimes.size(); i++) {
-            if(i+1 < cardsWithTheSameLabelOccuringMoreThanFiveTimes.size() &&
-                    cardsWithTheSameLabelOccuringMoreThanFiveTimes.get(i+1).getNumberCard().ordinal() == cardsWithTheSameLabelOccuringMoreThanFiveTimes.get(i).getNumberCard().ordinal()+1) {
-                count ++;
+        for (int i = 0; i < cardsWithTheSameLabelOccuringMoreThanFiveTimes.size(); i++) {
+            if (i + 1 < cardsWithTheSameLabelOccuringMoreThanFiveTimes.size()) {
+                if (cardsWithTheSameLabelOccuringMoreThanFiveTimes.get(i + 1).getNumberCard().ordinal()
+                        == cardsWithTheSameLabelOccuringMoreThanFiveTimes.get(i).getNumberCard().ordinal() + 1) {
+                    count++;
+                } else {
+                    count = 0;
+                }
             }
         }
-        if(count == 4) {
+        if (count == 4) {
             return true;
         }
         return false;
@@ -50,7 +57,7 @@ public abstract class Hand {
 
 
     public Boolean isAValidHand() {
-        if(this.getCards().size() != 7) {
+        if (this.getCards().size() != 7) {
             return false;
         }
         return true;
@@ -58,7 +65,12 @@ public abstract class Hand {
 
     public abstract Boolean verify();
 
-
+    public Hand determineHand()  {
+        if(!this.verify()) {
+            next.ifPresent(hand -> hand.determineHand());
+        }
+        return this;
+    }
 
 
 }

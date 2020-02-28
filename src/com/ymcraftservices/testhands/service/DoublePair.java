@@ -9,10 +9,11 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class Square extends Hand {
-    public Square(List<Card> cards) {
+public class DoublePair extends Hand {
+
+    public DoublePair(List<Card> cards) {
         this.cards = cards;
-        next = Optional.of(new FullHouse(cards));
+        next = Optional.of(new Pair(cards));
     }
 
     @Override
@@ -21,10 +22,10 @@ public class Square extends Hand {
         Map<NumberCard, Long> numberCardAndItsOccurence = this.cards
                 .stream()
                 .collect(Collectors.groupingBy(card -> card.getNumberCard(), Collectors.counting()));
-        Optional<Map.Entry<NumberCard, Long>> maybeSquareEntry = numberCardAndItsOccurence.entrySet()
+        long numberOfPairs = numberCardAndItsOccurence.values()
                 .stream()
-                .filter(numberCardLongEntry -> numberCardLongEntry.getValue() == 4L)
-                .findFirst();
-        return maybeSquareEntry.isPresent();
+                .filter(aLong -> aLong.equals(2L))
+                .count();
+        return numberOfPairs >= 2;
     }
 }

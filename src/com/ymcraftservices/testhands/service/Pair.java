@@ -4,15 +4,14 @@ import com.ymcraftservices.testhands.model.Card;
 import com.ymcraftservices.testhands.model.Hand;
 import com.ymcraftservices.testhands.model.NumberCard;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
-public class Square extends Hand {
-    public Square(List<Card> cards) {
+public class Pair extends Hand {
+
+    public Pair(List<Card> cards) {
         this.cards = cards;
-        next = Optional.of(new FullHouse(cards));
+        next = Optional.of(new HighCard(cards));
     }
 
     @Override
@@ -21,10 +20,6 @@ public class Square extends Hand {
         Map<NumberCard, Long> numberCardAndItsOccurence = this.cards
                 .stream()
                 .collect(Collectors.groupingBy(card -> card.getNumberCard(), Collectors.counting()));
-        Optional<Map.Entry<NumberCard, Long>> maybeSquareEntry = numberCardAndItsOccurence.entrySet()
-                .stream()
-                .filter(numberCardLongEntry -> numberCardLongEntry.getValue() == 4L)
-                .findFirst();
-        return maybeSquareEntry.isPresent();
+        return new HashSet<>(numberCardAndItsOccurence.values()).size() ==2 && numberCardAndItsOccurence.values().containsAll(Arrays.asList(2L,1L));
     }
 }
