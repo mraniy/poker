@@ -6,14 +6,12 @@ import com.ymcraftservices.testhands.model.NumberCard;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class DoublePair extends Hand {
 
     public DoublePair(List<Card> cards) {
         this.cards = cards;
-        next = Optional.of(new Pair(cards));
     }
 
     @Override

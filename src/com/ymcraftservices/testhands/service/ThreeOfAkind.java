@@ -4,14 +4,17 @@ import com.ymcraftservices.testhands.model.Card;
 import com.ymcraftservices.testhands.model.Hand;
 import com.ymcraftservices.testhands.model.NumberCard;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ThreeOfAkind extends Hand {
 
     public ThreeOfAkind(List<Card> cards) {
         this.cards = cards;
-        next = Optional.of(new DoublePair(cards));
+
     }
 
     @Override

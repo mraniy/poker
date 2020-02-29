@@ -11,7 +11,6 @@ public class HighCard extends Hand {
 
     public HighCard(List<Card> cards) {
         this.cards = cards;
-        next = Optional.empty();
     }
 
     @Override

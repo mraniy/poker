@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
 public class Square extends Hand {
     public Square(List<Card> cards) {
         this.cards = cards;
-        next = Optional.of(new FullHouse(cards));
     }
 
     @Override

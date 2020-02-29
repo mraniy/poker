@@ -5,13 +5,11 @@ import com.ymcraftservices.testhands.model.Hand;
 import com.ymcraftservices.testhands.model.LabelCard;
 
 import java.util.List;
-import java.util.Optional;
 
 public class Flush extends Hand {
 
     public Flush(List<Card> cards) {
         this.cards = cards;
-        next = Optional.of(new Straight(cards));
     }
 
     @Override

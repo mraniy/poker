@@ -5,13 +5,11 @@ import com.ymcraftservices.testhands.model.Hand;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 
 public class Straight extends Hand {
 
     public Straight(List<Card> cards) {
         this.cards = cards;
-        next = Optional.of(new ThreeOfAkind(cards));
     }
 
     @Override

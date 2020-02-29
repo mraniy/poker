@@ -11,7 +11,6 @@ public class Pair extends Hand {
 
     public Pair(List<Card> cards) {
         this.cards = cards;
-        next = Optional.of(new HighCard(cards));
     }
 
     @Override

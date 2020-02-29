@@ -11,9 +11,7 @@ import java.util.Optional;
 public class RoyalFlush extends Hand {
 
     public RoyalFlush(List<Card> cards) {
-
         this.cards = cards;
-        next = Optional.of(new StraightFlush(cards));
     }
 
     @Override

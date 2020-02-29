@@ -13,7 +13,6 @@ public class FullHouse extends Hand {
 
     public FullHouse(List<Card> cards) {
         this.cards = cards;
-        next = Optional.of(new Flush(cards));
     }
 
     @Override

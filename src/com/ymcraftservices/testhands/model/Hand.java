@@ -15,9 +15,6 @@ public abstract class Hand {
 
     protected List<Card> cards;
 
-    protected Optional<Hand> next;
-
-
 
 
     protected LabelCard retrieveLabelCardOfFlush() {
@@ -65,12 +62,7 @@ public abstract class Hand {
 
     public abstract Boolean verify();
 
-    public Hand determineHand()  {
-        if(!this.verify()) {
-            next.ifPresent(hand -> hand.determineHand());
-        }
-        return this;
-    }
+
 
 
 }
