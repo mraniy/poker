@@ -18,6 +18,16 @@ public enum NumberCard {
 
     private Integer number;
 
+    public static int compare(NumberCard numberCard1 , NumberCard numberCard2) {
+        if(numberCard1.equals(NumberCard.AS)) return -1;
+        else if(numberCard2.equals(NumberCard.AS)) return 1;
+        else return numberCard1.getNumber() - numberCard2.getNumber();
+    }
+
+    public Integer getNumber() {
+        return number;
+    }
+
     NumberCard(Integer number) {
         this.number = number;
     }

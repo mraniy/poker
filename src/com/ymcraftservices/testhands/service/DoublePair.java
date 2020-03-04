@@ -26,4 +26,9 @@ public class DoublePair extends Hand {
                 .count();
         return numberOfPairs >= 2;
     }
+
+    @Override
+    public Hand getBestFiveCards() {
+        return null;
+    }
 }

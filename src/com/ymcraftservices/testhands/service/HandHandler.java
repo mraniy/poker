@@ -3,8 +3,6 @@ package com.ymcraftservices.testhands.service;
 import com.ymcraftservices.testhands.model.Card;
 import com.ymcraftservices.testhands.model.Hand;
 
-import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 
 public class HandHandler {

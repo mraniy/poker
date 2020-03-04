@@ -26,4 +26,9 @@ public class HighCard extends Hand {
         return listOcuurences.size() == 1 && listOcuurences.get(0).equals(1L);
 
     }
+
+    @Override
+    public Hand getBestFiveCards() {
+        return null;
+    }
 }

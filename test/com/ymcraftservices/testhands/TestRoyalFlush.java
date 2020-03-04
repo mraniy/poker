@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.core.Is.is;
 
 public class TestRoyalFlush {
@@ -29,7 +30,7 @@ public class TestRoyalFlush {
         List<Card> notRoyalFlushCards = Arrays.asList(card1, card2, card3, card4, card5, card6, card7);
         Hand notAroyalFlushCombination = new RoyalFlush(notRoyalFlushCards);
         // then
-        assertThat(notAroyalFlushCombination.verify() , is(false));
+        assertThat(notAroyalFlushCombination.verify(), is(false));
     }
 
     @Test
@@ -46,7 +47,7 @@ public class TestRoyalFlush {
         List<Card> royalFlushCards = Arrays.asList(card1, card2, card3, card4, card5, card6, card7);
         Hand royalFlushCombination = new RoyalFlush(royalFlushCards);
         // then
-        assertThat(royalFlushCombination.verify() , is(true));
+        assertThat(royalFlushCombination.verify(), is(true));
     }
 
     @Test
@@ -63,6 +64,25 @@ public class TestRoyalFlush {
         List<Card> royalFlushCards = Arrays.asList(card1, card2, card3, card4, card5, card6, card7);
         Hand royalFlushCombination = new RoyalFlush(royalFlushCards);
         // then
-        assertThat(royalFlushCombination.verify() , is(false));
+        assertThat(royalFlushCombination.verify(), is(false));
     }
+
+    @Test
+    public void should_return_ten_to_as_as_best_five_cards() {
+        // given
+        Card card1 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.AS);
+        Card card2 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.KING);
+        Card card3 = DataFactory.getCard(LabelCard.TREFLE, NumberCard.SEPT);
+        Card card4 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.DAME);
+        Card card5 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.VALLEE);
+        Card card6 = DataFactory.getCard(LabelCard.COEUR, NumberCard.NEUF);
+        Card card7 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.DIX);
+        // when
+        List<Card> royalFlushCards = Arrays.asList(card1, card2, card3, card4, card5, card6, card7);
+        Hand royalFlushCombination = new RoyalFlush(royalFlushCards);
+        // then
+        assertThat(royalFlushCombination.getBestFiveCards().getCards(), containsInAnyOrder(card1, card2, card4, card5, card7));
+    }
+
+
 }

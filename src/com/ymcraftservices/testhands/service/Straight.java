@@ -14,8 +14,13 @@ public class Straight extends Hand {
 
     @Override
     public Boolean verify() {
-        this.cards.sort(Comparator.comparing(card -> card.getNumberCard().ordinal()));
+        this.cards.sort(Comparator.comparing(card -> card.getNumberCard().getNumber()));
         return areCardsStraightNotToAs(this.cards) || isaStraightToAs();
+    }
+
+    @Override
+    public Hand getBestFiveCards() {
+        return null;
     }
 
     private boolean isaStraightToAs() {

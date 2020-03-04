@@ -17,4 +17,9 @@ public class Flush extends Hand {
         LabelCard labelCard = retrieveLabelCardOfFlush();
         return labelCard != null;
     }
+
+    @Override
+    public Hand getBestFiveCards() {
+        return null;
+    }
 }

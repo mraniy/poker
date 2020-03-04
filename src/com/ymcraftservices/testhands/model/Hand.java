@@ -17,6 +17,9 @@ public abstract class Hand {
 
 
 
+
+
+
     protected LabelCard retrieveLabelCardOfFlush() {
         Map<LabelCard, Long> numberOfOccurencesLabel = cards.stream()
                 .collect(Collectors.groupingBy(h -> h.getLabelCard(),
@@ -38,18 +41,38 @@ public abstract class Hand {
         int count = 0;
         for (int i = 0; i < cardsWithTheSameLabelOccuringMoreThanFiveTimes.size(); i++) {
             if (i + 1 < cardsWithTheSameLabelOccuringMoreThanFiveTimes.size()) {
-                if (cardsWithTheSameLabelOccuringMoreThanFiveTimes.get(i + 1).getNumberCard().ordinal()
-                        == cardsWithTheSameLabelOccuringMoreThanFiveTimes.get(i).getNumberCard().ordinal() + 1) {
-                    count++;
-                } else {
-                    count = 0;
-                }
+                count = getCount(cardsWithTheSameLabelOccuringMoreThanFiveTimes, count, i);
             }
         }
         if (count == 4) {
             return true;
         }
         return false;
+    }
+
+    private int getCount(List<Card> cardsWithTheSameLabelOccuringMoreThanFiveTimes, int count, int i) {
+        if (cardsWithTheSameLabelOccuringMoreThanFiveTimes.get(i + 1).getNumberCard().getNumber()
+                == cardsWithTheSameLabelOccuringMoreThanFiveTimes.get(i).getNumberCard().getNumber() + 1) {
+            count++;
+        } else {
+            count = 0;
+        }
+        return count;
+    }
+
+    protected Integer getStraightTo(List<Card> cardsWithTheSameLabelOccuringMoreThanFiveTimes) {
+        int count = 0;
+        int i = 0;
+        while(i < cardsWithTheSameLabelOccuringMoreThanFiveTimes.size()) {
+            if (i + 1 < cardsWithTheSameLabelOccuringMoreThanFiveTimes.size()) {
+                count = getCount(cardsWithTheSameLabelOccuringMoreThanFiveTimes, count, i);
+            }
+            i++;
+        }
+        if (count == 4) {
+            return i;
+        }
+        return -1;
     }
 
 
@@ -61,6 +84,8 @@ public abstract class Hand {
     }
 
     public abstract Boolean verify();
+
+    public abstract Hand getBestFiveCards();
 
 
 

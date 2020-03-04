@@ -21,4 +21,9 @@ public class Pair extends Hand {
                 .collect(Collectors.groupingBy(card -> card.getNumberCard(), Collectors.counting()));
         return new HashSet<>(numberCardAndItsOccurence.values()).size() ==2 && numberCardAndItsOccurence.values().containsAll(Arrays.asList(2L,1L));
     }
+
+    @Override
+    public Hand getBestFiveCards() {
+        return null;
+    }
 }
