@@ -5,6 +5,7 @@ import com.ymcraftservices.testhands.model.Hand;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Straight extends Hand {
 
@@ -20,6 +21,17 @@ public class Straight extends Hand {
 
     @Override
     public Hand getBestFiveCards() {
+        this.cards.sort(Comparator.comparing(card -> card.getNumberCard().getNumber()));
+        if(isaStraightToAs())  {
+            List<Card> cards = this.cards.stream()
+                    .filter(this::isFromTenToAs)
+                    .sorted()
+                    .collect(Collectors.toList());
+            return new Straight(cards);
+        } else if(areCardsStraightNotToAs(this.cards)) {
+            Integer straightTo = getStraightTo(this.cards);
+            return new Straight(this.cards.subList(straightTo-5 , straightTo));
+        }
         return null;
     }
 

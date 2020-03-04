@@ -60,12 +60,12 @@ public abstract class Hand {
         return count;
     }
 
-    protected Integer getStraightTo(List<Card> cardsWithTheSameLabelOccuringMoreThanFiveTimes) {
+    protected Integer getStraightTo(List<Card> cards) {
         int count = 0;
         int i = 0;
-        while(i < cardsWithTheSameLabelOccuringMoreThanFiveTimes.size()) {
-            if (i + 1 < cardsWithTheSameLabelOccuringMoreThanFiveTimes.size()) {
-                count = getCount(cardsWithTheSameLabelOccuringMoreThanFiveTimes, count, i);
+        while(i < cards.size()) {
+            if (i + 1 < cards.size()) {
+                count = getCount(cards, count, i);
             }
             i++;
         }

@@ -3,8 +3,10 @@ package com.ymcraftservices.testhands.service;
 import com.ymcraftservices.testhands.model.Card;
 import com.ymcraftservices.testhands.model.Hand;
 import com.ymcraftservices.testhands.model.LabelCard;
+import com.ymcraftservices.testhands.model.NumberCard;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Flush extends Hand {
 
@@ -20,6 +22,12 @@ public class Flush extends Hand {
 
     @Override
     public Hand getBestFiveCards() {
-        return null;
+        LabelCard labelCard = retrieveLabelCardOfFlush();
+        List<Card> cards = this.cards.stream()
+                .filter(card -> card.getLabelCard().equals(labelCard))
+                .sorted()
+                .limit(5)
+                .collect(Collectors.toList());
+        return new Flush(cards);
     }
 }
