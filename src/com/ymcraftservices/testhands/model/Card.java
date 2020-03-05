@@ -26,8 +26,15 @@ public class Card implements Comparable {
     @Override
     public int compareTo(Object o) {
         Card card = (Card) o;
-        if(this.getNumberCard().equals(NumberCard.AS)) return 1;
-        else if(card.getNumberCard().equals(NumberCard.AS)) return -1;
-        else return this.getNumberCard().getNumber() - card.getNumberCard().getNumber();
+        int number1;
+        int number2;
+        if(this.getNumberCard().equals(NumberCard.AS)) {
+            number1 = 14;
+        } else number1 = this.getNumberCard().getNumber();
+
+        if(card.getNumberCard().equals(NumberCard.AS)) {
+            number2 = 14;
+        } else number2 = card.getNumberCard().getNumber();
+        return number1 - number2;
     }
 }

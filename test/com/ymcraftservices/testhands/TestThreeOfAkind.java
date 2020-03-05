@@ -48,7 +48,7 @@ public class TestThreeOfAkind {
         // when
         List<Card> notThreeOfAKind = Arrays.asList(card1, card2, card3, card4, card5, card6, card7);
         Hand threeOfAkind = new ThreeOfAkind(notThreeOfAKind);
-        // then
+        // thent
         assertThat(threeOfAkind.verify() , is(true));
     }
 

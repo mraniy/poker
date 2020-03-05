@@ -3,6 +3,8 @@ package com.ymcraftservices.testhands.service;
 import com.ymcraftservices.testhands.model.Card;
 import com.ymcraftservices.testhands.model.Hand;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -29,6 +31,10 @@ public class HighCard extends Hand {
 
     @Override
     public Hand getBestFiveCards() {
-        return null;
+        List<Card> cards = this.cards
+                .stream()
+                .sorted()
+                .collect(Collectors.toList());
+        return new HighCard(cards.subList(2,7));
     }
 }
