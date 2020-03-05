@@ -26,13 +26,13 @@ public class RoyalFlush extends Hand {
     }
 
     @Override
-    public Hand getBestFiveCards() {
+    public void setBestFiveCards() {
         LabelCard labelCard = retrieveLabelCardOfFlush();
         List<Card> bestFiveCards= this.cards.stream()
                 .filter(card -> isaStraightToAs(card.getLabelCard()))
                 .filter(card -> card.getLabelCard().equals(labelCard))
                 .collect(Collectors.toList());
-        return new RoyalFlush(bestFiveCards);
+        setBestFiveCards(bestFiveCards);
     }
 
     private boolean isaStraightToAs(LabelCard labelCard) {

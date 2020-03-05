@@ -66,11 +66,11 @@ public class TestThreeOfAkind {
         // when
         List<Card> threeOfAKind = Arrays.asList(card1, card2, card3, card4, card5, card6, card7);
         ThreeOfAkind threeOfKind = new ThreeOfAkind(threeOfAKind);
-        ThreeOfAkind bestFiveCards =(ThreeOfAkind) threeOfKind.getBestFiveCards();
+        threeOfKind.setBestFiveCards();
         // then
 
-        assertThat(bestFiveCards.getCards() , containsInAnyOrder(card1,card2,card4,card5,card7));
-        assertThat(bestFiveCards.getKicker(), is(NumberCard.VALLEE.getNumber()));
+        assertThat(threeOfKind.getBestFiveCards() , containsInAnyOrder(card1,card2,card4,card5,card7));
+        assertThat(threeOfKind.getKicker(), is(NumberCard.VALLEE.getNumber()));
 
     }
 }

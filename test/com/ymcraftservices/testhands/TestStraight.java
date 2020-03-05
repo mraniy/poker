@@ -4,7 +4,6 @@ import com.ymcraftservices.testhands.model.Card;
 import com.ymcraftservices.testhands.model.Hand;
 import com.ymcraftservices.testhands.model.LabelCard;
 import com.ymcraftservices.testhands.model.NumberCard;
-import com.ymcraftservices.testhands.service.RoyalFlush;
 import com.ymcraftservices.testhands.service.Straight;
 import org.junit.jupiter.api.Test;
 
@@ -65,8 +64,9 @@ public class TestStraight {
         // when
         List<Card> straightCards = Arrays.asList(card1, card2, card3, card4, card5, card6, card7);
         Hand straightCombination = new Straight(straightCards);
+        straightCombination.setBestFiveCards();
         // then
-        assertThat(straightCombination.getBestFiveCards().getCards(), contains(card3,card4,card6,card1,card5));
+        assertThat(straightCombination.getBestFiveCards(), contains(card3,card4,card6,card1,card5));
     }
 
     @Test
@@ -82,8 +82,9 @@ public class TestStraight {
         // when
         List<Card> straightCards = Arrays.asList(card1, card2, card3, card4, card5, card6, card7);
         Hand straightCombination = new Straight(straightCards);
+        straightCombination.setBestFiveCards();
         // then
-        assertThat(straightCombination.getBestFiveCards().getCards(), contains(card1,card5,card6,card3,card4));
+        assertThat(straightCombination.getBestFiveCards(), contains(card1,card5,card6,card3,card4));
     }
 
 

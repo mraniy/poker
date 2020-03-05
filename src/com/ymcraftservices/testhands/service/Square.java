@@ -43,7 +43,7 @@ public class Square extends Hand {
     }
 
     @Override
-    public Hand getBestFiveCards() {
+    public void setBestFiveCards() {
         Optional<Map.Entry<NumberCard, Long>> maybenumberCardOfSquare = getNumberCardOfSquare();
         NumberCard numberCard = maybenumberCardOfSquare
                 .map(numberCardLongEntry -> numberCardLongEntry.getKey())
@@ -51,16 +51,16 @@ public class Square extends Hand {
         this.fourOfAKind = numberCard.getNumber();
         Stream<Card> streamOfFour = this.cards.stream()
                 .filter(card -> card.getNumberCard().getNumber() == numberCard.getNumber());
-        return this.cards.stream()
+         this.cards.stream()
                 .filter(card -> card.getNumberCard().getNumber() != numberCard.getNumber())
                 .max(Comparator.comparingInt(o -> o.getNumberCard().getNumber()))
-                .map(card -> {
+                .ifPresent(card -> {
                     this.kicker = card.getNumberCard().getNumber();
                     List<Card> bestFiveCards = Stream.concat(streamOfFour, Stream.of(card))
                             .collect(Collectors.toList());
-                    return new Square(bestFiveCards);
-                })
-                .orElseGet(() -> null);
+                    setBestFiveCards(bestFiveCards);
+                });
+
 
     }
 }

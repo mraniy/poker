@@ -63,7 +63,8 @@ public class TestFlush {
         // when
         List<Card> flush = Arrays.asList(card1, card2, card3, card4, card5, card6, card7);
         Hand flushHand = new Flush(flush);
+        flushHand.setBestFiveCards();
         // then
-        assertThat(flushHand.getBestFiveCards().getCards() , contains(card6, card2,card1,card5, card3));
+        assertThat(flushHand.getBestFiveCards() , contains(card6, card2,card1,card5, card3));
     }
 }

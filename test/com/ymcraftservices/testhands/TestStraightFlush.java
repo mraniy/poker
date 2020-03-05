@@ -63,8 +63,9 @@ public class TestStraightFlush {
         // when
         List<Card> straightFlushCards = Arrays.asList(card1, card2, card3, card4, card5, card6, card7);
         Hand straightFlushCombination = new StraightFlush(straightFlushCards);
+        straightFlushCombination.setBestFiveCards();
         // then
-        assertThat(straightFlushCombination.getBestFiveCards().getCards() , contains(card3,card4,card6,card1, card5));
+        assertThat(straightFlushCombination.getBestFiveCards() , contains(card3,card4,card6,card1, card5));
 
     }
 }

@@ -4,7 +4,6 @@ import com.ymcraftservices.testhands.model.Card;
 import com.ymcraftservices.testhands.model.Hand;
 import com.ymcraftservices.testhands.model.LabelCard;
 import com.ymcraftservices.testhands.model.NumberCard;
-import com.ymcraftservices.testhands.service.DoublePair;
 import com.ymcraftservices.testhands.service.Pair;
 import org.junit.jupiter.api.Test;
 
@@ -65,9 +64,10 @@ public class TestPair {
         // when
         List<Card> doublePair = Arrays.asList(card1, card2, card3, card4, card5, card6, card7);
         Hand doublePairCombination = new Pair(doublePair);
-        Pair bestFiveCards = (Pair) doublePairCombination.getBestFiveCards();
+        doublePairCombination.setBestFiveCards();
+
         // then
-        assertThat(bestFiveCards.getCards(), containsInAnyOrder(card1,card2,card7,card3,card5));
-        assertThat(bestFiveCards.getKicker() , is(NumberCard.VALLEE.getNumber()));
+        assertThat(doublePairCombination.getBestFiveCards(), containsInAnyOrder(card1,card2,card7,card3,card5));
+        assertThat(((Pair)doublePairCombination).getKicker() , is(NumberCard.VALLEE.getNumber()));
     }
 }

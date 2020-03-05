@@ -86,10 +86,10 @@ public class TestFullHouse {
         // when
         List<Card> fullHouse = Arrays.asList(card1, card2, card3, card4, card5, card6, card7);
         Hand fullHouseCombination = new FullHouse(fullHouse);
-        FullHouse bestFiveCards = (FullHouse) fullHouseCombination.getBestFiveCards();
+        fullHouseCombination.setBestFiveCards();
         // then
-        assertThat(bestFiveCards.getFrom() , is(1));
-        assertThat(bestFiveCards.getTo(), is(7));
+        assertThat(((FullHouse)fullHouseCombination).getFrom() , is(1));
+        assertThat(((FullHouse)fullHouseCombination).getTo(), is(7));
     }
 
 
@@ -106,10 +106,11 @@ public class TestFullHouse {
         // when
         List<Card> fullHouse = Arrays.asList(card1, card2, card3, card4, card5, card6, card7);
         Hand fullHouseCombination = new FullHouse(fullHouse);
-        FullHouse bestFiveCards = (FullHouse) fullHouseCombination.getBestFiveCards();
+        fullHouseCombination.setBestFiveCards();
+
         // then
-        assertThat(bestFiveCards.getFrom() , is(1));
-        assertThat(bestFiveCards.getTo(), is(13));
+        assertThat(((FullHouse)fullHouseCombination).getFrom() , is(1));
+        assertThat(((FullHouse)fullHouseCombination).getTo(), is(13));
     }
 
 
@@ -127,9 +128,9 @@ public class TestFullHouse {
         // when
         List<Card> fullHouse = Arrays.asList(card1, card2, card3, card4, card5, card6, card7);
         Hand fullHouseCombination = new FullHouse(fullHouse);
-        FullHouse bestFiveCards = (FullHouse) fullHouseCombination.getBestFiveCards();
+        fullHouseCombination.setBestFiveCards();
         // then
-        assertThat(bestFiveCards.getFrom() , is(7));
-        assertThat(bestFiveCards.getTo(), is(1));
+        assertThat(((FullHouse)fullHouseCombination).getFrom() , is(7));
+        assertThat(((FullHouse)fullHouseCombination).getTo(), is(1));
     }
 }

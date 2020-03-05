@@ -30,23 +30,21 @@ public class DoublePair extends Hand {
     }
 
     @Override
-    public Hand getBestFiveCards() {
+    public void setBestFiveCards() {
         Map<NumberCard, Long> numberCardAndItsOccurence = getCardsAndTheirOccurences();
         List<NumberCard> numberCards = getTwoHighestCardsHavingTwoOccurences(numberCardAndItsOccurence);
         Stream<Card> cardsWithDoublePair = this.cards.stream()
                 .filter(card -> numberCards.contains(card.getNumberCard()));
-        return getKicker(numberCardAndItsOccurence)
-                .map(numberCard -> {
+         getKicker(numberCardAndItsOccurence)
+                .ifPresent(numberCard -> {
                     List<Card> cards = this.cards.stream()
                             .filter(card -> card.getNumberCard().equals(numberCard))
                             .findFirst()
                             .map(card -> mergeKickerAndDoublePairs(cardsWithDoublePair, card)
                             ).orElseGet(() -> new ArrayList<>());
-                    DoublePair doublePair = new DoublePair(cards);
-                    doublePair.setKicker(numberCard.getNumber());
-                    return doublePair;
-                }).orElseGet(() -> null);
-
+                    setBestFiveCards(cards);
+                    this.setKicker(numberCard.getNumber());
+                });
     }
 
     private List<Card> mergeKickerAndDoublePairs(Stream<Card> cardsWithDoublePair, Card card) {

@@ -29,15 +29,15 @@ public class ThreeOfAkind extends Hand {
     }
 
     @Override
-    public Hand getBestFiveCards() {
+    public void setBestFiveCards() {
         Map<NumberCard, Long> numberCardAndItsOccurence = this.cards
                 .stream()
                 .collect(Collectors.groupingBy(card -> card.getNumberCard(), Collectors.counting()));
-        return numberCardAndItsOccurence.entrySet().stream()
+        numberCardAndItsOccurence.entrySet().stream()
                 .filter(numberCardLongEntry -> numberCardLongEntry.getValue().equals(3L))
                 .map(Map.Entry::getKey)
                 .findFirst()
-                .map(numberCard -> {
+                .ifPresent(numberCard -> {
                     Stream<Card> cardsThreeOfKind = this.cards.stream()
                             .filter(card -> card.getNumberCard().equals(numberCard));
                     Stream<Card> kickers = this.cards.stream()
@@ -45,14 +45,8 @@ public class ThreeOfAkind extends Hand {
                             .sorted(Comparator.reverseOrder())
                             .limit(2);
                     List<Card> cards = Stream.concat(cardsThreeOfKind, kickers).collect(Collectors.toList());
-                    return buildThreeOfAkind(cards);
-                })
-                .orElseGet(() -> null);
-    }
-
-    private ThreeOfAkind buildThreeOfAkind(List<Card> cards) {
-        ThreeOfAkind threeOfAkind = new ThreeOfAkind(cards);
-        threeOfAkind.setKicker(cards.get(3).getNumberCard().getNumber());
-        return threeOfAkind;
+                    setBestFiveCards(cards);
+                    setKicker(cards.get(3).getNumberCard().getNumber());
+                });
     }
 }

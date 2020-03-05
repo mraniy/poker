@@ -30,11 +30,11 @@ public class HighCard extends Hand {
     }
 
     @Override
-    public Hand getBestFiveCards() {
+    public void setBestFiveCards() {
         List<Card> cards = this.cards
                 .stream()
                 .sorted()
                 .collect(Collectors.toList());
-        return new HighCard(cards.subList(2,7));
+        setBestFiveCards(cards.subList(2,7));
     }
 }

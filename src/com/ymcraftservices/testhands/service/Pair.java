@@ -20,25 +20,25 @@ public class Pair extends Hand {
 
     @Override
     public Boolean verify() {
-        if(!isAValidHand()) return false;
+        if (!isAValidHand()) return false;
         Map<NumberCard, Long> numberCardAndItsOccurence = getCardAndTheirOccurences();
-        return new HashSet<>(numberCardAndItsOccurence.values()).size() ==2 && numberCardAndItsOccurence.values().containsAll(Arrays.asList(2L,1L));
+        return new HashSet<>(numberCardAndItsOccurence.values()).size() == 2 && numberCardAndItsOccurence.values().containsAll(Arrays.asList(2L, 1L));
     }
 
     private Map<NumberCard, Long> getCardAndTheirOccurences() {
         return this.cards
-                    .stream()
-                    .collect(Collectors.groupingBy(card -> card.getNumberCard(), Collectors.counting()));
+                .stream()
+                .collect(Collectors.groupingBy(card -> card.getNumberCard(), Collectors.counting()));
     }
 
     @Override
-    public Hand getBestFiveCards() {
+    public void setBestFiveCards() {
         Map<NumberCard, Long> numberCardAndItsOccurence = getCardAndTheirOccurences();
-        return numberCardAndItsOccurence.entrySet()
+        numberCardAndItsOccurence.entrySet()
                 .stream()
                 .filter(numberCardLongEntry -> numberCardLongEntry.getValue().equals(2L))
                 .findFirst()
-                .map(numberCardLongEntry ->  {
+                .ifPresent(numberCardLongEntry -> {
                     Stream<Card> pairStream = this.getCards().stream()
                             .filter(card -> card.getNumberCard().equals(numberCardLongEntry.getKey()));
                     Stream<Card> streamOtherCards = this.getCards().stream()
@@ -47,12 +47,9 @@ public class Pair extends Hand {
                             .limit(3);
                     List<Card> cards = Stream.concat(pairStream, streamOtherCards)
                             .collect(Collectors.toList());
-                    Pair pair = new Pair(cards);
-                    pair.setKicker(cards.get(2).getNumberCard().getNumber());
-                    return pair;
-
-                })
-                .orElseGet(() -> null);
+                    setBestFiveCards(cards);
+                    setKicker(cards.get(2).getNumberCard().getNumber());
+                });
 
     }
 }

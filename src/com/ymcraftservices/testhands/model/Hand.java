@@ -15,6 +15,7 @@ public abstract class Hand {
 
     protected List<Card> cards;
 
+    protected List<Card> bestFiveCards;
 
 
 
@@ -85,7 +86,7 @@ public abstract class Hand {
 
     public abstract Boolean verify();
 
-    public abstract Hand getBestFiveCards();
+    public abstract void setBestFiveCards();
 
 
 

@@ -26,14 +26,14 @@ public class StraightFlush extends Hand {
     }
 
     @Override
-    public Hand getBestFiveCards() {
+    public void setBestFiveCards() {
         LabelCard flushLabelCard = retrieveLabelCardOfFlush();
         List<Card> cardsWithTheSameLabelOccuringMoreThanFiveTimes = cards.stream()
                 .filter(card -> card.getLabelCard().equals(flushLabelCard))
                 .collect(Collectors.toList());
         cardsWithTheSameLabelOccuringMoreThanFiveTimes.sort(Comparator.comparing(card -> card.getNumberCard().getNumber()));
         Integer straightTo = getStraightTo(cardsWithTheSameLabelOccuringMoreThanFiveTimes);
-        return new StraightFlush(cardsWithTheSameLabelOccuringMoreThanFiveTimes.subList(straightTo-5, straightTo));
+        setBestFiveCards(cardsWithTheSameLabelOccuringMoreThanFiveTimes.subList(straightTo-5, straightTo));
     }
 
 

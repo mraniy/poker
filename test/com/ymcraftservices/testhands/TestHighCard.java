@@ -63,8 +63,9 @@ public class TestHighCard {
         // when
         List<Card> highcard = Arrays.asList(card1, card2, card3, card4, card5, card6, card7);
         Hand highCardCombination = new HighCard(highcard);
-        HighCard bestFiveCards = (HighCard) highCardCombination.getBestFiveCards();
+        highCardCombination.setBestFiveCards();
+
         // then
-        assertThat(bestFiveCards.getCards() , contains(card3,card6,card7,card2,card1));
+        assertThat(highCardCombination.getBestFiveCards() , contains(card3,card6,card7,card2,card1));
     }
 }

@@ -43,7 +43,7 @@ public class FullHouse extends Hand {
     }
 
     @Override
-    public Hand getBestFiveCards() {
+    public void setBestFiveCards() {
         Map<NumberCard, Long> numberCardAndItsOccurence = this.cards
                 .stream()
                 .collect(Collectors.groupingBy(card -> card.getNumberCard(), Collectors.counting()));
@@ -62,18 +62,17 @@ public class FullHouse extends Hand {
                     .collect(Collectors.toList());
             this.to = entriesByTwo.get(0).getKey().getNumber();
         }
-        return buildBestFullHouseHand();
+        buildBestFullHouseHand();
     }
 
-    private Hand buildBestFullHouseHand() {
+    private void buildBestFullHouseHand() {
         Stream<Card> cardFromStream = this.cards.stream().filter(card -> card.getNumberCard().getNumber().equals(this.from));
         Stream<Card> cardToStream = this.cards.stream().filter(card -> card.getNumberCard().getNumber().equals(this.to)).limit(2);
-        FullHouse fullHouse = new FullHouse(Stream.concat(cardFromStream, cardToStream).collect(Collectors.toList()));
-        fullHouse.setFrom(this.from);
-        fullHouse.setTo(this.to);
-        return fullHouse;
+        List<Card> bestFiveCards = Stream.concat(cardFromStream, cardToStream).collect(Collectors.toList());
+        setBestFiveCards(bestFiveCards);
+        this.setFrom(this.from);
+        this.setTo(this.to);
     }
-
 
     private Boolean maybeThreeOrTwoOfAKind(List<Map.Entry<NumberCard, Long>> entries, Map.Entry<NumberCard, Long> numberCardLongEntry) {
         return entries.stream()

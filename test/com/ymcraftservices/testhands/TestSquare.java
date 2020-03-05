@@ -46,8 +46,9 @@ public class TestSquare {
         // when
         List<Card> squareCards = Arrays.asList(card1, card2, card3, card4, card5, card6, card7);
         Hand squareCombination = new Square(squareCards);
+        squareCombination.setBestFiveCards();
         // then
-        assertThat(squareCombination.getBestFiveCards().getCards(), containsInAnyOrder(card1,card2,card3,card4,card5));
+        assertThat(squareCombination.getBestFiveCards(), containsInAnyOrder(card1,card2,card3,card4,card5));
     }
 
     @Test

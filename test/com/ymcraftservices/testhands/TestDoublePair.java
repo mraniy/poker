@@ -64,11 +64,11 @@ public class TestDoublePair {
         // when
         List<Card> doublePair = Arrays.asList(card1, card2, card3, card4, card5, card6, card7);
         Hand doublePairCombination = new DoublePair(doublePair);
-        DoublePair bestFiveCards = (DoublePair) doublePairCombination.getBestFiveCards();
+        doublePairCombination.setBestFiveCards();
         // then
 
-        assertThat(bestFiveCards.getCards() ,
+        assertThat(doublePairCombination.getBestFiveCards() ,
                 containsInAnyOrder(card1,card2,card5,card6,card7));
-        assertThat(bestFiveCards.getKicker(), is(10));
+        assertThat(((DoublePair)doublePairCombination).getKicker(), is(10));
     }
 }

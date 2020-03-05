@@ -21,13 +21,13 @@ public class Flush extends Hand {
     }
 
     @Override
-    public Hand getBestFiveCards() {
+    public void setBestFiveCards() {
         LabelCard labelCard = retrieveLabelCardOfFlush();
         List<Card> cards = this.cards.stream()
                 .filter(card -> card.getLabelCard().equals(labelCard))
                 .sorted()
                 .limit(5)
                 .collect(Collectors.toList());
-        return new Flush(cards);
+        setBestFiveCards(cards);
     }
 }

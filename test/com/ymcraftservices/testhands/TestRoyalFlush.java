@@ -80,8 +80,9 @@ public class TestRoyalFlush {
         // when
         List<Card> royalFlushCards = Arrays.asList(card1, card2, card3, card4, card5, card6, card7);
         Hand royalFlushCombination = new RoyalFlush(royalFlushCards);
+        royalFlushCombination.setBestFiveCards();
         // then
-        assertThat(royalFlushCombination.getBestFiveCards().getCards(), containsInAnyOrder(card1, card2, card4, card5, card7));
+        assertThat(royalFlushCombination.getBestFiveCards(), containsInAnyOrder(card1, card2, card4, card5, card7));
     }
 
 
