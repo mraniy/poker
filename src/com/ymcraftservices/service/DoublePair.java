@@ -61,7 +61,7 @@ public class DoublePair extends Hand implements HandWithOccurences {
         return numberCardAndItsOccurence.entrySet().stream()
                 .filter(numberCardLongEntry -> numberCardLongEntry.getValue().equals(1L))
                 .map(numberCardLongEntry -> numberCardLongEntry.getKey())
-                .max((o1, o2) -> NumberCard.compare(o1, o2));
+                .max((o1, o2) -> NumberCard.compare(o2, o1));
     }
 
     private List<NumberCard> getTwoHighestCardsHavingTwoOccurences(Map<NumberCard, Long> numberCardAndItsOccurence) {

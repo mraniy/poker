@@ -71,4 +71,25 @@ public class TestDoublePair {
                 containsInAnyOrder(card1,card2,card5,card6,card7));
         assertThat(((DoublePair)doublePairCombination).getKicker(), is(10));
     }
+
+    @Test
+    public void should_return_double_pair_ace_deux_king_as_kicker() {
+        Card card7 = new Card(LabelCard.PIQUE, NumberCard.AS);
+        Card card1 = new Card(LabelCard.PIQUE, NumberCard.KING);
+        Card card2 = new Card(LabelCard.PIQUE, NumberCard.VALLEE);
+        Card card3 = new Card(LabelCard.PIQUE, NumberCard.DEUX);
+        Card card4 = new Card(LabelCard.TREFLE, NumberCard.CINQ);
+        Card card5 = new Card(LabelCard.COEUR, NumberCard.AS);
+        Card card6 = new Card(LabelCard.TREFLE, NumberCard.DEUX);
+
+        // when
+        List<Card> doublePair = Arrays.asList(card1, card2, card3, card4, card5, card6, card7);
+        Hand doublePairCombination = new DoublePair(doublePair);
+        doublePairCombination.setBestFiveCards();
+        // then
+
+        assertThat(doublePairCombination.getBestFiveCards() ,
+                containsInAnyOrder(card7,card5,card3,card6,card1));
+        assertThat(((DoublePair)doublePairCombination).getKicker(), is(13));
+    }
 }

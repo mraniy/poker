@@ -42,6 +42,6 @@ public class Straight extends Hand implements StraightHand {
         return getCards()
                 .stream()
                 .filter(this::isFromTenToAs)
-                .count() == 5;
+                .count() >= 5;
     }
 }

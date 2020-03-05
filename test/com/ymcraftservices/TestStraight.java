@@ -50,6 +50,26 @@ public class TestStraight {
         assertThat(straightCombination.verify(), is(true));
     }
 
+    @Test
+    public void should_return_true_when_the_hand_is_a_straight_to_as() {
+        // given
+        Card card7 = new Card(LabelCard.TREFLE, NumberCard.AS);
+        Card card1 = new Card(LabelCard.PIQUE, NumberCard.AS);
+        Card card2 = new Card(LabelCard.PIQUE, NumberCard.VALLEE);
+        Card card3 = new Card(LabelCard.PIQUE, NumberCard.DAME);
+        Card card4 = new Card(LabelCard.TREFLE, NumberCard.DIX);
+        Card card5 = new Card(LabelCard.COEUR, NumberCard.KING);
+        Card card6 = new Card(LabelCard.TREFLE, NumberCard.QUATRE);
+
+        // when
+        List<Card> straightCards = Arrays.asList(card1, card2, card3, card4, card5, card6, card7);
+        Hand straightCombination = new Straight(straightCards);
+        // then
+        assertThat(straightCombination.verify(), is(true));
+    }
+
+
+
 
     @Test
     public void should_return_straight_to_valee() {
