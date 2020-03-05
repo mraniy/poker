@@ -16,6 +16,7 @@ public class Flush extends Hand {
 
     @Override
     public Boolean verify() {
+        if(!isAValidHand()) return false;
         LabelCard labelCard = retrieveLabelCardOfFlush();
         return labelCard != null;
     }
