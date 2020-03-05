@@ -21,19 +21,14 @@ public class Pair extends Hand {
     @Override
     public Boolean verify() {
         if (!isAValidHand()) return false;
-        Map<NumberCard, Long> numberCardAndItsOccurence = getCardAndTheirOccurences();
+        Map<NumberCard, Long> numberCardAndItsOccurence = getCardsAndTheirOccurences();
         return new HashSet<>(numberCardAndItsOccurence.values()).size() == 2 && numberCardAndItsOccurence.values().containsAll(Arrays.asList(2L, 1L));
     }
 
-    private Map<NumberCard, Long> getCardAndTheirOccurences() {
-        return this.cards
-                .stream()
-                .collect(Collectors.groupingBy(card -> card.getNumberCard(), Collectors.counting()));
-    }
 
     @Override
     public void setBestFiveCards() {
-        Map<NumberCard, Long> numberCardAndItsOccurence = getCardAndTheirOccurences();
+        Map<NumberCard, Long> numberCardAndItsOccurence = getCardsAndTheirOccurences();
         numberCardAndItsOccurence.entrySet()
                 .stream()
                 .filter(numberCardLongEntry -> numberCardLongEntry.getValue().equals(2L))
@@ -50,6 +45,5 @@ public class Pair extends Hand {
                     setBestFiveCards(cards);
                     setKicker(cards.get(2).getNumberCard().getNumber());
                 });
-
     }
 }

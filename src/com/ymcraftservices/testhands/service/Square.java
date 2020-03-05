@@ -33,9 +33,7 @@ public class Square extends Hand {
     }
 
     private Optional<Map.Entry<NumberCard, Long>> getNumberCardOfSquare() {
-        Map<NumberCard, Long> numberCardAndItsOccurence = this.cards
-                .stream()
-                .collect(Collectors.groupingBy(card -> card.getNumberCard(), Collectors.counting()));
+        Map<NumberCard, Long> numberCardAndItsOccurence = getCardsAndTheirOccurences();
         return numberCardAndItsOccurence.entrySet()
                 .stream()
                 .filter(numberCardLongEntry -> numberCardLongEntry.getValue() == 4L)

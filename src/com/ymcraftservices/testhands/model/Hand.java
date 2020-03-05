@@ -18,7 +18,11 @@ public abstract class Hand {
     protected List<Card> bestFiveCards;
 
 
-
+    protected Map<NumberCard, Long> getCardsAndTheirOccurences() {
+        return this.cards
+                .stream()
+                .collect(Collectors.groupingBy(card -> card.getNumberCard(), Collectors.counting()));
+    }
 
 
     protected LabelCard retrieveLabelCardOfFlush() {

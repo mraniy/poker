@@ -22,11 +22,15 @@ public class DoublePair extends Hand {
     public Boolean verify() {
         if(!isAValidHand()) return false;
         Map<NumberCard, Long> numberCardAndItsOccurence = getCardsAndTheirOccurences();
-        long numberOfPairs = numberCardAndItsOccurence.values()
+        long numberOfPairs = getNumberOfPairs(numberCardAndItsOccurence);
+        return numberOfPairs >= 2;
+    }
+
+    private long getNumberOfPairs(Map<NumberCard, Long> numberCardAndItsOccurence) {
+        return numberCardAndItsOccurence.values()
                 .stream()
                 .filter(aLong -> aLong.equals(2L))
                 .count();
-        return numberOfPairs >= 2;
     }
 
     @Override
@@ -66,11 +70,5 @@ public class DoublePair extends Hand {
                 .sorted((o1, o2) -> NumberCard.compare(o1, o2))
                 .limit(2)
                 .collect(Collectors.toList());
-    }
-
-    private Map<NumberCard, Long> getCardsAndTheirOccurences() {
-        return this.cards
-                .stream()
-                .collect(Collectors.groupingBy(card -> card.getNumberCard(), Collectors.counting()));
     }
 }

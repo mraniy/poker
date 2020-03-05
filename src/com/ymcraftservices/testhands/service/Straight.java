@@ -22,16 +22,18 @@ public class Straight extends Hand {
     @Override
     public void setBestFiveCards() {
         this.cards.sort(Comparator.comparing(card -> card.getNumberCard().getNumber()));
+        List<Card> cards = null;
         if(isaStraightToAs())  {
-            List<Card> cards = this.cards.stream()
+            cards = this.cards.stream()
                     .filter(this::isFromTenToAs)
                     .sorted()
                     .collect(Collectors.toList());
-            setBestFiveCards(cards);
         } else if(areCardsStraightNotToAs(this.cards)) {
             Integer straightTo = getStraightTo(this.cards);
-            setBestFiveCards(this.cards.subList(straightTo-5 , straightTo));
+            cards = this.cards.subList(straightTo - 5, straightTo);
+
         }
+        setBestFiveCards(cards);
     }
 
     private boolean isaStraightToAs() {

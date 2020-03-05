@@ -27,9 +27,7 @@ public class FullHouse extends Hand {
     @Override
     public Boolean verify() {
         if (!isAValidHand()) return false;
-        Map<NumberCard, Long> numberCardAndItsOccurence = this.cards
-                .stream()
-                .collect(Collectors.groupingBy(card -> card.getNumberCard(), Collectors.counting()));
+        Map<NumberCard, Long> numberCardAndItsOccurence = getCardsAndTheirOccurences();
         // retrieve the two potential two of a kind and three of kind
         List<Map.Entry<NumberCard, Long>> entries = numberCardAndItsOccurence.entrySet()
                 .stream()
@@ -42,11 +40,10 @@ public class FullHouse extends Hand {
 
     }
 
+
     @Override
     public void setBestFiveCards() {
-        Map<NumberCard, Long> numberCardAndItsOccurence = this.cards
-                .stream()
-                .collect(Collectors.groupingBy(card -> card.getNumberCard(), Collectors.counting()));
+        Map<NumberCard, Long> numberCardAndItsOccurence = getCardsAndTheirOccurences();
         List<Map.Entry<NumberCard, Long>> entriesByThree = numberCardAndItsOccurence.entrySet()
                 .stream()
                 .filter(numberCardLongEntry -> numberCardLongEntry.getValue() == 3L)
