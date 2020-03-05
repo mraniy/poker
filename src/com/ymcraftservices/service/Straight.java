@@ -1,5 +1,6 @@
 package com.ymcraftservices.service;
 
+import com.ymcraftservices.contract.StraightHand;
 import com.ymcraftservices.model.Card;
 import com.ymcraftservices.model.Hand;
 
@@ -7,7 +8,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Straight extends Hand {
+public class Straight extends Hand implements StraightHand {
 
     public Straight(List<Card> cards) {
         this.cards = cards;

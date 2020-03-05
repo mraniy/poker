@@ -1,5 +1,6 @@
 package com.ymcraftservices.service;
 
+import com.ymcraftservices.contract.HandWithOccurences;
 import com.ymcraftservices.model.Card;
 import com.ymcraftservices.model.Hand;
 import com.ymcraftservices.model.NumberCard;
@@ -14,7 +15,7 @@ import java.util.stream.Stream;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class FullHouse extends Hand {
+public class FullHouse extends Hand implements HandWithOccurences {
 
     private Integer from;
 
@@ -27,7 +28,7 @@ public class FullHouse extends Hand {
     @Override
     public Boolean verify() {
         if (!isAValidHand()) return false;
-        Map<NumberCard, Long> numberCardAndItsOccurence = getCardsAndTheirOccurences();
+        Map<NumberCard, Long> numberCardAndItsOccurence = getCardsAndTheirOccurences(this.cards);
         // retrieve the two potential two of a kind and three of kind
         List<Map.Entry<NumberCard, Long>> entries = numberCardAndItsOccurence.entrySet()
                 .stream()
@@ -43,23 +44,24 @@ public class FullHouse extends Hand {
 
     @Override
     public void setBestFiveCards() {
-        Map<NumberCard, Long> numberCardAndItsOccurence = getCardsAndTheirOccurences();
-        List<Map.Entry<NumberCard, Long>> entriesByThree = numberCardAndItsOccurence.entrySet()
-                .stream()
-                .filter(numberCardLongEntry -> numberCardLongEntry.getValue() == 3L)
-                .collect(Collectors.toList());
+        Map<NumberCard, Long> numberCardAndItsOccurence = getCardsAndTheirOccurences(this.cards);
+        List<Map.Entry<NumberCard, Long>> entriesByThree = retrieveCardsWithOccurences(numberCardAndItsOccurence, 3L);
         entriesByThree.sort((o1, o2) -> NumberCard.compare(o1.getKey() , o2.getKey()));
         this.from = entriesByThree.get(0).getKey().getNumber();
         if (entriesByThree.size() >= 2) {
             this.to = entriesByThree.get(1).getKey().getNumber();
         } else {
-            List<Map.Entry<NumberCard, Long>> entriesByTwo = numberCardAndItsOccurence.entrySet()
-                    .stream()
-                    .filter(numberCardLongEntry -> numberCardLongEntry.getValue() == 2L)
-                    .collect(Collectors.toList());
+            List<Map.Entry<NumberCard, Long>> entriesByTwo = retrieveCardsWithOccurences(numberCardAndItsOccurence, 2L);
             this.to = entriesByTwo.get(0).getKey().getNumber();
         }
         buildBestFullHouseHand();
+    }
+
+    private List<Map.Entry<NumberCard, Long>> retrieveCardsWithOccurences(Map<NumberCard, Long> numberCardAndItsOccurence, long l) {
+        return numberCardAndItsOccurence.entrySet()
+                .stream()
+                .filter(numberCardLongEntry -> numberCardLongEntry.getValue() == l)
+                .collect(Collectors.toList());
     }
 
     private void buildBestFullHouseHand() {

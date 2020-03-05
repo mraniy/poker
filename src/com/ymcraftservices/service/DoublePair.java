@@ -1,5 +1,6 @@
 package com.ymcraftservices.service;
 
+import com.ymcraftservices.contract.HandWithOccurences;
 import com.ymcraftservices.model.Card;
 import com.ymcraftservices.model.Hand;
 import com.ymcraftservices.model.NumberCard;
@@ -10,7 +11,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Data
-public class DoublePair extends Hand {
+public class DoublePair extends Hand implements HandWithOccurences {
 
     private Integer kicker;
 
@@ -21,7 +22,7 @@ public class DoublePair extends Hand {
     @Override
     public Boolean verify() {
         if(!isAValidHand()) return false;
-        Map<NumberCard, Long> numberCardAndItsOccurence = getCardsAndTheirOccurences();
+        Map<NumberCard, Long> numberCardAndItsOccurence = getCardsAndTheirOccurences(this.cards);
         long numberOfPairs = getNumberOfPairs(numberCardAndItsOccurence);
         return numberOfPairs >= 2;
     }
@@ -35,7 +36,7 @@ public class DoublePair extends Hand {
 
     @Override
     public void setBestFiveCards() {
-        Map<NumberCard, Long> numberCardAndItsOccurence = getCardsAndTheirOccurences();
+        Map<NumberCard, Long> numberCardAndItsOccurence = getCardsAndTheirOccurences(this.cards);
         List<NumberCard> numberCards = getTwoHighestCardsHavingTwoOccurences(numberCardAndItsOccurence);
         Stream<Card> cardsWithDoublePair = this.cards.stream()
                 .filter(card -> numberCards.contains(card.getNumberCard()));

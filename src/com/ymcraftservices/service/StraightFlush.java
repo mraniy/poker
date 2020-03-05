@@ -1,5 +1,7 @@
 package com.ymcraftservices.service;
 
+import com.ymcraftservices.contract.FlushHand;
+import com.ymcraftservices.contract.StraightHand;
 import com.ymcraftservices.model.Card;
 import com.ymcraftservices.model.Hand;
 import com.ymcraftservices.model.LabelCard;
@@ -8,7 +10,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class StraightFlush extends Hand {
+public class StraightFlush extends Hand implements FlushHand, StraightHand {
     public StraightFlush(List<Card> cards) {
         this.cards = cards;
     }
@@ -16,7 +18,7 @@ public class StraightFlush extends Hand {
     @Override
     public Boolean verify() {
         if(!isAValidHand()) return false;
-        LabelCard flushLabelCard = retrieveLabelCardOfFlush();
+        LabelCard flushLabelCard = retrieveLabelCardOfFlush(this.cards);
         if(flushLabelCard == null) return false;
         List<Card> cardsWithTheSameLabelOccuringMoreThanFiveTimes = cards.stream()
                 .filter(card -> card.getLabelCard().equals(flushLabelCard))
@@ -27,7 +29,7 @@ public class StraightFlush extends Hand {
 
     @Override
     public void setBestFiveCards() {
-        LabelCard flushLabelCard = retrieveLabelCardOfFlush();
+        LabelCard flushLabelCard = retrieveLabelCardOfFlush(this.cards);
         List<Card> cardsWithTheSameLabelOccuringMoreThanFiveTimes = cards.stream()
                 .filter(card -> card.getLabelCard().equals(flushLabelCard))
                 .collect(Collectors.toList());

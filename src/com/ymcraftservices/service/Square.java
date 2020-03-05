@@ -1,5 +1,6 @@
 package com.ymcraftservices.service;
 
+import com.ymcraftservices.contract.HandWithOccurences;
 import com.ymcraftservices.model.Card;
 import com.ymcraftservices.model.Hand;
 import com.ymcraftservices.model.NumberCard;
@@ -15,7 +16,7 @@ import java.util.stream.Stream;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class Square extends Hand {
+public class Square extends Hand implements HandWithOccurences {
 
     private Integer fourOfAKind;
 
@@ -33,7 +34,7 @@ public class Square extends Hand {
     }
 
     private Optional<Map.Entry<NumberCard, Long>> getNumberCardOfSquare() {
-        Map<NumberCard, Long> numberCardAndItsOccurence = getCardsAndTheirOccurences();
+        Map<NumberCard, Long> numberCardAndItsOccurence = getCardsAndTheirOccurences(this.cards);
         return numberCardAndItsOccurence.entrySet()
                 .stream()
                 .filter(numberCardLongEntry -> numberCardLongEntry.getValue() == 4L)
