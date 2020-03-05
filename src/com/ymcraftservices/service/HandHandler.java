@@ -1,7 +1,7 @@
-package com.ymcraftservices.testhands.service;
+package com.ymcraftservices.service;
 
-import com.ymcraftservices.testhands.model.Card;
-import com.ymcraftservices.testhands.model.Hand;
+import com.ymcraftservices.model.Card;
+import com.ymcraftservices.model.Hand;
 
 import java.util.List;
 

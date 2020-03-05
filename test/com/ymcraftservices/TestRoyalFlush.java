@@ -1,10 +1,10 @@
-package com.ymcraftservices.testhands;
+package com.ymcraftservices;
 
-import com.ymcraftservices.testhands.model.Card;
-import com.ymcraftservices.testhands.model.Hand;
-import com.ymcraftservices.testhands.model.LabelCard;
-import com.ymcraftservices.testhands.model.NumberCard;
-import com.ymcraftservices.testhands.service.RoyalFlush;
+import com.ymcraftservices.model.Card;
+import com.ymcraftservices.model.LabelCard;
+import com.ymcraftservices.model.NumberCard;
+import com.ymcraftservices.model.Hand;
+import com.ymcraftservices.service.RoyalFlush;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;

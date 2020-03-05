@@ -1,13 +1,13 @@
-package com.ymcraftservices.testhands;
+package com.ymcraftservices;
 
-import com.ymcraftservices.testhands.model.Card;
-import com.ymcraftservices.testhands.model.Hand;
-import com.ymcraftservices.testhands.model.LabelCard;
-import com.ymcraftservices.testhands.model.NumberCard;
-import com.ymcraftservices.testhands.service.DoublePair;
-import com.ymcraftservices.testhands.service.FullHouse;
-import com.ymcraftservices.testhands.service.HandHandler;
-import com.ymcraftservices.testhands.service.RoyalFlush;
+import com.ymcraftservices.model.Card;
+import com.ymcraftservices.model.Hand;
+import com.ymcraftservices.model.LabelCard;
+import com.ymcraftservices.model.NumberCard;
+import com.ymcraftservices.service.DoublePair;
+import com.ymcraftservices.service.RoyalFlush;
+import com.ymcraftservices.service.FullHouse;
+import com.ymcraftservices.service.HandHandler;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -32,7 +32,7 @@ public class TestHandHandler {
         List<Card> cards = Arrays.asList(card1, card2, card3, card4, card5, card6, card7);
         Hand hand = HandHandler.determine(cards);
         // then
-        assertThat(hand instanceof DoublePair , is(true));
+        assertThat(hand instanceof DoublePair, is(true));
     }
 
     @Test

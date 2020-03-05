@@ -1,4 +1,4 @@
-package com.ymcraftservices.testhands.model;
+package com.ymcraftservices.model;
 
 public enum NumberCard {
 
