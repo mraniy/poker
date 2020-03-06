@@ -19,11 +19,13 @@ public interface StraightHand {
         for (int i = 0; i < cards.size(); i++) {
             if (i + 1 < cards.size()) {
                 count = getCount(cards, count, i);
+                if (count == 4) {
+
+                    return true;
+                }
             }
         }
-        if (count == 4) {
-            return true;
-        }
+
         return false;
     }
 

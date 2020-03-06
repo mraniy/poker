@@ -36,13 +36,13 @@ public class TestStraight {
     @Test
     public void should_return_true_when_the_hand_is_a_straight_not_to_as() {
         // given
-        Card card1 = DataFactory.getCard(LabelCard.COEUR, NumberCard.DIX);
-        Card card2 = DataFactory.getCard(LabelCard.TREFLE, NumberCard.TROIS);
-        Card card3 = DataFactory.getCard(LabelCard.TREFLE, NumberCard.SEPT);
-        Card card4 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.HUIT);
-        Card card5 = DataFactory.getCard(LabelCard.PIQUE, NumberCard.VALLEE);
-        Card card6 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.NEUF);
-        Card card7 = DataFactory.getCard(LabelCard.COEUR, NumberCard.DEUX);
+        Card card7 = new Card(LabelCard.TREFLE, NumberCard.AS);
+        Card card1 = new Card(LabelCard.PIQUE, NumberCard.DEUX);
+        Card card2 = new Card(LabelCard.PIQUE, NumberCard.VALLEE);
+        Card card3 = new Card(LabelCard.PIQUE, NumberCard.TROIS);
+        Card card4 = new Card(LabelCard.PIQUE, NumberCard.QUATRE);
+        Card card5 = new Card(LabelCard.COEUR, NumberCard.CINQ);
+        Card card6 = new Card(LabelCard.COEUR, NumberCard.CINQ);
         // when
         List<Card> straightCards = Arrays.asList(card1, card2, card3, card4, card5, card6, card7);
         Hand straightCombination = new Straight(straightCards);

@@ -39,9 +39,9 @@ public class HandHandler {
         Card card1 = new Card(LabelCard.PIQUE, NumberCard.DEUX);
         Card card2 = new Card(LabelCard.PIQUE, NumberCard.VALLEE);
         Card card3 = new Card(LabelCard.PIQUE, NumberCard.TROIS);
-        Card card4 = new Card(LabelCard.PIQUE, NumberCard.DIX);
-        Card card5 = new Card(LabelCard.COEUR, NumberCard.KING);
-        Card card6 = new Card(LabelCard.TREFLE, NumberCard.QUATRE);
+        Card card4 = new Card(LabelCard.PIQUE, NumberCard.QUATRE);
+        Card card5 = new Card(LabelCard.COEUR, NumberCard.CINQ);
+        Card card6 = new Card(LabelCard.COEUR, NumberCard.CINQ);
         Hand determine = determine(Arrays.asList(card, card1, card2, card3, card4, card5, card6));
         determine.setBestFiveCards();
         System.out.println(determine.getBestFiveCards());
