@@ -69,7 +69,7 @@ public class TestDoublePair {
 
         assertThat(doublePairCombination.getBestFiveCards() ,
                 containsInAnyOrder(card1,card2,card5,card6,card7));
-        assertThat(((DoublePair)doublePairCombination).getKicker(), is(10));
+        assertThat(doublePairCombination.getKicker(), is(card7));
     }
 
     @Test
@@ -90,6 +90,6 @@ public class TestDoublePair {
 
         assertThat(doublePairCombination.getBestFiveCards() ,
                 containsInAnyOrder(card7,card5,card3,card6,card1));
-        assertThat(((DoublePair)doublePairCombination).getKicker(), is(13));
+        assertThat(doublePairCombination.getKicker(), is(card1));
     }
 }

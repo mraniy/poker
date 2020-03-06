@@ -70,7 +70,7 @@ public class TestThreeOfAkind {
         // then
 
         assertThat(threeOfKind.getBestFiveCards() , containsInAnyOrder(card1,card2,card4,card5,card7));
-        assertThat(threeOfKind.getKicker(), is(NumberCard.VALLEE.getNumber()));
+        assertThat(threeOfKind.getKicker(), is(card5));
 
     }
 }

@@ -13,7 +13,6 @@ import java.util.stream.Stream;
 @Data
 public class Pair extends Hand implements HandWithOccurences {
 
-    private Integer kicker;
 
     public Pair(List<Card> cards) {
         this.cards = cards;
@@ -44,7 +43,7 @@ public class Pair extends Hand implements HandWithOccurences {
                     List<Card> cards = Stream.concat(pairStream, streamOtherCards)
                             .collect(Collectors.toList());
                     setBestFiveCards(cards);
-                    setKicker(cards.get(2).getNumberCard().getNumber());
+                    setKicker(cards.get(2));
                 });
     }
 }

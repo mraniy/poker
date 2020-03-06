@@ -11,9 +11,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Data
-public class DoublePair extends Hand implements HandWithOccurences {
+public class DoublePair extends Hand implements HandWithOccurences  {
 
-    private Integer kicker;
 
     public DoublePair(List<Card> cards) {
         this.cards = cards;
@@ -48,7 +47,7 @@ public class DoublePair extends Hand implements HandWithOccurences {
                             .map(card -> mergeKickerAndDoublePairs(cardsWithDoublePair, card)
                             ).orElseGet(() -> new ArrayList<>());
                     setBestFiveCards(cards);
-                    this.setKicker(numberCard.getNumber());
+                    this.setKicker(getKicker(this.cards, numberCard));
                 });
     }
 

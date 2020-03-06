@@ -68,6 +68,6 @@ public class TestPair {
 
         // then
         assertThat(doublePairCombination.getBestFiveCards(), containsInAnyOrder(card1,card2,card7,card3,card5));
-        assertThat(((Pair)doublePairCombination).getKicker() , is(NumberCard.VALLEE.getNumber()));
+        assertThat(doublePairCombination.getKicker() , is(card5));
     }
 }

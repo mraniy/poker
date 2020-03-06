@@ -13,11 +13,10 @@ import java.util.stream.Stream;
 @Data
 public class ThreeOfAkind extends Hand implements HandWithOccurences {
 
-    private Integer kicker;
+
 
     public ThreeOfAkind(List<Card> cards) {
         this.cards = cards;
-
     }
 
     @Override
@@ -43,7 +42,7 @@ public class ThreeOfAkind extends Hand implements HandWithOccurences {
                             .limit(2);
                     List<Card> cards = Stream.concat(cardsThreeOfKind, kickers).collect(Collectors.toList());
                     setBestFiveCards(cards);
-                    setKicker(cards.get(3).getNumberCard().getNumber());
+                    setKicker(cards.get(3));
                 });
     }
 }

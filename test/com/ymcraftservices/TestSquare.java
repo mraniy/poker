@@ -49,6 +49,7 @@ public class TestSquare {
         squareCombination.setBestFiveCards();
         // then
         assertThat(squareCombination.getBestFiveCards(), containsInAnyOrder(card1,card2,card3,card4,card5));
+        assertThat(squareCombination.getKicker() , is(card4));
     }
 
     @Test

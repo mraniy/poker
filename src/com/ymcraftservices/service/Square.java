@@ -20,8 +20,6 @@ public class Square extends Hand implements HandWithOccurences {
 
     private Integer fourOfAKind;
 
-    private Integer kicker;
-
     public Square(List<Card> cards) {
         this.cards = cards;
     }
@@ -54,7 +52,7 @@ public class Square extends Hand implements HandWithOccurences {
                 .filter(card -> card.getNumberCard().getNumber() != numberCard.getNumber())
                 .max(Comparator.comparingInt(o -> o.getNumberCard().getNumber()))
                 .ifPresent(card -> {
-                    this.kicker = card.getNumberCard().getNumber();
+                    setKicker(card);
                     List<Card> bestFiveCards = Stream.concat(streamOfFour, Stream.of(card))
                             .collect(Collectors.toList());
                     setBestFiveCards(bestFiveCards);

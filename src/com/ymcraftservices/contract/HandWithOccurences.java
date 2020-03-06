@@ -14,4 +14,11 @@ public interface HandWithOccurences {
                 .stream()
                 .collect(Collectors.groupingBy(card -> card.getNumberCard(), Collectors.counting()));
     }
+
+    default Card getKicker(List<Card> cards, NumberCard numberCard) {
+        return cards.stream()
+                .filter(card -> card.getNumberCard().equals(numberCard))
+                .findFirst()
+                .orElseGet(() -> null);
+    }
 }
