@@ -33,13 +33,13 @@ public class HandHandler {
     }
 
     public static void main(String[] args) {
-        Card card = new Card(LabelCard.TREFLE, NumberCard.AS);
-        Card card1 = new Card(LabelCard.PIQUE, NumberCard.DEUX);
-        Card card2 = new Card(LabelCard.PIQUE, NumberCard.VALLEE);
-        Card card3 = new Card(LabelCard.PIQUE, NumberCard.TROIS);
-        Card card4 = new Card(LabelCard.PIQUE, NumberCard.QUATRE);
-        Card card5 = new Card(LabelCard.COEUR, NumberCard.CINQ);
-        Card card6 = new Card(LabelCard.COEUR, NumberCard.CINQ);
+        Card card1 = new Card(LabelCard.COEUR, NumberCard.DEUX);
+        Card card = new Card(LabelCard.COEUR, NumberCard.AS);
+        Card card2 = new Card(LabelCard.PIQUE, NumberCard.KING);
+        Card card3 = new Card(LabelCard.CARREAU, NumberCard.DAME);
+        Card card4 = new Card(LabelCard.CARREAU, NumberCard.DAME);
+        Card card5 = new Card(LabelCard.PIQUE, NumberCard.DIX);
+        Card card6 = new Card(LabelCard.PIQUE, NumberCard.VALLEE);
         Hand determine = determine(Arrays.asList(card, card1, card2, card3, card4, card5, card6));
         determine.setBestFiveCards();
         System.out.println(determine.getBestFiveCards());

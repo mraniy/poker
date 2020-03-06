@@ -16,13 +16,10 @@ public interface StraightHand {
 
     default boolean areCardsStraightNotToAs(List<Card> cards) {
         int count = 0;
-        for (int i = 0; i < cards.size(); i++) {
-            if (i + 1 < cards.size()) {
-                count = getCount(cards, count, i);
-                if (count == 4) {
-
-                    return true;
-                }
+        for (int j = 1; j < cards.size(); j++) {
+            count = getCount(cards, count, j);
+            if (count == 4) {
+                return true;
             }
         }
 
@@ -30,8 +27,8 @@ public interface StraightHand {
     }
 
     default int getCount(List<Card> cards, int count, int i) {
-        if (cards.get(i + 1).getNumberCard().getNumber()
-                == cards.get(i).getNumberCard().getNumber() + 1) {
+        if (cards.get(i).getNumberCard().getNumber()
+                == cards.get(i-1).getNumberCard().getNumber() + 1) {
             count++;
         } else {
             count = 0;
@@ -41,15 +38,11 @@ public interface StraightHand {
 
     default Integer getStraightTo(List<Card> cards) {
         int count = 0;
-        int i = 0;
-        while(i < cards.size()) {
-            if (i + 1 < cards.size()) {
-                count = getCount(cards, count, i);
+        for (int j = 1; j < cards.size(); j++) {
+            count = getCount(cards, count, j);
+            if (count == 4) {
+                return j+1;
             }
-            i++;
-        }
-        if (count == 4) {
-            return i;
         }
         return -1;
     }
