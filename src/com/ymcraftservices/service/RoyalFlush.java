@@ -7,7 +7,6 @@ import com.ymcraftservices.model.Hand;
 import com.ymcraftservices.model.LabelCard;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -20,8 +19,7 @@ public class RoyalFlush extends Hand implements FlushHand, StraightHand {
     @Override
     public Boolean verify() {
         if(!isAValidHand()) return false;
-        LabelCard labelCard = retrieveLabelCardOfFlush(this.cards);
-        return Optional.ofNullable(labelCard)
+        return retrieveLabelCardOfFlush(this.cards)
                 .filter(this::isaStraightToAs)
                 .isPresent();
 
@@ -29,12 +27,14 @@ public class RoyalFlush extends Hand implements FlushHand, StraightHand {
 
     @Override
     public void setBestFiveCards() {
-        LabelCard labelCard = retrieveLabelCardOfFlush(this.cards);
-        List<Card> bestFiveCards= this.cards.stream()
-                .filter(card -> isaStraightToAs(card.getLabelCard()))
-                .filter(card -> card.getLabelCard().equals(labelCard))
-                .collect(Collectors.toList());
-        setBestFiveCards(bestFiveCards);
+        retrieveLabelCardOfFlush(this.cards).ifPresent(labelCard -> {
+            List<Card> bestFiveCards= this.cards.stream()
+                    .filter(card -> isaStraightToAs(card.getLabelCard()))
+                    .filter(card -> card.getLabelCard().equals(labelCard))
+                    .collect(Collectors.toList());
+            setBestFiveCards(bestFiveCards);
+        });
+
     }
 
     private boolean isaStraightToAs(LabelCard labelCard) {

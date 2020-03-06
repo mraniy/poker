@@ -45,9 +45,9 @@ public class DoublePair extends Hand implements HandWithOccurences  {
                             .filter(card -> card.getNumberCard().equals(numberCard))
                             .findFirst()
                             .map(card -> mergeKickerAndDoublePairs(cardsWithDoublePair, card)
-                            ).orElseGet(() -> new ArrayList<>());
+                            ).orElseGet(() -> Arrays.asList());
                     setBestFiveCards(cards);
-                    this.setKicker(getKicker(this.cards, numberCard));
+                    getKicker(this.cards, numberCard).ifPresent(this::setKicker);
                 });
     }
 

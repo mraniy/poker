@@ -1,5 +1,6 @@
 package com.ymcraftservices.service;
 
+import com.google.common.collect.ImmutableSet;
 import com.ymcraftservices.contract.HandWithOccurences;
 import com.ymcraftservices.model.Card;
 import com.ymcraftservices.model.Hand;
@@ -23,7 +24,7 @@ public class ThreeOfAkind extends Hand implements HandWithOccurences {
     public Boolean verify() {
         if (!isAValidHand()) return false;
         Map<NumberCard, Long> numberCardAndItsOccurence = getCardsAndTheirOccurences(this.cards);
-        return new HashSet<>(numberCardAndItsOccurence.values()).size() == 2 && numberCardAndItsOccurence.values().containsAll(Arrays.asList(3L, 1L));
+        return ImmutableSet.copyOf(numberCardAndItsOccurence.values()).size() == 2 && numberCardAndItsOccurence.values().containsAll(Arrays.asList(3L, 1L));
     }
 
     @Override

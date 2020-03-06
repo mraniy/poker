@@ -4,6 +4,7 @@ import com.ymcraftservices.contract.StraightHand;
 import com.ymcraftservices.model.Card;
 import com.ymcraftservices.model.Hand;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,7 +25,7 @@ public class Straight extends Hand implements StraightHand {
     @Override
     public void setBestFiveCards() {
         this.cards.sort(Comparator.comparing(card -> card.getNumberCard().getNumber()));
-        List<Card> cards = null;
+        List<Card> cards = Arrays.asList();
         if(isaStraightToAs())  {
             cards = this.cards.stream()
                     .filter(this::isFromTenToAs)

@@ -5,6 +5,7 @@ import com.ymcraftservices.model.NumberCard;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public interface HandWithOccurences {
@@ -15,10 +16,9 @@ public interface HandWithOccurences {
                 .collect(Collectors.groupingBy(card -> card.getNumberCard(), Collectors.counting()));
     }
 
-    default Card getKicker(List<Card> cards, NumberCard numberCard) {
+    default Optional<Card> getKicker(List<Card> cards, NumberCard numberCard) {
         return cards.stream()
                 .filter(card -> card.getNumberCard().equals(numberCard))
-                .findFirst()
-                .orElseGet(() -> null);
+                .findFirst();
     }
 }

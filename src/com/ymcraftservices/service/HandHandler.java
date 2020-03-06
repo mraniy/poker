@@ -29,9 +29,7 @@ public class HandHandler {
         if (hand.verify()) return hand;
         hand = new Pair(cards);
         if (hand.verify()) return hand;
-        hand = new HighCard(cards);
-        if (hand.verify()) return hand;
-        return null;
+        else return new HighCard(cards);
     }
 
     public static void main(String[] args) {

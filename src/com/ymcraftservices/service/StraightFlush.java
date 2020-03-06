@@ -18,24 +18,26 @@ public class StraightFlush extends Hand implements FlushHand, StraightHand {
     @Override
     public Boolean verify() {
         if(!isAValidHand()) return false;
-        LabelCard flushLabelCard = retrieveLabelCardOfFlush(this.cards);
-        if(flushLabelCard == null) return false;
-        List<Card> cardsWithTheSameLabelOccuringMoreThanFiveTimes = cards.stream()
-                .filter(card -> card.getLabelCard().equals(flushLabelCard))
-                .collect(Collectors.toList());
-        cardsWithTheSameLabelOccuringMoreThanFiveTimes.sort(Comparator.comparing(card -> card.getNumberCard().getNumber()));
-        return areCardsStraightNotToAs(cardsWithTheSameLabelOccuringMoreThanFiveTimes);
+        return retrieveLabelCardOfFlush(this.cards).map(flushLabelCard -> {
+            List<Card> cardsWithTheSameLabelOccuringMoreThanFiveTimes = cards.stream()
+                    .filter(card -> card.getLabelCard().equals(flushLabelCard))
+                    .collect(Collectors.toList());
+            cardsWithTheSameLabelOccuringMoreThanFiveTimes.sort(Comparator.comparing(card -> card.getNumberCard().getNumber()));
+            return areCardsStraightNotToAs(cardsWithTheSameLabelOccuringMoreThanFiveTimes);
+        }).orElseGet(() -> false);
     }
 
     @Override
     public void setBestFiveCards() {
-        LabelCard flushLabelCard = retrieveLabelCardOfFlush(this.cards);
-        List<Card> cardsWithTheSameLabelOccuringMoreThanFiveTimes = cards.stream()
-                .filter(card -> card.getLabelCard().equals(flushLabelCard))
-                .collect(Collectors.toList());
-        cardsWithTheSameLabelOccuringMoreThanFiveTimes.sort(Comparator.comparing(card -> card.getNumberCard().getNumber()));
-        Integer straightTo = getStraightTo(cardsWithTheSameLabelOccuringMoreThanFiveTimes);
-        setBestFiveCards(cardsWithTheSameLabelOccuringMoreThanFiveTimes.subList(straightTo-5, straightTo));
+        retrieveLabelCardOfFlush(this.cards)
+                .ifPresent(flushLabelCard -> {
+                    List<Card> cardsWithTheSameLabelOccuringMoreThanFiveTimes = cards.stream()
+                            .filter(card -> card.getLabelCard().equals(flushLabelCard))
+                            .collect(Collectors.toList());
+                    cardsWithTheSameLabelOccuringMoreThanFiveTimes.sort(Comparator.comparing(card -> card.getNumberCard().getNumber()));
+                    Integer straightTo = getStraightTo(cardsWithTheSameLabelOccuringMoreThanFiveTimes);
+                    setBestFiveCards(cardsWithTheSameLabelOccuringMoreThanFiveTimes.subList(straightTo-5, straightTo));
+                });
     }
 
 

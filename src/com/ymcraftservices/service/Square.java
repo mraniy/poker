@@ -42,22 +42,21 @@ public class Square extends Hand implements HandWithOccurences {
     @Override
     public void setBestFiveCards() {
         Optional<Map.Entry<NumberCard, Long>> maybenumberCardOfSquare = getNumberCardOfSquare();
-        NumberCard numberCard = maybenumberCardOfSquare
-                .map(numberCardLongEntry -> numberCardLongEntry.getKey())
-                .orElseGet(() -> null);
-        this.fourOfAKind = numberCard.getNumber();
-        Stream<Card> streamOfFour = this.cards.stream()
-                .filter(card -> card.getNumberCard().getNumber() == numberCard.getNumber());
-         this.cards.stream()
-                .filter(card -> card.getNumberCard().getNumber() != numberCard.getNumber())
-                .max(Comparator.comparingInt(o -> o.getNumberCard().getNumber()))
-                .ifPresent(card -> {
-                    setKicker(card);
-                    List<Card> bestFiveCards = Stream.concat(streamOfFour, Stream.of(card))
-                            .collect(Collectors.toList());
-                    setBestFiveCards(bestFiveCards);
+        maybenumberCardOfSquare
+                .map(Map.Entry::getKey)
+                .ifPresent(numberCard -> {
+                    this.fourOfAKind = numberCard.getNumber();
+                    Stream<Card> streamOfFour = this.cards.stream()
+                            .filter(card -> card.getNumberCard().getNumber() == numberCard.getNumber());
+                    this.cards.stream()
+                            .filter(card -> card.getNumberCard().getNumber() != numberCard.getNumber())
+                            .max(Comparator.comparingInt(o -> o.getNumberCard().getNumber()))
+                            .ifPresent(card -> {
+                                setKicker(card);
+                                List<Card> bestFiveCards = Stream.concat(streamOfFour, Stream.of(card))
+                                        .collect(Collectors.toList());
+                                setBestFiveCards(bestFiveCards);
+                            });
                 });
-
-
     }
 }

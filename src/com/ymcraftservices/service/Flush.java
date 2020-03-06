@@ -17,18 +17,20 @@ public class Flush extends Hand implements FlushHand {
     @Override
     public Boolean verify() {
         if(!isAValidHand()) return false;
-        LabelCard labelCard = retrieveLabelCardOfFlush(this.cards);
-        return labelCard != null;
+        return retrieveLabelCardOfFlush(this.cards).isPresent();
+
     }
 
     @Override
     public void setBestFiveCards() {
-        LabelCard labelCard = retrieveLabelCardOfFlush(this.cards);
-        List<Card> cards = this.cards.stream()
-                .filter(card -> card.getLabelCard().equals(labelCard))
-                .sorted()
-                .limit(5)
-                .collect(Collectors.toList());
-        setBestFiveCards(cards);
+        retrieveLabelCardOfFlush(this.cards)
+                .ifPresent(labelCard -> {
+                    List<Card> cards = this.cards.stream()
+                            .filter(card -> card.getLabelCard().equals(labelCard))
+                            .sorted()
+                            .limit(5)
+                            .collect(Collectors.toList());
+                    setBestFiveCards(cards);
+                });
     }
 }
