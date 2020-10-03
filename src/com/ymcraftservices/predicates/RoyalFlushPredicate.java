@@ -2,14 +2,9 @@ package com.ymcraftservices.predicates;
 
 import com.ymcraftservices.model.Card;
 import com.ymcraftservices.model.Hand;
-import com.ymcraftservices.model.LabelCard;
 import com.ymcraftservices.model.NumberCard;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class RoyalFlushPredicate implements CustomPokerPredicate{
 
@@ -35,7 +30,7 @@ public class RoyalFlushPredicate implements CustomPokerPredicate{
     @Override
     public boolean test(Hand hand) {
         List<Card> maybeStraightFlushCards = StraightFlushPredicate.getInstance().getMaybeStraightFlushCards(hand);
-        return maybeStraightFlushCards.size()==4
+        return StraightPredicate.getInstance().hasAllTheCardsTheirMatchingNextCard(maybeStraightFlushCards)
                 && maybeStraightFlushCards.get(0).getNumberCard().getNext().equals(NumberCard.AS);
     }
 

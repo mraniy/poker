@@ -32,7 +32,7 @@ public class StraightFlushPredicate implements CustomPokerPredicate{
     @Override
     public boolean test(Hand hand) {
         List<Card> straightCards = getMaybeStraightFlushCards(hand);
-        return straightCards.size()==4;
+        return StraightPredicate.getInstance().hasAllTheCardsTheirMatchingNextCard(straightCards);
     }
 
     public List<Card> getMaybeStraightFlushCards(Hand hand) {
