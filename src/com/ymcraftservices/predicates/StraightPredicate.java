@@ -39,15 +39,20 @@ public class StraightPredicate implements CustomPokerPredicate {
         allCards.sort(Comparator.comparing(card -> card.getNumberCard().getNumber()));
         return Arrays.asList(0, 1, 2, 3)
                 .stream()
-                .filter(operand -> isSubListStraight(numberCards, allCards.subList(operand, operand + 4)))
+                .filter(operand -> {
+                    List<Card> cardsSublist = allCards.subList(operand, operand + 4);
+                    List<Card> cards = ComposableStraightPredicate.getInstance().apply(numberCards, cardsSublist);
+                    return cards.size() ==4;
+
+                })
                 .findFirst()
                 .isPresent();
     }
 
-    public boolean isSubListStraight(List<NumberCard> numberCards, List<Card> cards) {
-        long count = cards.stream()
+    public List<Card> isSubListStraight(List<NumberCard> numberCards, List<Card> cardsSublist) {
+        return cardsSublist.stream()
                 .filter(card -> numberCards.contains(card.getNumberCard().getNext()))
-                .count();
-        return count == 4L;
+                .collect(Collectors.toList());
+
     }
 }

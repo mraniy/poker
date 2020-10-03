@@ -34,31 +34,10 @@ public class RoyalFlushPredicate implements CustomPokerPredicate{
 
     @Override
     public boolean test(Hand hand) {
-        return retrieveLabelCardOfFlush(hand.getAllCards())
-                .filter(labelCard -> isaStraightToAs(hand, labelCard))
-                .isPresent();
+        List<Card> maybeStraightFlushCards = StraightFlushPredicate.getInstance().getMaybeStraightFlushCards(hand);
+        return maybeStraightFlushCards.size()==4
+                && maybeStraightFlushCards.get(0).getNumberCard().getNext().equals(NumberCard.AS);
     }
 
-    Optional<LabelCard> retrieveLabelCardOfFlush(List<Card> cards) {
-        Map<LabelCard, Long> numberOfOccurencesLabel = cards.stream()
-                .collect(Collectors.groupingBy(h -> h.getLabelCard(),
-                        Collectors.counting()));
-        Optional<Map.Entry<LabelCard, Long>> maybeFlush = numberOfOccurencesLabel.entrySet().stream()
-                .filter(labelCardLongEntry -> labelCardLongEntry.getValue() >= 5)
-                .findFirst();
-        return maybeFlush.map(Map.Entry::getKey);
-    }
 
-    private boolean isaStraightToAs(Hand hand, LabelCard labelCard) {
-        return hand.getAllCards()
-                .stream().filter(card -> card.getLabelCard().equals(labelCard))
-                .filter(this::isFromTenToAs)
-                .count() == 5;
-    }
-
-    boolean isFromTenToAs(Card card) {
-        return Arrays.asList(NumberCard.AS, NumberCard.KING, NumberCard.DAME, NumberCard.VALLEE, NumberCard.DIX)
-                .contains(card.getNumberCard());
-
-    }
 }
