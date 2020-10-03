@@ -1,6 +1,6 @@
 package com.ymcraftservices.model;
 
-import static com.ymcraftservices.utils.ComparatorUtils.compareCards;
+
 
 public enum NumberCard {
 
@@ -18,15 +18,33 @@ public enum NumberCard {
     DAME(12),
     KING(13);
 
-    private Integer number;
-
-    public static int compare(NumberCard numberCard1 , NumberCard numberCard2) {
-        return compareCards(numberCard1,numberCard2);
+    static {
+        AS.next = DEUX;
+        DEUX.next = TROIS;
+        TROIS.next = QUATRE;
+        QUATRE.next = CINQ;
+        CINQ.next = SIX;
+        SIX.next = SEPT;
+        SEPT.next = HUIT;
+        HUIT.next = NEUF;
+        NEUF.next = DIX;
+        DIX.next = VALLEE;
+        VALLEE.next = DAME;
+        DAME.next = KING;
+        KING.next = AS;
 
     }
 
+    private Integer number;
+
+    private NumberCard next;
+
     public Integer getNumber() {
         return number;
+    }
+
+    public NumberCard getNext() {
+        return  next;
     }
 
     NumberCard(Integer number) {
