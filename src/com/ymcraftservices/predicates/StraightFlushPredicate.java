@@ -12,10 +12,23 @@ import java.util.stream.Collectors;
 
 public class StraightFlushPredicate implements CustomPokerPredicate{
 
+    private static StraightFlushPredicate instance;
+
+    public static StraightFlushPredicate getInstance(){
+        if (instance == null) {
+            instance= new StraightFlushPredicate();
+        }
+        return instance;
+    }
+
+    private StraightFlushPredicate() {
+
+    }
+
 
     @Override
     public CustomPokerPredicate getNext() {
-        return new SquarePredicate();
+        return SquarePredicate.getInstance();
     }
 
     Optional<LabelCard> retrieveLabelCardOfFlush(List<Card> cards) {

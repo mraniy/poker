@@ -13,10 +13,23 @@ import java.util.stream.Collectors;
 
 public class RoyalFlushPredicate implements CustomPokerPredicate{
 
+    private static RoyalFlushPredicate instance;
+
+    public static RoyalFlushPredicate getInstance(){
+        if (instance == null) {
+            instance= new RoyalFlushPredicate();
+        }
+        return instance;
+    }
+
+    private RoyalFlushPredicate() {
+
+    }
+
 
     @Override
     public CustomPokerPredicate getNext() {
-        return new StraightFlushPredicate();
+        return  StraightFlushPredicate.getInstance();
     }
 
     @Override

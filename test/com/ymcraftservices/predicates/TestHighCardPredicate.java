@@ -31,7 +31,7 @@ public class TestHighCardPredicate {
         List<Card> potcards = Arrays.asList(card1, card2);
         Hand hand = new Hand(potcards, playercards);
         // when
-        HighCardPredicate highCardPredicate = new HighCardPredicate();
+        HighCardPredicate highCardPredicate =  HighCardPredicate.getInstance();
         boolean isHighCard = highCardPredicate.test(hand);
         assertThat(isHighCard , is(false));
     }
@@ -51,7 +51,7 @@ public class TestHighCardPredicate {
         List<Card> potcards = Arrays.asList(card1, card2);
         Hand hand = new Hand(potcards, playercards);
         // when
-        HighCardPredicate highCardPredicate = new HighCardPredicate();
+        HighCardPredicate highCardPredicate = HighCardPredicate.getInstance();
         boolean isHighCard = highCardPredicate.test(hand);
         assertThat(isHighCard , is(true));
     }

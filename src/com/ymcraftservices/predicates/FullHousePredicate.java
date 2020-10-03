@@ -12,10 +12,23 @@ import java.util.stream.Collectors;
 
 public class FullHousePredicate implements CustomPokerPredicate{
 
+    private static FullHousePredicate instance;
+
+    public static FullHousePredicate getInstance(){
+        if (instance == null) {
+            instance = new FullHousePredicate();
+        }
+        return instance;
+    }
+
+    private FullHousePredicate() {
+
+    }
+
 
     @Override
     public CustomPokerPredicate getNext() {
-        return new FlushPredicate();
+        return  FlushPredicate.getInstance();
     }
 
     private Optional<Map.Entry<NumberCard, Long>> maybeThreeOfAKind(List<Map.Entry<NumberCard, Long>> entries) {

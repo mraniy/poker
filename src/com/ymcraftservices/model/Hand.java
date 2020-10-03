@@ -33,13 +33,12 @@ public class Hand {
     }
 
     public Integer getScore() {
-        RoyalFlushPredicate highLevelPredicate = new RoyalFlushPredicate();
+        RoyalFlushPredicate highLevelPredicate =  RoyalFlushPredicate.getInstance();
         RoyalFlushFunction highLevelFunction = new RoyalFlushFunction();
         return getCombination(highLevelPredicate, highLevelFunction).getScore();
     }
 
     private Combination getCombination(CustomPokerPredicate customPokerPredicate, CustomPokerFuncion customPokerFuncion) {
-
         if (customPokerPredicate.test(this)) {
             return customPokerFuncion.apply(this);
         } else {
@@ -53,49 +52,5 @@ public class Hand {
                 .stream()
                 .collect(Collectors.groupingBy(card -> card.getNumberCard(), Collectors.counting()));
     }
-
-
-    private boolean isRoyalFlush() {
-        return false;
-    }
-
-    private boolean isKentFlush() {
-        return false;
-    }
-
-    private boolean isCarre() {
-        return false;
-    }
-
-
-    private boolean isFull() {
-        return false;
-    }
-
-    private boolean isFlush() {
-        return false;
-    }
-
-    private boolean isStraight() {
-        return false;
-    }
-
-    private boolean isBrelan() {
-        return false;
-    }
-
-    private boolean isDoublePair() {
-        return false;
-    }
-
-    private boolean isPair() {
-        return false;
-    }
-
-    private boolean isHighCard() {
-        HighCardPredicate highCardPredicate = new HighCardPredicate();
-        return highCardPredicate.test(this);
-    }
-
 
 }

@@ -1,19 +1,30 @@
 package com.ymcraftservices.predicates;
 
-import com.google.common.collect.ImmutableSet;
 import com.ymcraftservices.model.Hand;
 import com.ymcraftservices.model.NumberCard;
 
-import java.util.Arrays;
 import java.util.Map;
 import java.util.Optional;
 
 public class SquarePredicate implements CustomPokerPredicate{
 
+    private static SquarePredicate instance;
+
+    public static SquarePredicate getInstance(){
+        if (instance == null) {
+            instance= new SquarePredicate();
+        }
+        return instance;
+    }
+
+    private SquarePredicate() {
+
+    }
+
 
     @Override
     public CustomPokerPredicate getNext() {
-        return new FullHousePredicate();
+        return FullHousePredicate.getInstance();
     }
 
     @Override

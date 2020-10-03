@@ -31,7 +31,7 @@ public class TestPairPredicate {
         List<Card> potcards = Arrays.asList(card1, card2);
         Hand hand = new Hand(potcards, playercards);
         // when
-        PairPredicate pairPredicate = new PairPredicate();
+        PairPredicate pairPredicate = PairPredicate.getInstance();
         boolean isPair = pairPredicate.test(hand);
         assertThat(isPair , is(false));
 
@@ -52,7 +52,7 @@ public class TestPairPredicate {
         List<Card> potcards = Arrays.asList(card1, card2);
         Hand hand = new Hand(potcards, playercards);
         // when
-        PairPredicate pairPredicate = new PairPredicate();
+        PairPredicate pairPredicate = PairPredicate.getInstance();
         boolean isPair = pairPredicate.test(hand);
         assertThat(isPair , is(true));
     }

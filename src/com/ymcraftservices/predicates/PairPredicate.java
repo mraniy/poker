@@ -9,10 +9,23 @@ import java.util.Map;
 
 public class PairPredicate implements CustomPokerPredicate{
 
+    private static PairPredicate instance;
+
+    public static PairPredicate getInstance(){
+        if (instance == null) {
+            instance= new PairPredicate();
+        }
+        return instance;
+    }
+
+    private PairPredicate() {
+
+    }
+
 
     @Override
     public CustomPokerPredicate getNext() {
-        return new HighCardPredicate();
+        return HighCardPredicate.getInstance();
     }
 
     @Override

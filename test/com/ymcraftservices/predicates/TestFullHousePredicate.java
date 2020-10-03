@@ -31,7 +31,7 @@ public class TestFullHousePredicate {
         List<Card> potcards = Arrays.asList(card1, card2);
         Hand hand = new Hand(potcards, playercards);
         // when
-        FullHousePredicate fullHousePredicate = new FullHousePredicate();
+        FullHousePredicate fullHousePredicate =  FullHousePredicate.getInstance();
         boolean isFullHouse = fullHousePredicate.test(hand);
         assertThat(isFullHouse , is(false));
     }
@@ -51,7 +51,7 @@ public class TestFullHousePredicate {
         List<Card> potcards = Arrays.asList(card1, card2);
         Hand hand = new Hand(potcards, playercards);
         // when
-        FullHousePredicate fullHousePredicate = new FullHousePredicate();
+        FullHousePredicate fullHousePredicate =  FullHousePredicate.getInstance();
         boolean isFullHouse = fullHousePredicate.test(hand);
         assertThat(isFullHouse , is(true));
     }

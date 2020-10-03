@@ -30,7 +30,7 @@ public class TestStraightPredicate {
         List<Card> potcards = Arrays.asList(card1, card2);
         Hand hand = new Hand(potcards, playercards);
         // then
-        StraightPredicate straightPredicate = new StraightPredicate();
+        StraightPredicate straightPredicate =  StraightPredicate.getInstance();
         boolean isStraight = straightPredicate.test(hand);
         assertThat(isStraight , is(false));
     }
@@ -50,7 +50,7 @@ public class TestStraightPredicate {
         List<Card> potcards = Arrays.asList(card1, card2);
         Hand hand = new Hand(potcards, playercards);
         // then
-        StraightPredicate straightPredicate = new StraightPredicate();
+        StraightPredicate straightPredicate = StraightPredicate.getInstance();
         boolean isStraight = straightPredicate.test(hand);
         assertThat(isStraight , is(false));
     }
@@ -71,7 +71,7 @@ public class TestStraightPredicate {
         List<Card> potcards = Arrays.asList(card1, card2);
         Hand hand = new Hand(potcards, playercards);
         // then
-        StraightPredicate straightPredicate = new StraightPredicate();
+        StraightPredicate straightPredicate = StraightPredicate.getInstance();
         boolean isStraight = straightPredicate.test(hand);
         assertThat(isStraight , is(true));
     }
@@ -91,7 +91,7 @@ public class TestStraightPredicate {
         List<Card> potcards = Arrays.asList(card1, card2);
         Hand hand = new Hand(potcards, playercards);
         // then
-        StraightPredicate straightPredicate = new StraightPredicate();
+        StraightPredicate straightPredicate = StraightPredicate.getInstance();
         boolean isStraight = straightPredicate.test(hand);
         assertThat(isStraight , is(true));
     }

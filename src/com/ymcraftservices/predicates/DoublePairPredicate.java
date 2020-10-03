@@ -7,10 +7,22 @@ import java.util.Map;
 
 public class DoublePairPredicate implements CustomPokerPredicate{
 
+    private static DoublePairPredicate instance;
+
+    public static DoublePairPredicate getInstance(){
+        if (instance == null) {
+            instance = new DoublePairPredicate();
+        }
+        return instance;
+    }
+
+    private DoublePairPredicate() {
+
+    }
 
     @Override
     public CustomPokerPredicate getNext() {
-        return new PairPredicate();
+        return  PairPredicate.getInstance();
     }
 
     @Override

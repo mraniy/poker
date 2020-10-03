@@ -31,7 +31,7 @@ public class TestSquarePredicate {
         List<Card> potcards = Arrays.asList(card1, card2);
         Hand hand = new Hand(potcards, playercards);
         // when
-        SquarePredicate squarePredicate = new SquarePredicate();
+        SquarePredicate squarePredicate = SquarePredicate.getInstance();
         boolean isSquare = squarePredicate.test(hand);
         assertThat(isSquare , is(false));
     }
@@ -53,7 +53,7 @@ public class TestSquarePredicate {
         List<Card> potcards = Arrays.asList(card1, card2);
         Hand hand = new Hand(potcards, playercards);
         // when
-        SquarePredicate squarePredicate = new SquarePredicate();
+        SquarePredicate squarePredicate =  SquarePredicate.getInstance();
         boolean isSquare = squarePredicate.test(hand);
         assertThat(isSquare , is(true));
     }

@@ -32,7 +32,7 @@ public class TestStraightFlush {
         List<Card> potcards = Arrays.asList(card1, card2);
         Hand hand = new Hand(potcards, playercards);
         // when
-        StraightFlushPredicate straightFlushPredicate = new StraightFlushPredicate();
+        StraightFlushPredicate straightFlushPredicate =  StraightFlushPredicate.getInstance();
         boolean isSraightFlush = straightFlushPredicate.test(hand);
         assertThat(isSraightFlush , is(false));
     }
@@ -52,7 +52,7 @@ public class TestStraightFlush {
         List<Card> potcards = Arrays.asList(card1, card2);
         Hand hand = new Hand(potcards, playercards);
         // when
-        StraightFlushPredicate straightFlushPredicate = new StraightFlushPredicate();
+        StraightFlushPredicate straightFlushPredicate =  StraightFlushPredicate.getInstance();
         boolean isStraightFlush = straightFlushPredicate.test(hand);
         // then
         assertThat(isStraightFlush, is(true));

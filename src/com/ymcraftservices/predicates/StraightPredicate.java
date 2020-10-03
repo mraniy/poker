@@ -11,10 +11,24 @@ import java.util.stream.Collectors;
 
 public class StraightPredicate implements CustomPokerPredicate {
 
+    private static StraightPredicate instance;
+
+    public static StraightPredicate getInstance(){
+        if (instance == null) {
+            instance= new StraightPredicate();
+        }
+        return instance;
+    }
+
+    private StraightPredicate() {
+
+    }
+
+
 
     @Override
     public CustomPokerPredicate getNext() {
-        return new BrelanPredicate();
+        return BrelanPredicate.getInstance();
     }
 
 

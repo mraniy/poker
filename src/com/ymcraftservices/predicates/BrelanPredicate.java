@@ -9,10 +9,23 @@ import java.util.Map;
 
 public class BrelanPredicate implements CustomPokerPredicate{
 
+    private static BrelanPredicate instance;
+
+    public static BrelanPredicate getInstance(){
+        if (instance == null) {
+            instance = new BrelanPredicate();
+        }
+        return instance;
+    }
+
+    private BrelanPredicate() {
+
+    }
+
 
     @Override
     public CustomPokerPredicate getNext() {
-        return new DoublePairPredicate();
+        return DoublePairPredicate.getInstance();
     }
 
     @Override

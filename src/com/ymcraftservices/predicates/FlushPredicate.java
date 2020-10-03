@@ -11,10 +11,22 @@ import java.util.stream.Collectors;
 
 public class FlushPredicate implements CustomPokerPredicate {
 
+    private static FlushPredicate instance;
+
+    public static FlushPredicate getInstance(){
+        if (instance == null) {
+            return new FlushPredicate();
+        }
+        return instance;
+    }
+
+    private FlushPredicate() {
+
+    }
 
     @Override
     public CustomPokerPredicate getNext() {
-        return new StraightPredicate();
+        return  StraightPredicate.getInstance();
     }
 
     Optional<LabelCard> retrieveLabelCardOfFlush(List<Card> cards) {

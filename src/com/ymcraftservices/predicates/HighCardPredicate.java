@@ -5,7 +5,23 @@ import com.ymcraftservices.model.Hand;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
 public class HighCardPredicate implements CustomPokerPredicate{
+
+    private static HighCardPredicate instance;
+
+    public static HighCardPredicate getInstance(){
+        if (instance == null) {
+            instance = new HighCardPredicate();
+        }
+        return instance;
+    }
+
+    private HighCardPredicate() {
+
+    }
+
+
 
     @Override
     public boolean test(Hand hand) {

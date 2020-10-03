@@ -30,7 +30,7 @@ public class TestFlushPredicate {
         List<Card> potcards = Arrays.asList(card1, card2);
         Hand hand = new Hand(potcards, playercards);
         // when
-        FlushPredicate flushPredicate = new FlushPredicate();
+        FlushPredicate flushPredicate =  FlushPredicate.getInstance();
         boolean isFlush = flushPredicate.test(hand);
         assertThat(isFlush , is(false));
 
@@ -51,7 +51,7 @@ public class TestFlushPredicate {
         List<Card> potcards = Arrays.asList(card1, card2);
         Hand hand = new Hand(potcards, playercards);
         // when
-        FlushPredicate flushPredicate = new FlushPredicate();
+        FlushPredicate flushPredicate =  FlushPredicate.getInstance();
         boolean isFlush = flushPredicate.test(hand);
         assertThat(isFlush , is(true));
     }

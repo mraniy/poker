@@ -31,7 +31,7 @@ public class TestRoyalFlushPredicate {
         List<Card> potcards = Arrays.asList(card1, card2);
         Hand hand = new Hand(potcards, playercards);
         // when
-        RoyalFlushPredicate royalFlushPredicate = new RoyalFlushPredicate();
+        RoyalFlushPredicate royalFlushPredicate =  RoyalFlushPredicate.getInstance();
         boolean isRoyalFlushCard = royalFlushPredicate.test(hand);
         assertThat(isRoyalFlushCard , is(false));
     }
@@ -51,7 +51,7 @@ public class TestRoyalFlushPredicate {
         List<Card> potcards = Arrays.asList(card1, card2);
         Hand hand = new Hand(potcards, playercards);
         // when
-        RoyalFlushPredicate royalFlushPredicate = new RoyalFlushPredicate();
+        RoyalFlushPredicate royalFlushPredicate =  RoyalFlushPredicate.getInstance();
         boolean isRoyalFlushCard = royalFlushPredicate.test(hand);
         assertThat(isRoyalFlushCard , is(true));
     }

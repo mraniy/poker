@@ -32,7 +32,7 @@ public class TestBrelanPredicate {
         List<Card> potcards = Arrays.asList(card1, card2);
         Hand hand = new Hand(potcards, playercards);
         // then
-        BrelanPredicate brelanPredicate = new BrelanPredicate();
+        BrelanPredicate brelanPredicate = BrelanPredicate.getInstance();
         boolean isStraight = brelanPredicate.test(hand);
         assertThat(isStraight , is(false));
 
@@ -53,7 +53,7 @@ public class TestBrelanPredicate {
         List<Card> potcards = Arrays.asList(card1, card2);
         Hand hand = new Hand(potcards, playercards);
         // then
-        BrelanPredicate brelanPredicate = new BrelanPredicate();
+        BrelanPredicate brelanPredicate = BrelanPredicate.getInstance();
         boolean isStraight = brelanPredicate.test(hand);
         assertThat(isStraight , is(true));
     }
