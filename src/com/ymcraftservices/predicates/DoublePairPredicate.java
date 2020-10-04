@@ -5,6 +5,8 @@ import com.ymcraftservices.model.NumberCard;
 
 import java.util.Map;
 
+import static com.ymcraftservices.utils.CardOccurenceCalculator.getCardsAndTheirOccurences;
+
 public class DoublePairPredicate implements CustomPokerPredicate{
 
     private static DoublePairPredicate instance;

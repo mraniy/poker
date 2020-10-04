@@ -1,16 +1,19 @@
 package com.ymcraftservices.functions;
 
 import com.ymcraftservices.model.Combination;
+import com.ymcraftservices.model.CombinationScore;
 import com.ymcraftservices.model.Hand;
 
-public class FullHouseFunction  implements CustomPokerFuncion {
+import java.util.function.Function;
+
+public class FullHouseFunction  implements CustomPokerFunction {
     @Override
-    public CustomPokerFuncion getNext() {
+    public CustomPokerFunction getNext() {
         return new FlushFunction();
     }
 
     @Override
-    public Combination apply(Hand hand) {
-        return Combination.FULLHOUSE;
+    public Combination apply(Hand hand, Function<Hand,Integer> handStrenghtCalculator) {
+        return new Combination(CombinationScore.FULLHOUSE,handStrenghtCalculator.apply(hand));
     }
 }

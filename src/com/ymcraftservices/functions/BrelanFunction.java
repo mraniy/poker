@@ -1,16 +1,19 @@
 package com.ymcraftservices.functions;
 
 import com.ymcraftservices.model.Combination;
+import com.ymcraftservices.model.CombinationScore;
 import com.ymcraftservices.model.Hand;
 
-public class BrelanFunction implements CustomPokerFuncion {
+import java.util.function.Function;
+
+public class BrelanFunction implements CustomPokerFunction {
     @Override
-    public CustomPokerFuncion getNext() {
+    public CustomPokerFunction getNext() {
         return new DoublePairFunction();
     }
 
     @Override
-    public Combination apply(Hand hand) {
-        return Combination.BRELAN;
+    public Combination apply(Hand hand, Function<Hand,Integer> handStrenghtCalculator) {
+        return new Combination(CombinationScore.BRELAN,handStrenghtCalculator.apply(hand));
     }
 }

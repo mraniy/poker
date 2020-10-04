@@ -1,27 +1,15 @@
 package com.ymcraftservices.model;
 
-public enum Combination {
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
-    HIGHCARD(100),
-    PAIR(200),
-    DOUBLEPAIR(300),
-    BRELAN(400),
-    STRAIGHT(500),
-    FLUSH(600),
-    FULLHOUSE(700),
-    CARRE(800),
-    KENTFLUSH(900),
-    ROYALFLUSH(1000);
+@AllArgsConstructor
+@Data
+public class Combination {
 
-    private int score;
+      CombinationScore combinationScore;
 
-    public int getScore() {
-        return score;
-    }
-
-    Combination(int score) {
-        this.score = score;
-    }
+      Integer strenght;
 
 
 }

@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static com.ymcraftservices.utils.CardOccurenceCalculator.getCardsAndTheirOccurences;
+
 public class FullHousePredicate implements CustomPokerPredicate{
 
     private static FullHousePredicate instance;

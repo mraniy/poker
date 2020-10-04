@@ -1,20 +1,18 @@
 package com.ymcraftservices.model;
 
 
-import com.ymcraftservices.functions.CustomPokerFuncion;
-import com.ymcraftservices.functions.HighCardFunction;
+import com.ymcraftservices.functions.CustomPokerFunction;
 import com.ymcraftservices.functions.RoyalFlushFunction;
 import com.ymcraftservices.predicates.CustomPokerPredicate;
-import com.ymcraftservices.predicates.HighCardPredicate;
 import com.ymcraftservices.predicates.RoyalFlushPredicate;
+import com.ymcraftservices.scorecalculators.CustomScoreCalculator;
+import com.ymcraftservices.scorecalculators.RoyalFlushCalculator;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -35,14 +33,15 @@ public class Hand {
     public Integer getScore() {
         RoyalFlushPredicate highLevelPredicate =  RoyalFlushPredicate.getInstance();
         RoyalFlushFunction highLevelFunction = new RoyalFlushFunction();
-        return getCombination(highLevelPredicate, highLevelFunction).getScore();
+        RoyalFlushCalculator highLevelCalculator = new RoyalFlushCalculator();
+        return getCombination(highLevelPredicate, highLevelFunction,highLevelCalculator).getCombinationScore().getScore();
     }
 
-    private Combination getCombination(CustomPokerPredicate customPokerPredicate, CustomPokerFuncion customPokerFuncion) {
+    private Combination getCombination(CustomPokerPredicate customPokerPredicate, CustomPokerFunction customPokerFunction, CustomScoreCalculator customScoreCalculator) {
         if (customPokerPredicate.test(this)) {
-            return customPokerFuncion.apply(this);
+            return customPokerFunction.apply(this,customScoreCalculator);
         } else {
-            return getCombination(customPokerPredicate.getNext(), customPokerFuncion.getNext());
+            return getCombination(customPokerPredicate.getNext(), customPokerFunction.getNext(),customScoreCalculator.getNext());
 
         }
     }

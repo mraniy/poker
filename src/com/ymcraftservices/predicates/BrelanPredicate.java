@@ -7,6 +7,8 @@ import com.ymcraftservices.model.NumberCard;
 import java.util.Arrays;
 import java.util.Map;
 
+import static com.ymcraftservices.utils.CardOccurenceCalculator.getCardsAndTheirOccurences;
+
 public class BrelanPredicate implements CustomPokerPredicate{
 
     private static BrelanPredicate instance;
