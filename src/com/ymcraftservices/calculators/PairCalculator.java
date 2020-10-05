@@ -1,5 +1,7 @@
 package com.ymcraftservices.calculators;
 
+import com.ymcraftservices.model.Combination;
+import com.ymcraftservices.model.CombinationScore;
 import com.ymcraftservices.model.Hand;
 import com.ymcraftservices.model.NumberCard;
 import com.ymcraftservices.utils.CardComparatorForRepeatedCards;
@@ -17,7 +19,7 @@ public class PairCalculator implements CustomScoreCalculator {
 
 
     @Override
-    public Integer apply(Hand hand) {
+    public Combination apply(Hand hand) {
         Predicate<Map.Entry<NumberCard, Long>> pairPredicate = numberCardLongEntry -> numberCardLongEntry.getValue().equals(2L);
         Predicate<Map.Entry<NumberCard, Long>> kickersPredicate = numberCardLongEntry -> numberCardLongEntry.getValue().equals(1L);
         List<Map.Entry<NumberCard, Long>> pairEntries = getCardsCorrespondingToPredicate(hand.getAllCards(), pairPredicate);
@@ -27,6 +29,7 @@ public class PairCalculator implements CustomScoreCalculator {
                 .findFirst()
                 .map(numberCardLongEntry -> numberCardLongEntry.getKey())
                 .orElseGet(() -> null);
+
         List<NumberCard> kickers = kickerEntries.stream()
                 .map(Map.Entry::getKey)
                 .sorted((o1, o2) -> new CardComparatorForRepeatedCards().apply(o1, o2))
@@ -35,7 +38,7 @@ public class PairCalculator implements CustomScoreCalculator {
 
         List<NumberCard> numberCards = Stream.concat(Stream.of(pairCard), kickers.stream())
                 .collect(Collectors.toList());
-        return calculate(numberCards);
+        return new Combination(CombinationScore.PAIR,calculate(numberCards));
     }
 
     @Override

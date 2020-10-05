@@ -30,7 +30,7 @@ public class TestFullHouseScoreCalculator {
         Hand hand = new Hand(potcards, playercards);
         FullHouseCalculator fullHouseCalculator = new FullHouseCalculator();
         // when
-        Integer strenght = fullHouseCalculator.apply(hand);
+        Integer strenght = fullHouseCalculator.apply(hand).getStrenght();
         // then
         // 14*10 + 7 = 147
         assertThat(strenght , is(147));
@@ -51,7 +51,7 @@ public class TestFullHouseScoreCalculator {
         Hand hand = new Hand(potcards, playercards);
         FullHouseCalculator fullHouseCalculator = new FullHouseCalculator();
         // when
-        Integer strenght = fullHouseCalculator.apply(hand);
+        Integer strenght = fullHouseCalculator.apply(hand).getStrenght();
         // then
         // 14*10 + 7 = 147
         assertThat(strenght , is(147));

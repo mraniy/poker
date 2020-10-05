@@ -1,8 +1,6 @@
 package com.ymcraftservices.calculators;
 
-import com.ymcraftservices.model.Card;
-import com.ymcraftservices.model.Hand;
-import com.ymcraftservices.model.NumberCard;
+import com.ymcraftservices.model.*;
 import com.ymcraftservices.utils.CardComparatorForRepeatedCards;
 
 import java.util.List;
@@ -18,7 +16,7 @@ public class DoublePairCalculator implements CustomScoreCalculator {
 
 
     @Override
-    public Integer apply(Hand hand) {
+    public Combination apply(Hand hand) {
         Predicate<Map.Entry<NumberCard, Long>> doublePairPredicate =
                 numberCardLongEntry -> numberCardLongEntry.getValue().equals(2L);
         List<Map.Entry<NumberCard, Long>> doublePairEntries =
@@ -39,7 +37,7 @@ public class DoublePairCalculator implements CustomScoreCalculator {
         List<NumberCard> numberCards = Stream.concat(doublePairs.stream(),
                 Stream.of(kicker))
                 .collect(Collectors.toList());
-        return calculate(numberCards);
+         return new Combination(CombinationScore.DOUBLEPAIR,calculate(numberCards));
     }
 
     @Override

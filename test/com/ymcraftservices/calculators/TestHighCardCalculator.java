@@ -29,7 +29,7 @@ public class TestHighCardCalculator {
         List<Card> potcards = Arrays.asList(card1, card2);
         Hand hand = new Hand(potcards, playercards);
         // when
-        Integer score = new HighCardCalculator().apply(hand);
+        Integer score = new HighCardCalculator().apply(hand).getStrenght();
         // 140000+13000+1000+90 +7
         assertThat(score , is(154097));
 

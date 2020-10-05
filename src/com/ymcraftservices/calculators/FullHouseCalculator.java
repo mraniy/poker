@@ -1,5 +1,7 @@
 package com.ymcraftservices.calculators;
 
+import com.ymcraftservices.model.Combination;
+import com.ymcraftservices.model.CombinationScore;
 import com.ymcraftservices.model.Hand;
 import com.ymcraftservices.model.NumberCard;
 import com.ymcraftservices.utils.CardComparatorForRepeatedCards;
@@ -17,17 +19,17 @@ public class FullHouseCalculator implements CustomScoreCalculator {
 
 
     @Override
-    public Integer apply(Hand hand) {
+    public Combination apply(Hand hand) {
         Predicate<Map.Entry<NumberCard, Long>> fullHousePredicate = numberCardLongEntry -> numberCardLongEntry.getValue().equals(3L) || numberCardLongEntry.getValue().equals(2L);
         List<Map.Entry<NumberCard, Long>> entries = getCardsCorrespondingToPredicate(hand.getAllCards(), fullHousePredicate);
         List<NumberCard> maxNumberCards = retrieveNumberCardByNumberOfOccurences(entries, 3L);
         List<NumberCard> minNumberCards = retrieveNumberCardByNumberOfOccurences(entries, 2L);
         if(maxNumberCards.size() == 2) {
-            return calculate(maxNumberCards);
+            return new Combination(CombinationScore.FULLHOUSE,calculate(maxNumberCards));
         } else {
             List<NumberCard> numberCards = Stream.concat(Stream.of(maxNumberCards.get(0)), Stream.of(minNumberCards.get(0)))
                     .collect(Collectors.toList());
-            return calculate(numberCards);
+            return new Combination(CombinationScore.FULLHOUSE,calculate(numberCards));
         }
     }
 

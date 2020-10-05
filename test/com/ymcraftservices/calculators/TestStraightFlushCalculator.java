@@ -31,7 +31,7 @@ public class TestStraightFlushCalculator {
         Hand hand = new Hand(potcards, playercards);
         // when
         StraighFlushCalculator straightFlushCalculator =  new StraighFlushCalculator();
-        Integer score = straightFlushCalculator.apply(hand);
+        Integer score = straightFlushCalculator.apply(hand).getStrenght();
         // then
         assertThat(score, is(NumberCard.DIX.getNumber()));
     }

@@ -1,5 +1,7 @@
 package com.ymcraftservices.calculators;
 
+import com.ymcraftservices.model.Combination;
+import com.ymcraftservices.model.CombinationScore;
 import com.ymcraftservices.model.Hand;
 import com.ymcraftservices.model.NumberCard;
 import com.ymcraftservices.utils.CardComparatorForRepeatedCards;
@@ -17,7 +19,7 @@ public class BrelanCalculator implements CustomScoreCalculator {
 
 
     @Override
-    public Integer apply(Hand hand) {
+    public Combination apply(Hand hand) {
         Predicate<Map.Entry<NumberCard, Long>> brelanPredicate = numberCardLongEntry -> numberCardLongEntry.getValue().equals(3L);
         Predicate<Map.Entry<NumberCard, Long>> kickersPredicate = numberCardLongEntry -> numberCardLongEntry.getValue().equals(1L);
         List<Map.Entry<NumberCard, Long>> brelanEntries = getCardsCorrespondingToPredicate(hand.getAllCards(), brelanPredicate);
@@ -39,7 +41,7 @@ public class BrelanCalculator implements CustomScoreCalculator {
         List<NumberCard> numberCards = Stream.concat(Stream.of(numberCardBrelan), kickers.stream())
                 .collect(Collectors.toList());
 
-        return calculate(numberCards);
+        return new Combination(CombinationScore.BRELAN,calculate(numberCards));
     }
 
 

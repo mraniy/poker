@@ -30,7 +30,7 @@ public class TestStraightCalculator {
         Hand hand = new Hand(potcards, playercards);
         StraightCalculator straightCalculator = new StraightCalculator();
         // when
-        Integer strenght = straightCalculator.apply(hand);
+        Integer strenght = straightCalculator.apply(hand).getStrenght();
         // then
         // 14*200(brelan) + 12(kicker)
         assertThat(strenght , is(NumberCard.SIX.getNumber()));

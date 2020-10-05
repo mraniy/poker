@@ -31,7 +31,7 @@ public class TestFlushCalculator {
         List<Card> potcards = Arrays.asList(card1, card2);
         Hand hand = new Hand(potcards, playercards);
         // then
-        Integer scoreFlush = new FlushCalculator().apply(hand);
+        Integer scoreFlush = new FlushCalculator().apply(hand).getStrenght();
         // 14*10000 13*1000 7*100 3*10 2
         assertThat(scoreFlush, is(153732));
     }

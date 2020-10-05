@@ -29,7 +29,7 @@ public class TestSquareCalculator {
         List<Card> playercards = Arrays.asList(card3, card4, card5, card6, card7);
         List<Card> potcards = Arrays.asList(card1, card2);
         Hand hand = new Hand(potcards, playercards);
-        Integer score = new SquareCalculator().apply(hand);
+        Integer score = new SquareCalculator().apply(hand).getStrenght();
         // 14*10 +12
         assertThat(score, is(152));
 

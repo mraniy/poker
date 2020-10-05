@@ -1,12 +1,10 @@
 package com.ymcraftservices.model;
 
 
-import com.ymcraftservices.functions.CustomPokerFunction;
-import com.ymcraftservices.functions.RoyalFlushFunction;
-import com.ymcraftservices.predicates.CustomPokerPredicate;
-import com.ymcraftservices.predicates.RoyalFlushPredicate;
 import com.ymcraftservices.calculators.CustomScoreCalculator;
 import com.ymcraftservices.calculators.RoyalFlushCalculator;
+import com.ymcraftservices.predicates.CustomPokerPredicate;
+import com.ymcraftservices.predicates.RoyalFlushPredicate;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -30,17 +28,16 @@ public class Hand {
 
     public Integer getScore() {
         RoyalFlushPredicate highLevelPredicate =  RoyalFlushPredicate.getInstance();
-        RoyalFlushFunction highLevelFunction = new RoyalFlushFunction();
         RoyalFlushCalculator highLevelCalculator = new RoyalFlushCalculator();
-        Combination combination = getCombination(highLevelPredicate, highLevelFunction, highLevelCalculator);
+        Combination combination = getCombination(highLevelPredicate, highLevelCalculator);
         return combination.getCombinationScore().getScore() + combination.getStrenght();
     }
 
-    private Combination getCombination(CustomPokerPredicate customPokerPredicate, CustomPokerFunction customPokerFunction, CustomScoreCalculator customScoreCalculator) {
+    private Combination getCombination(CustomPokerPredicate customPokerPredicate, CustomScoreCalculator customScoreCalculator) {
         if (customPokerPredicate.test(this)) {
-            return customPokerFunction.apply(this,customScoreCalculator);
+            return customScoreCalculator.apply(this);
         } else {
-            return getCombination(customPokerPredicate.getNext(), customPokerFunction.getNext(),customScoreCalculator.getNext());
+            return getCombination(customPokerPredicate.getNext(), customScoreCalculator.getNext());
 
         }
     }

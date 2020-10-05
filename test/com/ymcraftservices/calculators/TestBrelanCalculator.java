@@ -30,7 +30,7 @@ public class TestBrelanCalculator {
         Hand hand = new Hand(potcards, playercards);
         BrelanCalculator brelanCalculator = new BrelanCalculator();
         // when
-        Integer strenght = brelanCalculator.apply(hand);
+        Integer strenght = brelanCalculator.apply(hand).getStrenght();
         // then
         // 14*100(brelan) + 12*10 + 10
         assertThat(strenght , is(1530));

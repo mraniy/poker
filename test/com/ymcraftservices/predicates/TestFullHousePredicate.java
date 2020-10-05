@@ -56,4 +56,23 @@ public class TestFullHousePredicate {
         assertThat(isFullHouse , is(true));
     }
 
+    @Test
+    public void should_be_full_house_with_two_three_of_kind() {
+        // given
+        Card card1 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.AS);
+        Card card2 = DataFactory.getCard(LabelCard.TREFLE, NumberCard.AS);
+        Card card3 = DataFactory.getCard(LabelCard.COEUR, NumberCard.AS);
+        Card card4 = DataFactory.getCard(LabelCard.PIQUE, NumberCard.SEPT);
+        Card card5 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.SEPT);
+        Card card6 = DataFactory.getCard(LabelCard.COEUR, NumberCard.SEPT);
+        Card card7 = DataFactory.getCard(LabelCard.TREFLE, NumberCard.DIX);
+        List<Card> playercards = Arrays.asList(card3, card4, card5, card6, card7);
+        List<Card> potcards = Arrays.asList(card1, card2);
+        Hand hand = new Hand(potcards, playercards);
+        // when
+        boolean isFullHouse = FullHousePredicate.getInstance().test(hand);
+        // then
+        assertThat(isFullHouse, is(true));
+    }
+
 }

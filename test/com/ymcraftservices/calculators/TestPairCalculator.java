@@ -29,7 +29,7 @@ public class TestPairCalculator {
         List<Card> playercards = Arrays.asList(card3, card4, card5, card6, card7);
         List<Card> potcards = Arrays.asList(card1, card2);
         Hand hand = new Hand(potcards, playercards);
-        Integer scoreCalculator = new PairCalculator().apply(hand);
+        Integer scoreCalculator = new PairCalculator().apply(hand).getStrenght();
         // then
         // 14*1000 + 11*100 +10*10+ 7
         assertThat(scoreCalculator, is(15207));

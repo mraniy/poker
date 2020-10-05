@@ -30,7 +30,7 @@ public class TestDoublePairCalculator {
         Hand hand = new Hand(potcards, playercards);
         // when
         DoublePairCalculator doublePairCalculator = new DoublePairCalculator();
-        Integer score = doublePairCalculator.apply(hand);
+        Integer score = doublePairCalculator.apply(hand).getStrenght();
         // 14*100 + 10*10 + 9
         assertThat(score , is(1509));
     }
