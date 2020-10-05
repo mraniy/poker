@@ -26,17 +26,17 @@ public class TestPokerGame {
     @Test
     public void should_return_brian_as_winner_as_he_has_the_best_hand() {
         // given in the setup
-        Card flop1 = new Card(LabelCard.CARREAU, NumberCard.CINQ);
+        Card flop1 = new Card(LabelCard.CARREAU, NumberCard.FIVE);
         Card flop2 = new Card(LabelCard.CARREAU, NumberCard.AS);
-        Card flop3 = new Card(LabelCard.TREFLE, NumberCard.TROIS);
-        Card turn = new Card(LabelCard.CARREAU, NumberCard.DEUX);
-        Card river = new Card(LabelCard.COEUR, NumberCard.VALLEE);
-        Card samCard1 = new Card(LabelCard.PIQUE, NumberCard.DEUX);
-        Card samCard2 = new Card(LabelCard.CARREAU, NumberCard.DAME);
-        Card brianCard1 = new Card(LabelCard.COEUR, NumberCard.TROIS);
-        Card briancard2 = new Card(LabelCard.PIQUE, NumberCard.TROIS);
-        Card joeCard1 = new Card(LabelCard.CARREAU, NumberCard.SEPT);
-        Card joeCard2 = new Card(LabelCard.CARREAU, NumberCard.VALLEE);
+        Card flop3 = new Card(LabelCard.TREFLE, NumberCard.THREE);
+        Card turn = new Card(LabelCard.CARREAU, NumberCard.TWO);
+        Card river = new Card(LabelCard.COEUR, NumberCard.JACK);
+        Card samCard1 = new Card(LabelCard.PIQUE, NumberCard.TWO);
+        Card samCard2 = new Card(LabelCard.CARREAU, NumberCard.QUEEN);
+        Card brianCard1 = new Card(LabelCard.COEUR, NumberCard.THREE);
+        Card briancard2 = new Card(LabelCard.PIQUE, NumberCard.THREE);
+        Card joeCard1 = new Card(LabelCard.CARREAU, NumberCard.SEVEN);
+        Card joeCard2 = new Card(LabelCard.CARREAU, NumberCard.JACK);
         List<Card> potCards = Arrays.asList(flop1, flop2, flop3, turn, river);
         List<Card> samCards = Arrays.asList(samCard1, samCard2);
         List<Card> brianCards = Arrays.asList(brianCard1, briancard2);
@@ -56,12 +56,12 @@ public class TestPokerGame {
     public void should_return_brian_as_winner_as_he_has_the_best_double_pair() {
         // given
         Card flop1 = DataFactory.getCard(LabelCard.PIQUE, NumberCard.AS);
-        Card flop2 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.VALLEE);
-        Card flop3 = DataFactory.getCard(LabelCard.TREFLE, NumberCard.SEPT);
-        Card turn = DataFactory.getCard(LabelCard.COEUR, NumberCard.SEPT);
-        Card river = DataFactory.getCard(LabelCard.CARREAU, NumberCard.DIX);
+        Card flop2 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.JACK);
+        Card flop3 = DataFactory.getCard(LabelCard.TREFLE, NumberCard.SEVEN);
+        Card turn = DataFactory.getCard(LabelCard.COEUR, NumberCard.SEVEN);
+        Card river = DataFactory.getCard(LabelCard.CARREAU, NumberCard.TEN);
 
-        Card samCard1 = DataFactory.getCard(LabelCard.COEUR, NumberCard.NEUF);
+        Card samCard1 = DataFactory.getCard(LabelCard.COEUR, NumberCard.NINE);
         Card samCard2 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.AS);
 
         Card brianCard1 = DataFactory.getCard(LabelCard.TREFLE, NumberCard.AS);
@@ -85,20 +85,20 @@ public class TestPokerGame {
     @Test
     public void should_return_brian_and_joe_are_winners() {
         // given in the setup
-        Card flop1 = new Card(LabelCard.CARREAU, NumberCard.CINQ);
+        Card flop1 = new Card(LabelCard.CARREAU, NumberCard.FIVE);
         Card flop2 = new Card(LabelCard.COEUR, NumberCard.AS);
-        Card flop3 = new Card(LabelCard.TREFLE, NumberCard.TROIS);
-        Card turn = new Card(LabelCard.CARREAU, NumberCard.DEUX);
-        Card river = new Card(LabelCard.COEUR, NumberCard.VALLEE);
+        Card flop3 = new Card(LabelCard.TREFLE, NumberCard.THREE);
+        Card turn = new Card(LabelCard.CARREAU, NumberCard.TWO);
+        Card river = new Card(LabelCard.COEUR, NumberCard.JACK);
 
-        Card samCard1 = new Card(LabelCard.PIQUE, NumberCard.DEUX);
-        Card samCard2 = new Card(LabelCard.CARREAU, NumberCard.DAME);
+        Card samCard1 = new Card(LabelCard.PIQUE, NumberCard.TWO);
+        Card samCard2 = new Card(LabelCard.CARREAU, NumberCard.QUEEN);
 
-        Card brianCard1 = new Card(LabelCard.COEUR, NumberCard.QUATRE);
-        Card briancard2 = new Card(LabelCard.PIQUE, NumberCard.TROIS);
+        Card brianCard1 = new Card(LabelCard.COEUR, NumberCard.FOUR);
+        Card briancard2 = new Card(LabelCard.PIQUE, NumberCard.THREE);
 
-        Card joeCard1 = new Card(LabelCard.CARREAU, NumberCard.SEPT);
-        Card joeCard2 = new Card(LabelCard.CARREAU, NumberCard.QUATRE);
+        Card joeCard1 = new Card(LabelCard.CARREAU, NumberCard.SEVEN);
+        Card joeCard2 = new Card(LabelCard.CARREAU, NumberCard.FOUR);
 
         List<Card> potCards = Arrays.asList(flop1, flop2, flop3, turn, river);
         List<Card> samCards = Arrays.asList(samCard1, samCard2);
@@ -114,5 +114,35 @@ public class TestPokerGame {
         // assertThat
         assertThat(winners.size(), is(2));
         assertThat(winners.containsAll(Arrays.asList(brian, joe)) , is(true));
+    }
+
+    @Test
+    public void test() {
+        // given in the setup
+        Card flop1 = new Card(LabelCard.COEUR, NumberCard.SEVEN);
+        Card flop2 = new Card(LabelCard.CARREAU, NumberCard.TEN);
+        Card flop3 = new Card(LabelCard.TREFLE, NumberCard.FIVE);
+        Card turn = new Card(LabelCard.PIQUE, NumberCard.TWO);
+        Card river = new Card(LabelCard.PIQUE, NumberCard.SIX);
+
+        Card samCard1 = new Card(LabelCard.TREFLE, NumberCard.QUEEN);
+        Card samCard2 = new Card(LabelCard.CARREAU, NumberCard.TWO);
+
+        Card brianCard1 = new Card(LabelCard.COEUR, NumberCard.EIGHT);
+        Card briancard2 = new Card(LabelCard.TREFLE, NumberCard.EIGHT);
+
+
+        List<Card> potCards = Arrays.asList(flop1, flop2, flop3, turn, river);
+        List<Card> samCards = Arrays.asList(samCard1, samCard2);
+        List<Card> brianCards = Arrays.asList(brianCard1, briancard2);
+
+        sam = new Player("jackson","samuel",500,new Hand(potCards,samCards));
+        brian = new Player("adams","brian",700,new Hand(potCards,brianCards));
+        // when
+        PokerGame pokerGame = new PokerGame();
+        List<Player> winners = pokerGame.getWinners(Arrays.asList(sam, brian));
+        // assertThat
+        //assertThat(winners.size(), is(2));
+        //assertThat(winners.containsAll(Arrays.asList(brian, joe)) , is(true));
     }
 }

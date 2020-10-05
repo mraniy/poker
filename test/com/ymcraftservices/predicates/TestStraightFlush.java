@@ -5,8 +5,6 @@ import com.ymcraftservices.model.Card;
 import com.ymcraftservices.model.Hand;
 import com.ymcraftservices.model.LabelCard;
 import com.ymcraftservices.model.NumberCard;
-import com.ymcraftservices.predicates.DoublePairPredicate;
-import com.ymcraftservices.predicates.StraightFlushPredicate;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -21,13 +19,13 @@ public class TestStraightFlush {
     @Test
     public void should_return_false_when_the_hand_is_not_a_straight_flush() {
         // given
-        Card card1 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.DIX);
+        Card card1 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.TEN);
         Card card2 = DataFactory.getCard(LabelCard.TREFLE, NumberCard.KING);
-        Card card3 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.SEPT);
-        Card card4 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.HUIT);
-        Card card5 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.VALLEE);
-        Card card6 = DataFactory.getCard(LabelCard.COEUR, NumberCard.NEUF);
-        Card card7 = DataFactory.getCard(LabelCard.COEUR, NumberCard.DIX);
+        Card card3 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.SEVEN);
+        Card card4 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.EIGHT);
+        Card card5 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.JACK);
+        Card card6 = DataFactory.getCard(LabelCard.COEUR, NumberCard.NINE);
+        Card card7 = DataFactory.getCard(LabelCard.COEUR, NumberCard.TEN);
         List<Card> playercards = Arrays.asList(card3, card4, card5, card6, card7);
         List<Card> potcards = Arrays.asList(card1, card2);
         Hand hand = new Hand(potcards, playercards);
@@ -40,13 +38,13 @@ public class TestStraightFlush {
     @Test
     public void should_return_true_when_the_hand_is_a_straight_flush() {
         // given
-        Card card1 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.DIX);
+        Card card1 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.TEN);
         Card card2 = DataFactory.getCard(LabelCard.TREFLE, NumberCard.KING);
-        Card card3 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.SEPT);
-        Card card4 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.HUIT);
-        Card card5 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.VALLEE);
-        Card card6 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.NEUF);
-        Card card7 = DataFactory.getCard(LabelCard.COEUR, NumberCard.DIX);
+        Card card3 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.SEVEN);
+        Card card4 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.EIGHT);
+        Card card5 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.JACK);
+        Card card6 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.NINE);
+        Card card7 = DataFactory.getCard(LabelCard.COEUR, NumberCard.TEN);
         // when
         List<Card> playercards = Arrays.asList(card3, card4, card5, card6, card7);
         List<Card> potcards = Arrays.asList(card1, card2);

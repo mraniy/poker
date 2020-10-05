@@ -19,12 +19,12 @@ public class TestStraightCalculator {
     public void should_return_this_score_for_this_hand() {
         // given
         Card card1 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.AS);
-        Card card2 = DataFactory.getCard(LabelCard.TREFLE, NumberCard.DEUX);
-        Card card3 = DataFactory.getCard(LabelCard.COEUR, NumberCard.TROIS);
-        Card card4 = DataFactory.getCard(LabelCard.PIQUE, NumberCard.QUATRE);
-        Card card5 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.CINQ);
+        Card card2 = DataFactory.getCard(LabelCard.TREFLE, NumberCard.TWO);
+        Card card3 = DataFactory.getCard(LabelCard.COEUR, NumberCard.THREE);
+        Card card4 = DataFactory.getCard(LabelCard.PIQUE, NumberCard.FOUR);
+        Card card5 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.FIVE);
         Card card6 = DataFactory.getCard(LabelCard.COEUR, NumberCard.SIX);
-        Card card7 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.SEPT);
+        Card card7 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.SEVEN);
         List<Card> playercards = Arrays.asList(card3, card4, card5, card6, card7);
         List<Card> potcards = Arrays.asList(card1, card2);
         Hand hand = new Hand(potcards, playercards);

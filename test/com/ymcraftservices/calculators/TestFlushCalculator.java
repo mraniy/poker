@@ -20,12 +20,12 @@ public class TestFlushCalculator {
     public void should_return_this_score() {
         // given
         Card card1 = DataFactory.getCard(LabelCard.TREFLE, NumberCard.AS);
-        Card card2 = DataFactory.getCard(LabelCard.TREFLE, NumberCard.TROIS);
-        Card card3 = DataFactory.getCard(LabelCard.TREFLE, NumberCard.SEPT);
-        Card card4 = DataFactory.getCard(LabelCard.PIQUE, NumberCard.SEPT);
+        Card card2 = DataFactory.getCard(LabelCard.TREFLE, NumberCard.THREE);
+        Card card3 = DataFactory.getCard(LabelCard.TREFLE, NumberCard.SEVEN);
+        Card card4 = DataFactory.getCard(LabelCard.PIQUE, NumberCard.SEVEN);
         Card card5 = DataFactory.getCard(LabelCard.TREFLE, NumberCard.KING);
-        Card card6 = DataFactory.getCard(LabelCard.TREFLE, NumberCard.DEUX);
-        Card card7 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.DIX);
+        Card card6 = DataFactory.getCard(LabelCard.TREFLE, NumberCard.TWO);
+        Card card7 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.TEN);
         // when
         List<Card> playercards = Arrays.asList(card3, card4, card5, card6, card7);
         List<Card> potcards = Arrays.asList(card1, card2);

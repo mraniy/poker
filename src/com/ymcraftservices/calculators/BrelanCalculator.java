@@ -41,7 +41,7 @@ public class BrelanCalculator implements CustomScoreCalculator {
         List<NumberCard> numberCards = Stream.concat(Stream.of(numberCardBrelan), kickers.stream())
                 .collect(Collectors.toList());
 
-        String message = "Three of kind ".concat(numberCardBrelan.toString()).concat(" with ").concat(kickers.get(0).toString() + " as a kicker");
+        String message = "THREE of kind ".concat(numberCardBrelan.toString()).concat(" with ").concat(kickers.get(0).toString() + " as a kicker");
         return new Combination(CombinationScore.BRELAN,calculate(numberCards), message);
     }
 

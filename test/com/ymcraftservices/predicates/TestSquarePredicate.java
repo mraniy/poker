@@ -5,7 +5,6 @@ import com.ymcraftservices.model.Card;
 import com.ymcraftservices.model.Hand;
 import com.ymcraftservices.model.LabelCard;
 import com.ymcraftservices.model.NumberCard;
-import com.ymcraftservices.predicates.SquarePredicate;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -21,11 +20,11 @@ public class TestSquarePredicate {
         // given
         Card card1 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.AS);
         Card card2 = DataFactory.getCard(LabelCard.TREFLE, NumberCard.AS);
-        Card card3 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.SEPT);
-        Card card4 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.DAME);
-        Card card5 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.VALLEE);
-        Card card6 = DataFactory.getCard(LabelCard.COEUR, NumberCard.VALLEE);
-        Card card7 = DataFactory.getCard(LabelCard.COEUR, NumberCard.DIX);
+        Card card3 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.SEVEN);
+        Card card4 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.QUEEN);
+        Card card5 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.JACK);
+        Card card6 = DataFactory.getCard(LabelCard.COEUR, NumberCard.JACK);
+        Card card7 = DataFactory.getCard(LabelCard.COEUR, NumberCard.TEN);
         // when
         List<Card> playercards = Arrays.asList(card3, card4, card5, card6, card7);
         List<Card> potcards = Arrays.asList(card1, card2);
@@ -44,10 +43,10 @@ public class TestSquarePredicate {
         Card card1 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.AS);
         Card card2 = DataFactory.getCard(LabelCard.TREFLE, NumberCard.AS);
         Card card3 = DataFactory.getCard(LabelCard.COEUR, NumberCard.AS);
-        Card card4 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.DAME);
+        Card card4 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.QUEEN);
         Card card5 = DataFactory.getCard(LabelCard.PIQUE, NumberCard.AS);
-        Card card6 = DataFactory.getCard(LabelCard.COEUR, NumberCard.VALLEE);
-        Card card7 = DataFactory.getCard(LabelCard.COEUR, NumberCard.DIX);
+        Card card6 = DataFactory.getCard(LabelCard.COEUR, NumberCard.JACK);
+        Card card7 = DataFactory.getCard(LabelCard.COEUR, NumberCard.TEN);
         // when
         List<Card> playercards = Arrays.asList(card3, card4, card5, card6, card7);
         List<Card> potcards = Arrays.asList(card1, card2);

@@ -20,11 +20,11 @@ public class TestDoublePairCalculator {
         // given
         Card card1 = DataFactory.getCard(LabelCard.PIQUE, NumberCard.AS);
         Card card2 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.AS);
-        Card card3 = DataFactory.getCard(LabelCard.TREFLE, NumberCard.SEPT);
-        Card card4 = DataFactory.getCard(LabelCard.COEUR, NumberCard.SEPT);
-        Card card5 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.DIX);
-        Card card6 = DataFactory.getCard(LabelCard.COEUR, NumberCard.NEUF);
-        Card card7 = DataFactory.getCard(LabelCard.TREFLE, NumberCard.DIX);
+        Card card3 = DataFactory.getCard(LabelCard.TREFLE, NumberCard.SEVEN);
+        Card card4 = DataFactory.getCard(LabelCard.COEUR, NumberCard.SEVEN);
+        Card card5 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.TEN);
+        Card card6 = DataFactory.getCard(LabelCard.COEUR, NumberCard.NINE);
+        Card card7 = DataFactory.getCard(LabelCard.TREFLE, NumberCard.TEN);
         List<Card> playercards = Arrays.asList(card3, card4, card5, card6, card7);
         List<Card> potcards = Arrays.asList(card1, card2);
         Hand hand = new Hand(potcards, playercards);

@@ -38,7 +38,7 @@ public class FullHousePredicate implements CustomPokerPredicate{
                 .stream()
                 .filter(numberOfOccurences -> numberOfOccurences >= 2)
                 .collect(Collectors.toList());
-        return atLeastTwoOccurencesOfCards(occurencesOfCards) && atLeastOneThreeOfAkind(occurencesOfCards);
+        return atLeastTwoOccurencesOfCards(occurencesOfCards) && atLeastOneTHREEOfAkind(occurencesOfCards);
 
     }
 
@@ -46,7 +46,7 @@ public class FullHousePredicate implements CustomPokerPredicate{
         return occurencesOfCards.size() >=2;
     }
 
-    private boolean atLeastOneThreeOfAkind(List<Long> occurencesOfCards) {
+    private boolean atLeastOneTHREEOfAkind(List<Long> occurencesOfCards) {
         return occurencesOfCards.contains(3L);
     }
 

@@ -5,7 +5,6 @@ import com.ymcraftservices.model.Card;
 import com.ymcraftservices.model.Hand;
 import com.ymcraftservices.model.LabelCard;
 import com.ymcraftservices.model.NumberCard;
-import com.ymcraftservices.predicates.HighCardPredicate;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -21,11 +20,11 @@ public class TestHighCardPredicate {
         // given
         Card card1 = DataFactory.getCard(LabelCard.PIQUE, NumberCard.AS);
         Card card2 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.KING);
-        Card card3 = DataFactory.getCard(LabelCard.TREFLE, NumberCard.SEPT);
-        Card card4 = DataFactory.getCard(LabelCard.COEUR, NumberCard.DEUX);
+        Card card3 = DataFactory.getCard(LabelCard.TREFLE, NumberCard.SEVEN);
+        Card card4 = DataFactory.getCard(LabelCard.COEUR, NumberCard.TWO);
         Card card5 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.KING);
-        Card card6 = DataFactory.getCard(LabelCard.COEUR, NumberCard.NEUF);
-        Card card7 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.DIX);
+        Card card6 = DataFactory.getCard(LabelCard.COEUR, NumberCard.NINE);
+        Card card7 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.TEN);
         // when
         List<Card> playercards = Arrays.asList(card3, card4, card5, card6, card7);
         List<Card> potcards = Arrays.asList(card1, card2);
@@ -41,11 +40,11 @@ public class TestHighCardPredicate {
         // given
         Card card1 = DataFactory.getCard(LabelCard.PIQUE, NumberCard.AS);
         Card card2 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.KING);
-        Card card3 = DataFactory.getCard(LabelCard.TREFLE, NumberCard.SEPT);
-        Card card4 = DataFactory.getCard(LabelCard.COEUR, NumberCard.DEUX);
-        Card card5 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.TROIS);
-        Card card6 = DataFactory.getCard(LabelCard.COEUR, NumberCard.NEUF);
-        Card card7 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.DIX);
+        Card card3 = DataFactory.getCard(LabelCard.TREFLE, NumberCard.SEVEN);
+        Card card4 = DataFactory.getCard(LabelCard.COEUR, NumberCard.TWO);
+        Card card5 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.THREE);
+        Card card6 = DataFactory.getCard(LabelCard.COEUR, NumberCard.NINE);
+        Card card7 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.TEN);
         // when
         List<Card> playercards = Arrays.asList(card3, card4, card5, card6, card7);
         List<Card> potcards = Arrays.asList(card1, card2);
