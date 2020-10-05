@@ -1,10 +1,8 @@
 package com.ymcraftservices;
 
 import com.ymcraftservices.model.*;
-import com.ymcraftservices.predicates.DoublePairPredicate;
 import com.ymcraftservices.service.PokerGame;
-import org.hamcrest.core.Is;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -20,6 +18,10 @@ public class TestPokerGame {
     private Player brian;
 
 
+    @AfterEach
+    public void sautdeligne() {
+        System.out.println("\n");
+    }
 
     @Test
     public void should_return_brian_as_winner_as_he_has_the_best_hand() {
@@ -44,7 +46,7 @@ public class TestPokerGame {
         brian = new Player("adams","brian",700,new Hand(potCards,brianCards));
         // when
         PokerGame pokerGame = new PokerGame();
-        List<Player> winners = pokerGame.getWinner(Arrays.asList(joe, sam, brian));
+        List<Player> winners = pokerGame.getWinners(Arrays.asList(joe, sam, brian));
         // assertThat
         assertThat(winners.size(), is(1));
         assertThat(winners.get(0).getFirstName() , is(joe.getFirstName()));
@@ -74,7 +76,7 @@ public class TestPokerGame {
 
         // when
         PokerGame pokerGame = new PokerGame();
-        List<Player> winners = pokerGame.getWinner(Arrays.asList(sam, brian));
+        List<Player> winners = pokerGame.getWinners(Arrays.asList(sam, brian));
         // assertThat
         assertThat(winners.size(), is(1));
         assertThat(winners.get(0).getFirstName() , is(brian.getFirstName()));
@@ -108,7 +110,7 @@ public class TestPokerGame {
         brian = new Player("adams","brian",700,new Hand(potCards,brianCards));
         // when
         PokerGame pokerGame = new PokerGame();
-        List<Player> winners = pokerGame.getWinner(Arrays.asList(joe, sam, brian));
+        List<Player> winners = pokerGame.getWinners(Arrays.asList(joe, sam, brian));
         // assertThat
         assertThat(winners.size(), is(2));
         assertThat(winners.containsAll(Arrays.asList(brian, joe)) , is(true));

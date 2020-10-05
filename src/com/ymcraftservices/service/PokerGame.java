@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class PokerGame {
 
-    public List<Player> getWinner(List<Player> players) {
+    public List<Player> getWinners(List<Player> players) {
         Integer highScoreHands = players.stream()
                 .map(player -> player.getHand().getCombination())
                 .max(Comparator.comparingInt(Combination::getScore))
@@ -19,7 +19,9 @@ public class PokerGame {
                 .sorted(Comparator.comparing(o -> o.getHand().getCombination().getScore()))
                 .peek(player -> System.out.println(player.getFirstName().concat(" has ").concat(player.getHand().getCombination().getMessage())))
                 .filter(player -> player.getHand().getCombination().getScore().equals(highScoreHands))
+                .peek(player -> System.out.println(player.getFirstName().concat(" wins it with a ").concat(player.getHand().getCombination().getMessage())))
                 .collect(Collectors.toList());
+
 
     }
 
