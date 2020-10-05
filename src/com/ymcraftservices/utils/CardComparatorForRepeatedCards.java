@@ -7,7 +7,8 @@ import java.util.function.BiFunction;
 public class CardComparatorForRepeatedCards implements BiFunction<NumberCard,NumberCard,Integer> {
     @Override
     public Integer apply(NumberCard numberCard1, NumberCard numberCard2) {
-        if (numberCard1.equals(NumberCard.AS)) return 1;
-        else return numberCard1.getNumber() - numberCard2.getNumber();
+        int number1 = numberCard1.equals(NumberCard.AS) ? 14 : numberCard1.getNumber();
+        int number2 = numberCard2.equals(NumberCard.AS) ? 14 : numberCard2.getNumber();
+        return number2 -  number1;
     }
 }

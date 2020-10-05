@@ -6,40 +6,32 @@ import com.ymcraftservices.utils.CardComparatorForRepeatedCards;
 
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.function.Predicate;
 
-import static com.ymcraftservices.utils.CardOccurenceCalculator.getCardsAndTheirOccurences;
+import static com.ymcraftservices.utils.CardOccurenceCalculator.getCardsCorrespondingToPredicate;
+import static com.ymcraftservices.utils.ScoreCalculator.calculate;
 
 public class FullHouseCalculator implements CustomScoreCalculator {
 
 
     @Override
     public Integer apply(Hand hand) {
-        Map<NumberCard, Long> cardsAndTheirOccurences = getCardsAndTheirOccurences(hand.getAllCards());
-        List<Map.Entry<NumberCard, Long>> entries = cardsAndTheirOccurences.entrySet()
-                .stream()
-                .filter(numberCardLongEntry -> numberCardLongEntry.getValue().equals(3L) || numberCardLongEntry.getValue().equals(2L))
-                .collect(Collectors.toList());
+        Predicate<Map.Entry<NumberCard, Long>> fullHousePredicate = numberCardLongEntry -> numberCardLongEntry.getValue().equals(3L) || numberCardLongEntry.getValue().equals(2L);
+        List<Map.Entry<NumberCard, Long>> entries = getCardsCorrespondingToPredicate(hand.getAllCards(), fullHousePredicate);
         NumberCard maxNumberCard = retrieveNumberCardByNumberOfOccurences(entries, 3L);
         NumberCard minNumberCard = retrieveNumberCardByNumberOfOccurences(entries, 2L);
         return getScore(minNumberCard,maxNumberCard);
     }
 
+
+
     private Integer getScore(NumberCard minNumberCard,NumberCard maxNumberCard) {
-        Integer scoreMax = getScore(maxNumberCard, 200);
-        Integer scoreMin = getScore(minNumberCard, 10);
+        Integer scoreMax = calculate(maxNumberCard, 100);
+        Integer scoreMin = calculate(minNumberCard, 10);
         return scoreMax + scoreMin;
     }
 
-    private Integer getScore(NumberCard maxNumberCard, int coefficient) {
-        Integer scoreMaxCard;
-        if(maxNumberCard.equals(NumberCard.AS)) {
-            scoreMaxCard = 14 * coefficient;
-        } else {
-            scoreMaxCard = maxNumberCard.getNumber()*coefficient;
-        }
-        return scoreMaxCard;
-    }
+
 
     private NumberCard retrieveNumberCardByNumberOfOccurences(List<Map.Entry<NumberCard, Long>> entries, long numberOfOccurences) {
         return entries.stream()

@@ -9,6 +9,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.ymcraftservices.utils.CardUtilsForStraightHands.isStraightHand;
+
 public class StraightPredicate implements CustomPokerPredicate {
 
     private static StraightPredicate instance;
@@ -42,14 +44,6 @@ public class StraightPredicate implements CustomPokerPredicate {
                 .anyMatch(fromIndice -> isStraightHand(allCards, numberCards, fromIndice));
     }
 
-    private boolean isStraightHand(List<Card> allCards, List<NumberCard> numberCards, Integer fromIndice) {
-        List<Card> cardsSublist = allCards.subList(fromIndice, fromIndice + 4);
-        List<Card> cards = ComposableStraightPredicate.getInstance().apply(numberCards, cardsSublist);
-        return hasAllTheCardsTheirMatchingNextCard(cards);
-    }
 
-    public boolean hasAllTheCardsTheirMatchingNextCard(List<Card> cards) {
-        return cards.size() ==4;
-    }
 
 }

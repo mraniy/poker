@@ -7,11 +7,11 @@ public class StraighFlushCalculator implements CustomScoreCalculator {
 
     @Override
     public Integer apply(Hand hand) {
-        return 1;
+        return new StraightCalculator().apply(hand);
     }
 
     @Override
     public CustomScoreCalculator getNext() {
-        return new CarreCalculator();
+        return new SquareCalculator();
     }
 }

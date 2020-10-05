@@ -6,6 +6,8 @@ import com.ymcraftservices.model.NumberCard;
 
 import java.util.List;
 
+import static com.ymcraftservices.utils.CardUtilsForStraightHands.hasAllTheCardsTheirMatchingNextCard;
+
 public class RoyalFlushPredicate implements CustomPokerPredicate{
 
     private static RoyalFlushPredicate instance;
@@ -30,7 +32,7 @@ public class RoyalFlushPredicate implements CustomPokerPredicate{
     @Override
     public boolean test(Hand hand) {
         List<Card> maybeStraightFlushCards = StraightFlushPredicate.getInstance().getMaybeStraightFlushCards(hand);
-        return StraightPredicate.getInstance().hasAllTheCardsTheirMatchingNextCard(maybeStraightFlushCards)
+        return hasAllTheCardsTheirMatchingNextCard(maybeStraightFlushCards)
                 && maybeStraightFlushCards.get(0).getNumberCard().getNext().equals(NumberCard.AS);
     }
 

@@ -7,7 +7,8 @@ public class RoyalFlushCalculator implements CustomScoreCalculator {
 
     @Override
     public Integer apply(Hand hand) {
-        return 1;
+        // impossible to have two royal flushes so no need to implement a specific method for Royal flush
+        return 0;
     }
 
     @Override
