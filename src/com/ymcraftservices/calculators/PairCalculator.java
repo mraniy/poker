@@ -38,7 +38,7 @@ public class PairCalculator implements CustomScoreCalculator {
 
         List<NumberCard> numberCards = Stream.concat(Stream.of(pairCard), kickers.stream())
                 .collect(Collectors.toList());
-        return new Combination(CombinationScore.PAIR,calculate(numberCards));
+        return new Combination(CombinationScore.PAIR,calculate(numberCards), "High card to ".concat(kickers.get(0).toString()));
     }
 
     @Override

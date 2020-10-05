@@ -8,7 +8,10 @@ public class StraighFlushCalculator implements CustomScoreCalculator {
 
     @Override
     public Combination apply(Hand hand) {
-        return new StraightCalculator().apply(hand);
+        Combination combination = new StraightCalculator().apply(hand);
+
+        return new Combination(combination.getCombinationScore(), combination.getStrenght(),
+                combination.getMessage().replace("Straight"," Straight flush"));
     }
 
     @Override

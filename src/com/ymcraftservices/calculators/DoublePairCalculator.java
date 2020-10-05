@@ -37,7 +37,15 @@ public class DoublePairCalculator implements CustomScoreCalculator {
         List<NumberCard> numberCards = Stream.concat(doublePairs.stream(),
                 Stream.of(kicker))
                 .collect(Collectors.toList());
-         return new Combination(CombinationScore.DOUBLEPAIR,calculate(numberCards));
+        String message = getMessage(kicker, numberCards);
+        return new Combination(CombinationScore.DOUBLEPAIR,calculate(numberCards),message);
+    }
+
+    private String getMessage(NumberCard kicker, List<NumberCard> numberCards) {
+        String doublePairsMessage = numberCards.stream()
+                .map(NumberCard::toString)
+                .collect(Collectors.joining(","));
+        return "double pair of (".concat(doublePairsMessage).concat(") with ").concat(kicker.toString() + " as a kicker");
     }
 
     @Override

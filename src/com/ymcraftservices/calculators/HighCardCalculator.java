@@ -19,7 +19,7 @@ public class HighCardCalculator implements CustomScoreCalculator {
                 .sorted((o1, o2) -> new CardComparatorForRepeatedCards().apply(o1, o2))
                 .limit(5)
                 .collect(Collectors.toList());
-        return new Combination(CombinationScore.HIGHCARD,calculate(highCards));
+        return new Combination(CombinationScore.HIGHCARD,calculate(highCards), "highCard to "+ highCards.get(0).toString());
     }
 
     @Override

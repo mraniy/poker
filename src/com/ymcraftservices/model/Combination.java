@@ -7,9 +7,16 @@ import lombok.Data;
 @Data
 public class Combination {
 
-      CombinationScore combinationScore;
+      private CombinationScore combinationScore;
 
-      Integer strenght;
+      private Integer strenght;
+
+      private String message;
+
+      public Integer getScore() {
+            return  getCombinationScore().getScore() + getStrenght();
+      }
+
 
 
 }

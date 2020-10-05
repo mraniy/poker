@@ -25,15 +25,20 @@ public class FullHouseCalculator implements CustomScoreCalculator {
         List<NumberCard> maxNumberCards = retrieveNumberCardByNumberOfOccurences(entries, 3L);
         List<NumberCard> minNumberCards = retrieveNumberCardByNumberOfOccurences(entries, 2L);
         if(maxNumberCards.size() == 2) {
-            return new Combination(CombinationScore.FULLHOUSE,calculate(maxNumberCards));
+            String message = getMessage(maxNumberCards.get(0).toString(), maxNumberCards.get(1).toString());
+            return new Combination(CombinationScore.FULLHOUSE,calculate(maxNumberCards), message);
         } else {
             List<NumberCard> numberCards = Stream.concat(Stream.of(maxNumberCards.get(0)), Stream.of(minNumberCards.get(0)))
                     .collect(Collectors.toList());
-            return new Combination(CombinationScore.FULLHOUSE,calculate(numberCards));
+            String message = getMessage(maxNumberCards.get(0).toString(), minNumberCards.get(0).toString());
+            return new Combination(CombinationScore.FULLHOUSE,calculate(numberCards),message);
         }
     }
 
-
+    private String getMessage(String maxFull, String minFull) {
+        return "Full House".concat("from ".concat(maxFull))
+                .concat("To ").concat(minFull);
+    }
 
 
     private List<NumberCard> retrieveNumberCardByNumberOfOccurences(List<Map.Entry<NumberCard, Long>> entries, long numberOfOccurences) {

@@ -30,7 +30,7 @@ public class FlushCalculator implements CustomScoreCalculator {
                 .map(Card::getNumberCard)
                 .sorted((o1, o2) -> new CardComparatorForRepeatedCards().apply(o1, o2))
                 .collect(Collectors.toList());
-        return new Combination(CombinationScore.FLUSH,calculate(numberCards));
+        return new Combination(CombinationScore.FLUSH,calculate(numberCards), "Flush to ".concat(numberCards.get(0).toString()));
     }
 
     @Override

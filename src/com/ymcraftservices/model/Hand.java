@@ -26,12 +26,13 @@ public class Hand {
                 .collect(Collectors.toList());
     }
 
-    public Integer getScore() {
+    public Combination getCombination() {
         RoyalFlushPredicate highLevelPredicate =  RoyalFlushPredicate.getInstance();
         RoyalFlushCalculator highLevelCalculator = new RoyalFlushCalculator();
-        Combination combination = getCombination(highLevelPredicate, highLevelCalculator);
-        return combination.getCombinationScore().getScore() + combination.getStrenght();
+        return getCombination(highLevelPredicate, highLevelCalculator);
     }
+
+
 
     private Combination getCombination(CustomPokerPredicate customPokerPredicate, CustomScoreCalculator customScoreCalculator) {
         if (customPokerPredicate.test(this)) {
