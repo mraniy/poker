@@ -20,22 +20,26 @@ public class FullHouseCalculator implements CustomScoreCalculator {
     public Integer apply(Hand hand) {
         Predicate<Map.Entry<NumberCard, Long>> fullHousePredicate = numberCardLongEntry -> numberCardLongEntry.getValue().equals(3L) || numberCardLongEntry.getValue().equals(2L);
         List<Map.Entry<NumberCard, Long>> entries = getCardsCorrespondingToPredicate(hand.getAllCards(), fullHousePredicate);
-        NumberCard maxNumberCard = retrieveNumberCardByNumberOfOccurences(entries, 3L);
-        NumberCard minNumberCard = retrieveNumberCardByNumberOfOccurences(entries, 2L);
-        List<NumberCard> numberCards = Stream.of(maxNumberCard, minNumberCard).collect(Collectors.toList());
-        return calculate(numberCards);
+        List<NumberCard> maxNumberCards = retrieveNumberCardByNumberOfOccurences(entries, 3L);
+        List<NumberCard> minNumberCards = retrieveNumberCardByNumberOfOccurences(entries, 2L);
+        if(maxNumberCards.size() == 2) {
+            return calculate(maxNumberCards);
+        } else {
+            List<NumberCard> numberCards = Stream.concat(Stream.of(maxNumberCards.get(0)), Stream.of(minNumberCards.get(0)))
+                    .collect(Collectors.toList());
+            return calculate(numberCards);
+        }
     }
 
 
 
 
-    private NumberCard retrieveNumberCardByNumberOfOccurences(List<Map.Entry<NumberCard, Long>> entries, long numberOfOccurences) {
+    private List<NumberCard> retrieveNumberCardByNumberOfOccurences(List<Map.Entry<NumberCard, Long>> entries, long numberOfOccurences) {
         return entries.stream()
                 .filter(numberCardLongEntry -> numberCardLongEntry.getValue().equals(numberOfOccurences))
                 .map(Map.Entry::getKey)
-                .max((o1, o2) ->
-                        new CardComparatorForRepeatedCards().apply(o1, o2)
-                ).orElseGet(() -> null);
+                .sorted((o1, o2) -> new CardComparatorForRepeatedCards().apply(o1,o2))
+                .collect(Collectors.toList());
     }
 
     @Override

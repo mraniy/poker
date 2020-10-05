@@ -19,8 +19,11 @@ public class DoublePairCalculator implements CustomScoreCalculator {
 
     @Override
     public Integer apply(Hand hand) {
-        Predicate<Map.Entry<NumberCard, Long>> doublePairPredicate = numberCardLongEntry -> numberCardLongEntry.getValue().equals(2L);
-        List<Map.Entry<NumberCard, Long>> doublePairEntries = getCardsCorrespondingToPredicate(hand.getAllCards(), doublePairPredicate);
+        Predicate<Map.Entry<NumberCard, Long>> doublePairPredicate =
+                numberCardLongEntry -> numberCardLongEntry.getValue().equals(2L);
+        List<Map.Entry<NumberCard, Long>> doublePairEntries =
+                getCardsCorrespondingToPredicate(hand.getAllCards(), doublePairPredicate);
+
         List<NumberCard> doublePairs = doublePairEntries.stream()
                 .map(Map.Entry::getKey)
                 .sorted((o1, o2) -> new CardComparatorForRepeatedCards().apply(o1, o2))

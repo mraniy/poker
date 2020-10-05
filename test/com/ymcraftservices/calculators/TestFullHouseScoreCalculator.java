@@ -35,4 +35,25 @@ public class TestFullHouseScoreCalculator {
         // 14*10 + 7 = 147
         assertThat(strenght , is(147));
     }
+
+    @Test
+    public void should_return_score_when_full_house_of_three() {
+        // given
+        Card card1 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.AS);
+        Card card2 = DataFactory.getCard(LabelCard.TREFLE, NumberCard.AS);
+        Card card3 = DataFactory.getCard(LabelCard.COEUR, NumberCard.AS);
+        Card card4 = DataFactory.getCard(LabelCard.PIQUE, NumberCard.SEPT);
+        Card card5 = DataFactory.getCard(LabelCard.CARREAU, NumberCard.SEPT);
+        Card card6 = DataFactory.getCard(LabelCard.COEUR, NumberCard.SEPT);
+        Card card7 = DataFactory.getCard(LabelCard.TREFLE, NumberCard.DIX);
+        List<Card> playercards = Arrays.asList(card3, card4, card5, card6, card7);
+        List<Card> potcards = Arrays.asList(card1, card2);
+        Hand hand = new Hand(potcards, playercards);
+        FullHouseCalculator fullHouseCalculator = new FullHouseCalculator();
+        // when
+        Integer strenght = fullHouseCalculator.apply(hand);
+        // then
+        // 14*10 + 7 = 147
+        assertThat(strenght , is(147));
+    }
 }

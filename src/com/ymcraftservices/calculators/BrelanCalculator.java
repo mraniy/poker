@@ -23,6 +23,7 @@ public class BrelanCalculator implements CustomScoreCalculator {
         List<Map.Entry<NumberCard, Long>> brelanEntries = getCardsCorrespondingToPredicate(hand.getAllCards(), brelanPredicate);
         List<Map.Entry<NumberCard, Long>> kickersEntries = getCardsCorrespondingToPredicate(hand.getAllCards(), kickersPredicate);
 
+
         NumberCard numberCardBrelan = brelanEntries.stream().findFirst()
                 .map(numberCardLongEntry -> numberCardLongEntry.getKey())
                 .orElseGet(() -> null);
