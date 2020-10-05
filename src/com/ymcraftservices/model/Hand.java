@@ -34,7 +34,8 @@ public class Hand {
         RoyalFlushPredicate highLevelPredicate =  RoyalFlushPredicate.getInstance();
         RoyalFlushFunction highLevelFunction = new RoyalFlushFunction();
         RoyalFlushCalculator highLevelCalculator = new RoyalFlushCalculator();
-        return getCombination(highLevelPredicate, highLevelFunction,highLevelCalculator).getCombinationScore().getScore();
+        Combination combination = getCombination(highLevelPredicate, highLevelFunction, highLevelCalculator);
+        return combination.getCombinationScore().getScore() + combination.getStrenght();
     }
 
     private Combination getCombination(CustomPokerPredicate customPokerPredicate, CustomPokerFunction customPokerFunction, CustomScoreCalculator customScoreCalculator) {
@@ -46,10 +47,5 @@ public class Hand {
         }
     }
 
-    Map<NumberCard, Long> getCardsAndTheirOccurences(List<Card> cards) {
-        return cards
-                .stream()
-                .collect(Collectors.groupingBy(card -> card.getNumberCard(), Collectors.counting()));
-    }
 
 }
