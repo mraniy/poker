@@ -1,15 +1,10 @@
-package com.ymcraftservices.scorecalculators;
+package com.ymcraftservices.calculators;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Lists;
 import com.ymcraftservices.model.Card;
 import com.ymcraftservices.model.Hand;
 import com.ymcraftservices.model.NumberCard;
 import com.ymcraftservices.utils.CardComparatorForRepeatedCards;
 
-import java.io.Serializable;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;

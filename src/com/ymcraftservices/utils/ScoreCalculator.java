@@ -27,15 +27,6 @@ public class ScoreCalculator {
         return (int) scoreCard;
     }
 
-    public static Integer calculate(NumberCard numberCard, int coefficient) {
-        Integer scoreCard;
-        if (numberCard.equals(NumberCard.AS)) {
-            scoreCard = 14 * coefficient;
-        } else {
-            scoreCard = numberCard.getNumber() * coefficient;
-        }
-        return scoreCard;
-    }
 
 
 }

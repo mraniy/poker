@@ -1,4 +1,4 @@
-package com.ymcraftservices.scorecalculators;
+package com.ymcraftservices.calculators;
 
 import com.ymcraftservices.model.Hand;
 import com.ymcraftservices.model.NumberCard;

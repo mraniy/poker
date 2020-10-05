@@ -5,8 +5,6 @@ import com.ymcraftservices.model.Card;
 import com.ymcraftservices.model.Hand;
 import com.ymcraftservices.model.LabelCard;
 import com.ymcraftservices.model.NumberCard;
-import com.ymcraftservices.predicates.PairPredicate;
-import com.ymcraftservices.scorecalculators.PairCalculator;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;

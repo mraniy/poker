@@ -1,15 +1,14 @@
-package com.ymcraftservices.scorecalculators;
+package com.ymcraftservices.calculators;
 
 import com.ymcraftservices.model.Hand;
 import com.ymcraftservices.model.NumberCard;
 import com.ymcraftservices.utils.CardComparatorForRepeatedCards;
-import com.ymcraftservices.utils.CardOccurenceCalculator;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static com.ymcraftservices.utils.CardOccurenceCalculator.getCardsCorrespondingToPredicate;
 import static com.ymcraftservices.utils.ScoreCalculator.calculate;
@@ -36,14 +35,13 @@ public class BrelanCalculator implements CustomScoreCalculator {
                 .collect(Collectors.toList());
 
 
-        return getScore(kickers, numberCardBrelan);
+        List<NumberCard> numberCards = Stream.concat(Stream.of(numberCardBrelan), kickers.stream())
+                .collect(Collectors.toList());
+
+        return calculate(numberCards);
     }
 
-    private Integer getScore(List<NumberCard> minNumberCards,NumberCard maxNumberCard) {
-        Integer scoreMax = calculate(maxNumberCard, 100);
-        Integer scoreMin = calculate(minNumberCards);
-        return scoreMax + scoreMin;
-    }
+
 
     @Override
     public CustomScoreCalculator getNext() {

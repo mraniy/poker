@@ -5,7 +5,6 @@ import com.ymcraftservices.model.Card;
 import com.ymcraftservices.model.Hand;
 import com.ymcraftservices.model.LabelCard;
 import com.ymcraftservices.model.NumberCard;
-import com.ymcraftservices.scorecalculators.FullHouseCalculator;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -33,7 +32,7 @@ public class TestFullHouseScoreCalculator {
         // when
         Integer strenght = fullHouseCalculator.apply(hand);
         // then
-        // 14*100 + 7*10 = 2870
-        assertThat(strenght , is(1470));
+        // 14*10 + 7 = 147
+        assertThat(strenght , is(147));
     }
 }

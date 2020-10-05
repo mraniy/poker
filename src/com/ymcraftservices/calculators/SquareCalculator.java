@@ -1,4 +1,4 @@
-package com.ymcraftservices.scorecalculators;
+package com.ymcraftservices.calculators;
 
 import com.ymcraftservices.model.Hand;
 import com.ymcraftservices.model.NumberCard;
@@ -7,6 +7,8 @@ import com.ymcraftservices.utils.CardComparatorForRepeatedCards;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static com.ymcraftservices.utils.CardOccurenceCalculator.getCardsCorrespondingToPredicate;
 import static com.ymcraftservices.utils.ScoreCalculator.calculate;
@@ -30,9 +32,8 @@ public class SquareCalculator implements CustomScoreCalculator {
                 .map(Map.Entry::getKey)
                 .max((o1, o2) ->  new CardComparatorForRepeatedCards().apply(o2, o1))
                 .orElseGet(() -> null);
-        Integer scoreMax = calculate(numberCardSquare, 10);
-        Integer scoreKicker = calculate(kicker, 1);
-        return scoreKicker+ scoreMax;
+        List<NumberCard> numberCards = Stream.of(numberCardSquare, kicker).collect(Collectors.toList());
+        return calculate(numberCards);
     }
 
     @Override

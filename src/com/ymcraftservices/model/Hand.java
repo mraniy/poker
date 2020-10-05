@@ -5,14 +5,12 @@ import com.ymcraftservices.functions.CustomPokerFunction;
 import com.ymcraftservices.functions.RoyalFlushFunction;
 import com.ymcraftservices.predicates.CustomPokerPredicate;
 import com.ymcraftservices.predicates.RoyalFlushPredicate;
-import com.ymcraftservices.scorecalculators.CustomScoreCalculator;
-import com.ymcraftservices.scorecalculators.RoyalFlushCalculator;
+import com.ymcraftservices.calculators.CustomScoreCalculator;
+import com.ymcraftservices.calculators.RoyalFlushCalculator;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 

@@ -2,16 +2,16 @@ package com.ymcraftservices.model;
 
 public enum CombinationScore {
 
-    HIGHCARD(10000),
-    PAIR(20000),
-    DOUBLEPAIR(30000),
-    BRELAN(40000),
-    STRAIGHT(50000),
-    FLUSH(60000),
-    FULLHOUSE(70000),
-    CARRE(80000),
-    KENTFLUSH(90000),
-    ROYALFLUSH(100000);
+    HIGHCARD(1000000),
+    PAIR(2000000),
+    DOUBLEPAIR(3000000),
+    BRELAN(4000000),
+    STRAIGHT(5000000),
+    FLUSH(6000000),
+    FULLHOUSE(7000000),
+    CARRE(8000000),
+    KENTFLUSH(9000000),
+    ROYALFLUSH(10000000);
 
     private int score;
 
