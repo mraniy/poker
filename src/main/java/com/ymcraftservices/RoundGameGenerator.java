@@ -9,7 +9,7 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class Main {
+public class RoundGameGenerator {
 
     public static void main(String[] args) {
         IPokerGame pokerGame = new PokerGame();
