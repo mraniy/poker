@@ -36,8 +36,8 @@ public class FullHouseCalculator implements CustomScoreCalculator {
     }
 
     private String getMessage(String maxFull, String minFull) {
-        return "Full House".concat("from ".concat(maxFull))
-                .concat("To ").concat(minFull);
+        return "Full House".concat(" from ".concat(maxFull))
+                .concat(" To ").concat(minFull);
     }
 
 

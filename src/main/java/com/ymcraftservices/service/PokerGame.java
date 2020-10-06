@@ -1,14 +1,18 @@
 package com.ymcraftservices.service;
 
 import com.ymcraftservices.model.Combination;
+import com.ymcraftservices.model.Hand;
 import com.ymcraftservices.model.Player;
+import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class PokerGame {
 
+public class PokerGame implements IPokerGame{
+
+    @Override
     public List<Player> getWinners(List<Player> players) {
         Integer highScoreHands = players.stream()
                 .map(player -> player.getHand().getCombination())
@@ -21,8 +25,6 @@ public class PokerGame {
                 .filter(player -> player.getHand().getCombination().getScore().equals(highScoreHands))
                 .peek(player -> System.out.println(player.getFirstName().concat(" wins it with a ").concat(player.getHand().getCombination().getMessage())))
                 .collect(Collectors.toList());
-
-
     }
 
 
