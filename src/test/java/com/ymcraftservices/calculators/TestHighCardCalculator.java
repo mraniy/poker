@@ -5,7 +5,8 @@ import com.ymcraftservices.model.Card;
 import com.ymcraftservices.model.Hand;
 import com.ymcraftservices.model.LabelCard;
 import com.ymcraftservices.model.NumberCard;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+
 
 import java.util.Arrays;
 import java.util.List;
