@@ -1,11 +1,13 @@
 package com.ymcraftservices.calculators;
 
+import com.ymcraftservices.message.BrelanMessage;
 import com.ymcraftservices.model.Combination;
 import com.ymcraftservices.model.CombinationScore;
 import com.ymcraftservices.model.Hand;
 import com.ymcraftservices.model.NumberCard;
 import com.ymcraftservices.utils.CardComparatorForRepeatedCards;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
@@ -17,6 +19,7 @@ import static com.ymcraftservices.utils.ScoreCalculator.calculate;
 
 public class BrelanCalculator implements CustomScoreCalculator {
 
+    BrelanMessage brelanMessage = new BrelanMessage();
 
     @Override
     public Combination apply(Hand hand) {
@@ -33,7 +36,7 @@ public class BrelanCalculator implements CustomScoreCalculator {
         List<NumberCard> kickers = kickersEntries.stream()
                 .filter(numberCardLongEntry -> numberCardLongEntry.getValue().equals(1L))
                 .map(Map.Entry::getKey)
-                .sorted((o1, o2) ->  new CardComparatorForRepeatedCards().apply(o1, o2))
+                .sorted((o1, o2) -> new CardComparatorForRepeatedCards().apply(o1, o2))
                 .limit(2)
                 .collect(Collectors.toList());
 
@@ -41,10 +44,8 @@ public class BrelanCalculator implements CustomScoreCalculator {
         List<NumberCard> numberCards = Stream.concat(Stream.of(numberCardBrelan), kickers.stream())
                 .collect(Collectors.toList());
 
-        String message = "THREE of kind ".concat(numberCardBrelan.toString()).concat(" with ").concat(kickers.get(0).toString() + " as a kicker");
-        return new Combination(CombinationScore.BRELAN,calculate(numberCards), message);
+        return new Combination(CombinationScore.BRELAN, calculate(numberCards), brelanMessage.apply(Arrays.asList(numberCardBrelan.toString(),kickers.get(0).toString() )));
     }
-
 
 
     @Override

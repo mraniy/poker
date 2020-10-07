@@ -1,11 +1,13 @@
 package com.ymcraftservices.calculators;
 
+import com.ymcraftservices.message.PairMessage;
 import com.ymcraftservices.model.Combination;
 import com.ymcraftservices.model.CombinationScore;
 import com.ymcraftservices.model.Hand;
 import com.ymcraftservices.model.NumberCard;
 import com.ymcraftservices.utils.CardComparatorForRepeatedCards;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
@@ -17,6 +19,7 @@ import static com.ymcraftservices.utils.ScoreCalculator.calculate;
 
 public class PairCalculator implements CustomScoreCalculator {
 
+    PairMessage pairMessage = new PairMessage();
 
     @Override
     public Combination apply(Hand hand) {
@@ -38,9 +41,8 @@ public class PairCalculator implements CustomScoreCalculator {
 
         List<NumberCard> numberCards = Stream.concat(Stream.of(pairCard), kickers.stream())
                 .collect(Collectors.toList());
-        return new Combination(CombinationScore.PAIR, calculate(numberCards), "Pair of ".concat(pairCard.toString()).concat(" with ")
-                .concat(kickers.get(0).toString())
-                .concat(" as a kicker"));
+
+        return new Combination(CombinationScore.PAIR, calculate(numberCards), pairMessage.apply(Arrays.asList(pairCard.toString(), kickers.get(0).toString())));
     }
 
     @Override

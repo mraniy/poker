@@ -1,11 +1,13 @@
 package com.ymcraftservices.calculators;
 
+import com.ymcraftservices.message.SquareMessage;
 import com.ymcraftservices.model.Combination;
 import com.ymcraftservices.model.CombinationScore;
 import com.ymcraftservices.model.Hand;
 import com.ymcraftservices.model.NumberCard;
 import com.ymcraftservices.utils.CardComparatorForRepeatedCards;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
@@ -17,6 +19,7 @@ import static com.ymcraftservices.utils.ScoreCalculator.calculate;
 
 public class SquareCalculator implements CustomScoreCalculator {
 
+    SquareMessage squareMessage = new SquareMessage();
 
     @Override
     public Combination apply(Hand hand) {
@@ -36,7 +39,7 @@ public class SquareCalculator implements CustomScoreCalculator {
                 .orElseGet(() -> null);
 
         List<NumberCard> numberCards = Stream.of(numberCardSquare, kicker).collect(Collectors.toList());
-        String message = "Square of ".concat(numberCardSquare.toString()).concat(" with ").concat(kicker.toString()).concat(" as a kicker");
+        String message = squareMessage.apply(Arrays.asList(numberCardSquare.toString(),kicker.toString()));
         return new Combination(CombinationScore.CARRE,calculate(numberCards), message);
     }
 

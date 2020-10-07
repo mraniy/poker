@@ -1,5 +1,6 @@
 package com.ymcraftservices.calculators;
 
+import com.ymcraftservices.message.StraightMessage;
 import com.ymcraftservices.model.*;
 import com.ymcraftservices.utils.CardComparatorForRepeatedCards;
 
@@ -12,6 +13,7 @@ import static com.ymcraftservices.utils.CardUtilsForStraightHands.isStraightHand
 
 public class StraightCalculator implements CustomScoreCalculator {
 
+    StraightMessage straightMessage = new StraightMessage();
 
     @Override
     public Combination apply(Hand hand) {
@@ -28,7 +30,7 @@ public class StraightCalculator implements CustomScoreCalculator {
                 .map(Card::getNumberCard)
                 .max((o1, o2) -> new CardComparatorForRepeatedCards().apply(o2,o1))
                 .orElseGet(() -> null);
-        return new Combination(CombinationScore.STRAIGHT,fourthHighestCard.getNumber(),"Straight to " + fourthHighestCard.getNext());
+        return new Combination(CombinationScore.STRAIGHT,fourthHighestCard.getNumber(),straightMessage.apply(Arrays.asList(fourthHighestCard.toString())));
     }
 
     @Override

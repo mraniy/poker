@@ -1,8 +1,10 @@
 package com.ymcraftservices.calculators;
 
+import com.ymcraftservices.message.DoublePairMessage;
 import com.ymcraftservices.model.*;
 import com.ymcraftservices.utils.CardComparatorForRepeatedCards;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
@@ -14,6 +16,7 @@ import static com.ymcraftservices.utils.ScoreCalculator.calculate;
 
 public class DoublePairCalculator implements CustomScoreCalculator {
 
+    DoublePairMessage doublePairMessage = new DoublePairMessage();
 
     @Override
     public Combination apply(Hand hand) {
@@ -37,16 +40,10 @@ public class DoublePairCalculator implements CustomScoreCalculator {
         List<NumberCard> numberCards = Stream.concat(doublePairs.stream(),
                 Stream.of(kicker))
                 .collect(Collectors.toList());
-        String message = getMessage(kicker, doublePairs);
-        return new Combination(CombinationScore.DOUBLEPAIR,calculate(numberCards),message);
+        String message = doublePairMessage.apply(Arrays.asList(doublePairs.get(0).toString(), doublePairs.get(1).toString(), kicker.toString()));
+        return new Combination(CombinationScore.DOUBLEPAIR, calculate(numberCards), message);
     }
 
-    private String getMessage(NumberCard kicker, List<NumberCard> numberCards) {
-        String doublePairsMessage = numberCards.stream()
-                .map(NumberCard::toString)
-                .collect(Collectors.joining(","));
-        return "double pair of (".concat(doublePairsMessage).concat(") with ").concat(kicker.toString() + " as a kicker");
-    }
 
     @Override
     public CustomScoreCalculator getNext() {
