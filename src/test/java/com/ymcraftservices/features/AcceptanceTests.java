@@ -113,4 +113,18 @@ public class AcceptanceTests implements ContractStepDefs{
         assertThat(winners.contains(littleFinger), is(true));
     }
 
+    @Then("little finger is the winner of the tie as he has king as square")
+    public void little_finger_is_the_winner_of_the_tie_as_he_has_king_as_square() {
+        List<Player> winners = pokerGame.getWinners(Arrays.asList(aria, littleFinger, boltonRamsey));
+        assertThat(winners.size(), is(1));
+        assertThat(winners.contains(littleFinger), is(true));
+    }
+
+    @Then("Aria is the winner of the tie as she has a royal flush")
+    public void aria_is_the_winner_of_the_tie_as_she_has_a_royal_flush() {
+        List<Player> winners = pokerGame.getWinners(Arrays.asList(aria, littleFinger, boltonRamsey));
+        assertThat(winners.size(), is(1));
+        assertThat(winners.contains(aria), is(true));
+    }
+
 }

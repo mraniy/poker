@@ -1,6 +1,7 @@
 package com.ymcraftservices.calculators;
 
 import com.ymcraftservices.model.Combination;
+import com.ymcraftservices.model.CombinationScore;
 import com.ymcraftservices.model.Hand;
 
 public class StraighFlushCalculator implements CustomScoreCalculator {
@@ -10,7 +11,7 @@ public class StraighFlushCalculator implements CustomScoreCalculator {
     public Combination apply(Hand hand) {
         Combination combination = new StraightCalculator().apply(hand);
 
-        return new Combination(combination.getCombinationScore(), combination.getStrenght(),
+        return new Combination(CombinationScore.KENTFLUSH, combination.getStrenght(),
                 combination.getMessage().replace("Straight"," Straight flush"));
     }
 

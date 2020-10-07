@@ -36,7 +36,7 @@ public class SquareCalculator implements CustomScoreCalculator {
                 .orElseGet(() -> null);
 
         List<NumberCard> numberCards = Stream.of(numberCardSquare, kicker).collect(Collectors.toList());
-        String message = "Square of ".concat(numberCardSquare.toString()).concat(" with ").concat(kicker.toString());
+        String message = "Square of ".concat(numberCardSquare.toString()).concat(" with ").concat(kicker.toString()).concat(" as a kicker");
         return new Combination(CombinationScore.CARRE,calculate(numberCards), message);
     }
 

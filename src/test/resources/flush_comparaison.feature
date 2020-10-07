@@ -1,8 +1,8 @@
 Feature: two players have both flush , but one have one stronger card
 
-  As a poker system , i should be able to retrieve the winner of two straight hands.
+  As a poker system , i should be able to retrieve the winner of two flush hands.
 
-  Scenario: Creating players and their hands and do it in order to have multiple straights
+  Scenario: Creating players and their hands and do it in order to have multiple flushes
     When the flop , the turn and the river are
       | label  | number |
       | COEUR  | KING   |
