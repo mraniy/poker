@@ -28,7 +28,7 @@ public class StraightCalculator implements CustomScoreCalculator {
                 .map(Card::getNumberCard)
                 .max((o1, o2) -> new CardComparatorForRepeatedCards().apply(o2,o1))
                 .orElseGet(() -> null);
-        return new Combination(CombinationScore.CARRE,fourthHighestCard.getNumber(),"Straight to " + fourthHighestCard.getNext());
+        return new Combination(CombinationScore.STRAIGHT,fourthHighestCard.getNumber(),"Straight to " + fourthHighestCard.getNext());
     }
 
     @Override
