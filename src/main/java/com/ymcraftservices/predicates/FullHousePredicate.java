@@ -34,19 +34,23 @@ public class FullHousePredicate implements CustomPokerPredicate{
     @Override
     public boolean test(Hand hand) {
         Map<NumberCard, Long> numberCardAndItsOccurence = getCardsAndTheirOccurences(hand.getAllCards());
-        List<Long> occurencesOfCards = numberCardAndItsOccurence.values()
+        List<Long> occurencesOfCards = getAllCardsHavingMoreThanTwoOccurences(numberCardAndItsOccurence);
+        return atLeastOnePair(occurencesOfCards) && atLeastOneThreeOfAkind(occurencesOfCards);
+
+    }
+
+    private List<Long> getAllCardsHavingMoreThanTwoOccurences(Map<NumberCard, Long> numberCardAndItsOccurence) {
+        return numberCardAndItsOccurence.values()
                 .stream()
                 .filter(numberOfOccurences -> numberOfOccurences >= 2)
                 .collect(Collectors.toList());
-        return atLeastTwoOccurencesOfCards(occurencesOfCards) && atLeastOneTHREEOfAkind(occurencesOfCards);
-
     }
 
-    private boolean atLeastTwoOccurencesOfCards(List<Long> occurencesOfCards) {
+    private boolean atLeastOnePair(List<Long> occurencesOfCards) {
         return occurencesOfCards.size() >=2;
     }
 
-    private boolean atLeastOneTHREEOfAkind(List<Long> occurencesOfCards) {
+    private boolean atLeastOneThreeOfAkind(List<Long> occurencesOfCards) {
         return occurencesOfCards.contains(3L);
     }
 

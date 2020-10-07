@@ -28,21 +28,31 @@ public class PairCalculator implements CustomScoreCalculator {
         List<Map.Entry<NumberCard, Long>> pairEntries = getCardsCorrespondingToPredicate(hand.getAllCards(), pairPredicate);
         List<Map.Entry<NumberCard, Long>> kickerEntries = getCardsCorrespondingToPredicate(hand.getAllCards(), kickersPredicate);
 
-        NumberCard pairCard = pairEntries.stream()
-                .findFirst()
-                .map(numberCardLongEntry -> numberCardLongEntry.getKey())
-                .orElseGet(() -> null);
+        NumberCard pairCard = getPairCard(pairEntries);
+        List<NumberCard> kickers = getKickersCard(kickerEntries);
+        List<NumberCard> numberCards = getAllCards(pairCard, kickers);
 
-        List<NumberCard> kickers = kickerEntries.stream()
+        return new Combination(CombinationScore.PAIR, calculate(numberCards), pairMessage.apply(Arrays.asList(pairCard.toString(), kickers.get(0).toString())));
+    }
+
+    private List<NumberCard> getAllCards(NumberCard pairCard, List<NumberCard> kickers) {
+        return Stream.concat(Stream.of(pairCard), kickers.stream())
+                .collect(Collectors.toList());
+    }
+
+    private List<NumberCard> getKickersCard(List<Map.Entry<NumberCard, Long>> kickerEntries) {
+        return kickerEntries.stream()
                 .map(Map.Entry::getKey)
                 .sorted((o1, o2) -> new CardComparatorForRepeatedCards().apply(o1, o2))
                 .limit(3)
                 .collect(Collectors.toList());
+    }
 
-        List<NumberCard> numberCards = Stream.concat(Stream.of(pairCard), kickers.stream())
-                .collect(Collectors.toList());
-
-        return new Combination(CombinationScore.PAIR, calculate(numberCards), pairMessage.apply(Arrays.asList(pairCard.toString(), kickers.get(0).toString())));
+    private NumberCard getPairCard(List<Map.Entry<NumberCard, Long>> pairEntries) {
+        return pairEntries.stream()
+                .findFirst()
+                .map(numberCardLongEntry -> numberCardLongEntry.getKey())
+                .orElseGet(() -> null);
     }
 
     @Override

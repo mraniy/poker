@@ -16,7 +16,6 @@ public class PokerGame implements IPokerGame{
         List<Integer> collect = players.stream()
                 .map(player -> player.getHand().getCombination().getScore())
                 .collect(Collectors.toList());
-        System.out.println(collect.size());
         Integer highScoreHands = players.stream()
                 .map(player -> player.getHand().getCombination())
                 .max(Comparator.comparingInt(Combination::getScore))

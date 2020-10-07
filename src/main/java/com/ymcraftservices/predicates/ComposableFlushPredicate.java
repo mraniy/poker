@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import static com.ymcraftservices.utils.CardOccurenceCalculator.getCardsCorrespondingToPredicate;
+
 public class ComposableFlushPredicate implements Function<List<Card>,List<Card>> {
 
     private static ComposableFlushPredicate instance;
@@ -25,16 +27,28 @@ public class ComposableFlushPredicate implements Function<List<Card>,List<Card>>
 
     @Override
     public List<Card> apply(List<Card> cards) {
-        Map<LabelCard, Long> numberOfOccurencesLabel = cards.stream()
-                .collect(Collectors.groupingBy(h -> h.getLabelCard(),
-                        Collectors.counting()));
-        LabelCard labelCard = numberOfOccurencesLabel.entrySet().stream()
+        Map<LabelCard, Long> numberOfOccurencesLabel = getLabelAndItsOccurences(cards);
+        LabelCard labelCard = getFlushLabelCard(numberOfOccurencesLabel);
+        return getFlushCards(cards, labelCard);
+    }
+
+    private List<Card> getFlushCards(List<Card> cards, LabelCard labelCard) {
+        return cards.stream()
+                .filter(card -> card.getLabelCard().equals(labelCard))
+                .collect(Collectors.toList());
+    }
+
+    private LabelCard getFlushLabelCard(Map<LabelCard, Long> numberOfOccurencesLabel) {
+        return numberOfOccurencesLabel.entrySet().stream()
                 .filter(labelCardLongEntry -> labelCardLongEntry.getValue() >= 5)
                 .findFirst()
                 .map(Map.Entry::getKey)
                 .orElseGet(() -> null);
+    }
+
+    private Map<LabelCard, Long> getLabelAndItsOccurences(List<Card> cards) {
         return cards.stream()
-                .filter(card -> card.getLabelCard().equals(labelCard))
-                .collect(Collectors.toList());
+                .collect(Collectors.groupingBy(h -> h.getLabelCard(),
+                        Collectors.counting()));
     }
 }

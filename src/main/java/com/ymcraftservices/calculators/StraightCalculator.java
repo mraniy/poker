@@ -19,8 +19,17 @@ public class StraightCalculator implements CustomScoreCalculator {
     public Combination apply(Hand hand) {
         List<Card> allCards = hand.getAllCards();
         allCards.sort(Comparator.comparing(card -> card.getNumberCard().getNumber()));
-        List<NumberCard> numCards = allCards.stream().map(Card::getNumberCard).collect(Collectors.toList());
-        NumberCard fourthHighestCard = Arrays.asList(0, 1, 2, 3)
+        List<NumberCard> numCards = getAllCards(allCards);
+        NumberCard fourthHighestCard = getFourthHighestCard(allCards, numCards);
+        return new Combination(CombinationScore.STRAIGHT,fourthHighestCard.getNumber(),straightMessage.apply(Arrays.asList(fourthHighestCard.toString())));
+    }
+
+    private List<NumberCard> getAllCards(List<Card> allCards) {
+        return allCards.stream().map(Card::getNumberCard).collect(Collectors.toList());
+    }
+
+    private NumberCard getFourthHighestCard(List<Card> allCards, List<NumberCard> numCards) {
+        return Arrays.asList(0, 1, 2, 3)
                 .stream()
                 .filter(fromIndice -> isStraightHand(allCards, numCards, fromIndice))
                 .map(integer -> {
@@ -30,7 +39,6 @@ public class StraightCalculator implements CustomScoreCalculator {
                 .map(Card::getNumberCard)
                 .max((o1, o2) -> new CardComparatorForRepeatedCards().apply(o2,o1))
                 .orElseGet(() -> null);
-        return new Combination(CombinationScore.STRAIGHT,fourthHighestCard.getNumber(),straightMessage.apply(Arrays.asList(fourthHighestCard.toString())));
     }
 
     @Override

@@ -24,24 +24,33 @@ public class DoublePairCalculator implements CustomScoreCalculator {
                 numberCardLongEntry -> numberCardLongEntry.getValue().equals(2L);
         List<Map.Entry<NumberCard, Long>> doublePairEntries =
                 getCardsCorrespondingToPredicate(hand.getAllCards(), doublePairPredicate);
+        List<NumberCard> doublePairs = getCardsThatAreDoublePairs(doublePairEntries);
+        NumberCard kicker = getKicker(hand, doublePairs);
+        List<NumberCard> numberCards = getAllNumberCards(doublePairs, kicker);
+        String message = doublePairMessage.apply(Arrays.asList(doublePairs.get(0).toString(), doublePairs.get(1).toString(), kicker.toString()));
+        return new Combination(CombinationScore.DOUBLEPAIR, calculate(numberCards), message);
+    }
 
-        List<NumberCard> doublePairs = doublePairEntries.stream()
-                .map(Map.Entry::getKey)
-                .sorted((o1, o2) -> new CardComparatorForRepeatedCards().apply(o1, o2))
-                .limit(2)
-                .collect(Collectors.toList());
-
-        NumberCard kicker = hand.getAllCards().stream()
+    private NumberCard getKicker(Hand hand, List<NumberCard> doublePairs) {
+        return hand.getAllCards().stream()
                 .filter(card -> !doublePairs.contains(card.getNumberCard()))
                 .map(Card::getNumberCard)
                 .max((o1, o2) -> new CardComparatorForRepeatedCards().apply(o2, o1))
                 .orElseGet(() -> null);
+    }
 
-        List<NumberCard> numberCards = Stream.concat(doublePairs.stream(),
+    private List<NumberCard> getAllNumberCards(List<NumberCard> doublePairs, NumberCard kicker) {
+        return Stream.concat(doublePairs.stream(),
                 Stream.of(kicker))
                 .collect(Collectors.toList());
-        String message = doublePairMessage.apply(Arrays.asList(doublePairs.get(0).toString(), doublePairs.get(1).toString(), kicker.toString()));
-        return new Combination(CombinationScore.DOUBLEPAIR, calculate(numberCards), message);
+    }
+
+    private List<NumberCard> getCardsThatAreDoublePairs(List<Map.Entry<NumberCard, Long>> doublePairEntries) {
+        return doublePairEntries.stream()
+                .map(Map.Entry::getKey)
+                .sorted((o1, o2) -> new CardComparatorForRepeatedCards().apply(o1, o2))
+                .limit(2)
+                .collect(Collectors.toList());
     }
 
 

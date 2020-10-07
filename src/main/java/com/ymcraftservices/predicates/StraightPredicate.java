@@ -36,14 +36,26 @@ public class StraightPredicate implements CustomPokerPredicate {
 
     @Override
     public boolean test(Hand hand) {
-        List<Card> allCards = hand.getAllCards();
-        List<NumberCard> numberCards = allCards.stream().map(Card::getNumberCard).collect(Collectors.toList());
-        allCards.sort(Comparator.comparing(card -> card.getNumberCard().getNumber()));
+        List<Card> allCards = getAllCardsSortedClassically(hand);
+        List<NumberCard> numberCards = getAllNumberCards(allCards);
+        return isOneOfTheSublistsStraight(allCards, numberCards);
+    }
+
+    private boolean isOneOfTheSublistsStraight(List<Card> allCards, List<NumberCard> numberCards) {
         return Arrays.asList(0, 1, 2, 3)
                 .stream()
                 .anyMatch(fromIndice -> isStraightHand(allCards, numberCards, fromIndice));
     }
 
+    private List<Card> getAllCardsSortedClassically(Hand hand) {
+        return hand.getAllCards().stream()
+                .sorted(Comparator.comparing(card -> card.getNumberCard().getNumber()))
+                .collect(Collectors.toList());
+    }
+
+    private List<NumberCard> getAllNumberCards(List<Card> allCards) {
+        return allCards.stream().map(Card::getNumberCard).collect(Collectors.toList());
+    }
 
 
 }

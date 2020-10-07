@@ -28,19 +28,29 @@ public class SquareCalculator implements CustomScoreCalculator {
         List<Map.Entry<NumberCard, Long>> squareEntries = getCardsCorrespondingToPredicate(hand.getAllCards(), squarePredicate);
         List<Map.Entry<NumberCard, Long>> kickersEntries = getCardsCorrespondingToPredicate(hand.getAllCards(), kickersPredicate);
 
-        NumberCard numberCardSquare = squareEntries.stream().findFirst()
-                .map(numberCardLongEntry -> numberCardLongEntry.getKey())
-                .orElseGet(() -> null);
+        NumberCard numberCardSquare = getNumberCardSquare(squareEntries);
+        NumberCard kicker = getKicker(kickersPredicate, kickersEntries);
+        List<NumberCard> numberCards = getAllCards(numberCardSquare, kicker);
+        String message = squareMessage.apply(Arrays.asList(numberCardSquare.toString(),kicker.toString()));
+        return new Combination(CombinationScore.CARRE,calculate(numberCards), message);
+    }
 
-        NumberCard kicker = kickersEntries.stream()
+    private List<NumberCard> getAllCards(NumberCard numberCardSquare, NumberCard kicker) {
+        return Stream.of(numberCardSquare, kicker).collect(Collectors.toList());
+    }
+
+    private NumberCard getKicker(Predicate<Map.Entry<NumberCard, Long>> kickersPredicate, List<Map.Entry<NumberCard, Long>> kickersEntries) {
+        return kickersEntries.stream()
                 .filter(kickersPredicate)
                 .map(Map.Entry::getKey)
                 .max((o1, o2) ->  new CardComparatorForRepeatedCards().apply(o2, o1))
                 .orElseGet(() -> null);
+    }
 
-        List<NumberCard> numberCards = Stream.of(numberCardSquare, kicker).collect(Collectors.toList());
-        String message = squareMessage.apply(Arrays.asList(numberCardSquare.toString(),kicker.toString()));
-        return new Combination(CombinationScore.CARRE,calculate(numberCards), message);
+    private NumberCard getNumberCardSquare(List<Map.Entry<NumberCard, Long>> squareEntries) {
+        return squareEntries.stream().findFirst()
+                .map(numberCardLongEntry -> numberCardLongEntry.getKey())
+                .orElseGet(() -> null);
     }
 
     @Override

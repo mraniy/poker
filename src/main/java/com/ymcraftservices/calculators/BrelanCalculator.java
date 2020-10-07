@@ -28,23 +28,27 @@ public class BrelanCalculator implements CustomScoreCalculator {
         List<Map.Entry<NumberCard, Long>> brelanEntries = getCardsCorrespondingToPredicate(hand.getAllCards(), brelanPredicate);
         List<Map.Entry<NumberCard, Long>> kickersEntries = getCardsCorrespondingToPredicate(hand.getAllCards(), kickersPredicate);
 
+        NumberCard numberCardBrelan = getNumberCardBrelan(brelanEntries);
+        List<NumberCard> kickers = getKickers(kickersEntries);
+        List<NumberCard> allNumberCards = Stream.concat(Stream.of(numberCardBrelan), kickers.stream())
+                .collect(Collectors.toList());
 
-        NumberCard numberCardBrelan = brelanEntries.stream().findFirst()
-                .map(numberCardLongEntry -> numberCardLongEntry.getKey())
-                .orElseGet(() -> null);
+        return new Combination(CombinationScore.BRELAN, calculate(allNumberCards), brelanMessage.apply(Arrays.asList(numberCardBrelan.toString(),kickers.get(0).toString() )));
+    }
 
-        List<NumberCard> kickers = kickersEntries.stream()
+    private List<NumberCard> getKickers(List<Map.Entry<NumberCard, Long>> kickersEntries) {
+        return kickersEntries.stream()
                 .filter(numberCardLongEntry -> numberCardLongEntry.getValue().equals(1L))
                 .map(Map.Entry::getKey)
                 .sorted((o1, o2) -> new CardComparatorForRepeatedCards().apply(o1, o2))
                 .limit(2)
                 .collect(Collectors.toList());
+    }
 
-
-        List<NumberCard> numberCards = Stream.concat(Stream.of(numberCardBrelan), kickers.stream())
-                .collect(Collectors.toList());
-
-        return new Combination(CombinationScore.BRELAN, calculate(numberCards), brelanMessage.apply(Arrays.asList(numberCardBrelan.toString(),kickers.get(0).toString() )));
+    private NumberCard getNumberCardBrelan(List<Map.Entry<NumberCard, Long>> brelanEntries) {
+        return brelanEntries.stream().findFirst()
+                .map(numberCardLongEntry -> numberCardLongEntry.getKey())
+                .orElseGet(() -> null);
     }
 
 

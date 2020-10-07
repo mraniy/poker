@@ -25,20 +25,26 @@ public class FullHouseCalculator implements CustomScoreCalculator {
     public Combination apply(Hand hand) {
         Predicate<Map.Entry<NumberCard, Long>> fullHousePredicate = numberCardLongEntry -> numberCardLongEntry.getValue().equals(3L) || numberCardLongEntry.getValue().equals(2L);
         List<Map.Entry<NumberCard, Long>> entries = getCardsCorrespondingToPredicate(hand.getAllCards(), fullHousePredicate);
-        List<NumberCard> maxNumberCards = retrieveNumberCardByNumberOfOccurences(entries, 3L);
-        List<NumberCard> minNumberCards = retrieveNumberCardByNumberOfOccurences(entries, 2L);
-        if(maxNumberCards.size() == 2) {
-            String message = fullHouseMessage.apply(Arrays.asList(maxNumberCards.get(0).toString(), maxNumberCards.get(1).toString()));
-            return new Combination(CombinationScore.FULLHOUSE,calculate(maxNumberCards), message);
+        List<NumberCard> cardsOccuringThreeTimes = retrieveNumberCardByNumberOfOccurences(entries, 3L);
+        List<NumberCard> cardsOccuringTwoTimes = retrieveNumberCardByNumberOfOccurences(entries, 2L);
+        if(cardsOccuringThreeTimes.size() == 2) {
+            return getCombinationInCaseCardsOccuringThreeTimesTwice(cardsOccuringThreeTimes);
         } else {
-            List<NumberCard> numberCards = Stream.concat(Stream.of(maxNumberCards.get(0)), Stream.of(minNumberCards.get(0)))
-                    .collect(Collectors.toList());
-            String message = fullHouseMessage.apply(Arrays.asList(maxNumberCards.get(0).toString(), minNumberCards.get(0).toString()));
-            return new Combination(CombinationScore.FULLHOUSE,calculate(numberCards),message);
+            return getCombinationInCaseCardsWithTwoAndThreeOccurences(cardsOccuringThreeTimes, cardsOccuringTwoTimes);
         }
     }
 
+    private Combination getCombinationInCaseCardsWithTwoAndThreeOccurences(List<NumberCard> cardsOccuringThreeTimes, List<NumberCard> cardsOccuringTwoTimes) {
+        List<NumberCard> numberCards = Stream.concat(Stream.of(cardsOccuringThreeTimes.get(0)), Stream.of(cardsOccuringTwoTimes.get(0)))
+                .collect(Collectors.toList());
+        String message = fullHouseMessage.apply(Arrays.asList(cardsOccuringThreeTimes.get(0).toString(), cardsOccuringTwoTimes.get(0).toString()));
+        return new Combination(CombinationScore.FULLHOUSE,calculate(numberCards),message);
+    }
 
+    private Combination getCombinationInCaseCardsOccuringThreeTimesTwice(List<NumberCard> cardsOccuringThreeTimes) {
+        String message = fullHouseMessage.apply(Arrays.asList(cardsOccuringThreeTimes.get(0).toString(), cardsOccuringThreeTimes.get(1).toString()));
+        return new Combination(CombinationScore.FULLHOUSE,calculate(cardsOccuringThreeTimes), message);
+    }
 
 
     private List<NumberCard> retrieveNumberCardByNumberOfOccurences(List<Map.Entry<NumberCard, Long>> entries, long numberOfOccurences) {
