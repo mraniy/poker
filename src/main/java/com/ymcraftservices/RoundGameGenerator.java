@@ -3,12 +3,14 @@ package com.ymcraftservices;
 import com.ymcraftservices.model.*;
 import com.ymcraftservices.service.IPokerGame;
 import com.ymcraftservices.service.PokerGame;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+@Slf4j
 public class RoundGameGenerator {
 
     public static void main(String[] args) {
@@ -18,25 +20,26 @@ public class RoundGameGenerator {
                 .stream()
                 .map(integer -> fromNumberToCard(integer))
                 .collect(Collectors.toList());
+
         List<Card> potCards = cards.subList(0,5);
-        System.out.println("the pot");
+        log.info("the pot");
         potCards.forEach(System.out::println);
-        System.out.println("\n\n\nSam cards");
+        log.info("\n\n\nSam cards");
         List<Card> samCards = cards.subList(5,7);
         samCards.forEach(System.out::println);
-        System.out.println("\n\n\nJoe cards");
+        log.info("\n\n\nJoe cards");
         List<Card> joeCards = cards.subList(7,9);
         joeCards.forEach(System.out::println);
-        System.out.println("\n\n\nyounes cards");
+        log.info("\n\n\nyounes cards");
         List<Card> younesCards = cards.subList(9,11);
         younesCards.forEach(System.out::println);
-        System.out.println("\n\n\nyassine cards");
+        log.info("\n\n\nyassine cards");
         List<Card> yassineCards = cards.subList(11,13);
         yassineCards.forEach(System.out::println);
-        System.out.println("\n\n\nHassan cards");
+        log.info("\n\n\nHassan cards");
         List<Card> hassanCards = cards.subList(13,15);
         hassanCards.forEach(System.out::println);
-        System.out.println("\n\n");
+        log.info("\n\n");
         Player sam = new Player("jackson","samuel",500,new Hand(potCards,samCards));
         Player joe = new Player("big","joe",600,new Hand(potCards,joeCards));
         Player younes = new Player("big","younes",600,new Hand(potCards,younesCards));

@@ -3,13 +3,14 @@ package com.ymcraftservices.service;
 import com.ymcraftservices.model.Combination;
 import com.ymcraftservices.model.Hand;
 import com.ymcraftservices.model.Player;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+@Slf4j
 public class PokerGame implements IPokerGame{
 
     @Override
@@ -21,11 +22,9 @@ public class PokerGame implements IPokerGame{
                 .orElseGet(() -> 0);
         return players.stream()
                 .sorted(Comparator.comparing(o -> o.getHand().getCombination().getScore()))
-                .peek(player -> System.out.println(player.getFirstName().concat(" has ").concat(player.getHand().getCombination().getMessage())))
+                .peek(player -> log.info(player.getFirstName().concat(" has ").concat(player.getHand().getCombination().getMessage())))
                 .filter(player -> player.getHand().getCombination().getScore().equals(highScoreHands))
-                .peek(player -> System.out.println(player.getFirstName().concat(" wins it with a ").concat(player.getHand().getCombination().getMessage())))
+                .peek(player -> log.info(player.getFirstName().concat(" wins it with a ").concat(player.getHand().getCombination().getMessage())))
                 .collect(Collectors.toList());
     }
-
-
 }
