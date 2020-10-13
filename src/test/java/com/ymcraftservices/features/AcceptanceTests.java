@@ -3,7 +3,6 @@ package com.ymcraftservices.features;
 import com.ymcraftservices.model.Card;
 import com.ymcraftservices.model.Hand;
 import com.ymcraftservices.model.Player;
-import com.ymcraftservices.service.IPokerGame;
 import com.ymcraftservices.service.PokerGame;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -26,7 +25,7 @@ public class AcceptanceTests implements ContractStepDefs{
     protected List<Card> potCards;
 
 
-    protected IPokerGame pokerGame= new PokerGame();
+    protected PokerGame pokerGame= new PokerGame();
 
 
 

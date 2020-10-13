@@ -9,9 +9,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Slf4j
-public class PokerGame implements IPokerGame{
+public class PokerGame {
 
-    @Override
+
     public List<Player> getWinners(List<Player> players) {
         List<Integer> collect = players.stream()
                 .map(player -> player.getHand().getCombination().getScore())
