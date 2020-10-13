@@ -19,7 +19,7 @@ import static com.ymcraftservices.utils.ScoreCalculator.calculate;
 
 public class BrelanCalculator implements CustomScoreCalculator {
 
-    BrelanMessage brelanMessage = new BrelanMessage();
+     private BrelanMessage brelanMessage = new BrelanMessage();
 
     @Override
     public Combination apply(Hand hand) {
