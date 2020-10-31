@@ -13,7 +13,7 @@ Feature: when a single player wins the pot
 
     And Players Earning at this moment are
 
-      | Player        | earning |
+      | player        | earning |
       | Little Finger | 1000    |
       | Aria Stark    | 2000    |
       | Bolton Ramsey | 3000    |

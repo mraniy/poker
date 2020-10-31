@@ -15,14 +15,14 @@ import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
-public class AcceptanceTests implements ContractStepDefs{
+public class HandComparaisonFeature implements ContractStepDefs{
 
 
-    protected Player aria = new Player("Stark","Aria",null, null);;
+    protected Player aria = new Player("Stark","Aria",null, null);
 
     protected Player littleFinger = new Player("Finger","Little",null, null);
 
-    protected Player boltonRamsey =  new Player("Ramsey","Bolton",null, null);;
+    protected Player boltonRamsey =  new Player("Ramsey","Bolton",null, null);
 
     protected List<Card> potCards;
 
@@ -34,6 +34,12 @@ public class AcceptanceTests implements ContractStepDefs{
     protected EarningUpdater earningUpdater = new EarningUpdater();
 
 
+    @Given("Players Earning at this moment are")
+    public void players_earning_at_this_moment_are(List<List<String>> earningsByPlayer) {
+        aria.setPotScore(retrieveEarning(earningsByPlayer, aria));
+        littleFinger.setPotScore(retrieveEarning(earningsByPlayer, littleFinger));
+        boltonRamsey.setPotScore(retrieveEarning(earningsByPlayer, boltonRamsey));
+    }
 
     @Given("the flop , the turn and the river are")
     public void the_flop_the_turn_and_the_river_are(List<List<String>> cards) {
@@ -41,12 +47,7 @@ public class AcceptanceTests implements ContractStepDefs{
     }
 
 
-    @Given("Players Earning at this moment are")
-    public void players_earning_at_this_moment_are(List<List<String>> earningsByPlayer) {
-        aria.setPotScore(retrieveEarning(earningsByPlayer, aria));
-        littleFinger.setPotScore(retrieveEarning(earningsByPlayer, littleFinger));
-        boltonRamsey.setPotScore(retrieveEarning(earningsByPlayer, boltonRamsey));
-    }
+
 
     @Given("Aria has this hand")
     public void aria_has_this_hand(List<List<String>> cards) {
@@ -155,5 +156,9 @@ public class AcceptanceTests implements ContractStepDefs{
         assertThat(boltonRamsey.getPotScore(), is(boltonNewEarning));
         assertThat(littleFinger.getPotScore(), is(littleNewEarning));
     }
+
+
+
+
 
 }

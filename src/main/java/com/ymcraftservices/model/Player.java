@@ -14,4 +14,6 @@ public class Player {
     private Integer potScore;
 
     private Hand hand;
+
+
 }
