@@ -3,8 +3,6 @@ package com.ymcraftservices.features;
 import com.ymcraftservices.model.Card;
 import com.ymcraftservices.model.Hand;
 import com.ymcraftservices.model.Player;
-import com.ymcraftservices.model.Pot;
-import com.ymcraftservices.service.EarningUpdater;
 import com.ymcraftservices.service.WinnerFinder;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -15,38 +13,19 @@ import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
-public class HandComparaisonFeature implements ContractStepDefs{
 
-
-    protected Player aria = new Player("Stark","Aria",null, null);
-
-    protected Player littleFinger = new Player("Finger","Little",null, null);
-
-    protected Player boltonRamsey =  new Player("Ramsey","Bolton",null, null);
-
-    protected List<Card> potCards;
-
-    protected Pot pot;
+public class HandComparaisonFeature extends CommonDataBetweenSteps implements ContractStepDefs{
 
 
     protected WinnerFinder winnerFinder = new WinnerFinder();
 
-    protected EarningUpdater earningUpdater = new EarningUpdater();
+    protected List<Card> potCards;
 
-
-    @Given("Players Earning at this moment are")
-    public void players_earning_at_this_moment_are(List<List<String>> earningsByPlayer) {
-        aria.setPotScore(retrieveEarning(earningsByPlayer, aria));
-        littleFinger.setPotScore(retrieveEarning(earningsByPlayer, littleFinger));
-        boltonRamsey.setPotScore(retrieveEarning(earningsByPlayer, boltonRamsey));
-    }
 
     @Given("the flop , the turn and the river are")
     public void the_flop_the_turn_and_the_river_are(List<List<String>> cards) {
         potCards = retrieveCards(cards);
     }
-
-
 
 
     @Given("Aria has this hand")
@@ -67,14 +46,6 @@ public class HandComparaisonFeature implements ContractStepDefs{
         List<Card> boltonRamseyCards = retrieveCards(cards);
         boltonRamsey.setHand(new Hand(potCards,boltonRamseyCards));
     }
-
-    @Given("the pot is {string}")
-    public void the_pot_is(String potString) {
-        pot = new Pot(Arrays.asList(aria,littleFinger,boltonRamsey), Integer.valueOf(potString));
-    }
-
-
-
 
     @Then("both bolton and aria wins the tie with a straight to NINE")
     public void both_bolton_and_aria_wins_the_tie_with_a_straight_to_nine() {
@@ -145,20 +116,4 @@ public class HandComparaisonFeature implements ContractStepDefs{
         assertThat(winners.size(), is(1));
         assertThat(winners.contains(aria), is(true));
     }
-
-    @Then("Players Earnings become")
-    public void players_earnings_become(List<List<String>> earningsByPlayer) {
-        earningUpdater.updateEarnings(pot);
-        Integer ariaNewEarning = retrieveEarning(earningsByPlayer, aria);
-        Integer boltonNewEarning = retrieveEarning(earningsByPlayer, boltonRamsey);
-        Integer littleNewEarning = retrieveEarning(earningsByPlayer, littleFinger);
-        assertThat(aria.getPotScore(), is(ariaNewEarning));
-        assertThat(boltonRamsey.getPotScore(), is(boltonNewEarning));
-        assertThat(littleFinger.getPotScore(), is(littleNewEarning));
-    }
-
-
-
-
-
 }
