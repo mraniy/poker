@@ -24,4 +24,5 @@ public class EarningUpdater {
         });
         return winners;
     }
+    
 }

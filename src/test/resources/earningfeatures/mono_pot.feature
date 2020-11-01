@@ -1,6 +1,6 @@
 Feature: when a single player wins the pot
 
-  As a poker system , i should be able to retrieve the winner of two high cards.
+  As a poker system , i should be able to handle the earning of a pot
 
   Scenario: Creating players and their hands and do it in order to have multiple high cards
     When the flop , the turn and the river are

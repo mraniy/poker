@@ -15,5 +15,9 @@ public class Player {
 
     private Hand hand;
 
+    public String getFullName() {
+        return firstName+ " "+lastName;
+    }
+
 
 }
